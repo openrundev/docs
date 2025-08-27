@@ -2,7 +2,7 @@
 title: OpenRun
 layout: hextra-home
 cascade:
-  images: ["/openrun.png"]
+  images: ["/openrun_small.png"]
 ---
 
 <div class="hx:mb-4" style="background: #277A9F; background: linear-gradient(180deg, #277A9F, #359ece); color: transparent; background-clip: text; -webkit-background-clip: text;">
