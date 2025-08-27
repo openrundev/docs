@@ -29,7 +29,6 @@ noClasses = false
 [params]
 title = "OpenRun - App Deployment Simplified"
 description = "Open source alternative to Google Cloud Run and AWS App Runner."
-defaultImage = "/openrun.png"
 
 [params.navbar]
 displayTitle = false
