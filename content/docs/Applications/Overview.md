@@ -156,6 +156,7 @@ The options the `apply` command takes are:
 
 ```
 OPTIONS:
+   --dev, -d                   Create apps in development mode (default: false)
    --branch value, -b value    The branch to checkout if using git source (default: "main")
    --commit value, -c value    The commit SHA to checkout if using git source. This takes precedence over branch
    --git-auth value, -g value  The name of the git_auth entry in server config to use
@@ -175,6 +176,8 @@ By default, changes are applied to the stage app. Add the `--promote` option to 
 The `--reload` option controls whether new source code is loaded for apps during the apply operation. Setting it to `none` means no apps are reloaded, `updated` means apps which have a config update are reloaded. `matched` (the default) means all apps matched by the app glob are reloaded, even if there is no config update.
 
 By default, changes are applied as a three way merge. The old config and new config are compared against the live config. If there are changes between old and new declarative config, those changes are applied. Changes done imperatively are not overwritten. Using the `--force` option will overwrite any changes applied imperatively through the CLI or UI. The new declarative config overwrites any existing state when `--force` is used.
+
+If `--dev` option is specified for the apply, the apps are created in dev mode. For apps with source path pointing to git, a local source folder is created under `$OPENRUN_HOME/app_src`. This allows for easy zero-config dev environment setup.
 
 ### App Configuration
 

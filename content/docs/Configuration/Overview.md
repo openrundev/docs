@@ -50,7 +50,7 @@ The `config`/`ace.config` builtin supports the following parameters:
 - **key** (string, required) : the config key name
 - **default** (any, required) : the default value
 
-`_branch` is a special key which resolves to the git branch from which the app declaration is loaded.
+`_branch` is a special key which resolves to the git branch from which the app declaration is loaded. `_dev` is true if the apply is run in dev mode.
 
 In `app.star`, a call to config like
 

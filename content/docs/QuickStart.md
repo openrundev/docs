@@ -178,6 +178,8 @@ When developing an app, the source code for the app has to be present locally. T
 openrun app create --dev --approve ./diskapp /disk_usage_dev
 ```
 
+If an app is created in dev mode with git as the source path, the git repo is checked out automatically into `$OPENRUN_HOME/app_src` and the app is created from the local source.
+
 In dev mode, source code changes are picked up immediately and the app is live reloaded. For non-dev (prod) apps, `app reload` has to be done to pick up changes, from local disk or from git.
 
 ```

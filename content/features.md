@@ -8,7 +8,7 @@ layout: hextra-home
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="GitOps Workflow" link="/docs/quickstart/#lifecycle-with-git" subtitle="Blue-green (staged) deployments, versioning and preview environments with no infra to manage."  icon="github" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
-<!-- prettier-ignore --> {{< hextra/feature-card title="Hypermedia web apps" link="/docs/app/routing/#html-route" subtitle="Fast and lightweight backend driven apps, minimal frontend complexity."  icon="html5" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
+<!-- prettier-ignore --> {{< hextra/feature-card title="Hypermedia web apps" link="/docs/app/routing/#html-route" subtitle="Easily build fast and lightweight backend driven apps, with minimal frontend complexity."  icon="html5" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Secrets Management" link="/docs/configuration/secrets/" subtitle="Manage secrets with AWS Secrets Manager and Vault."  icon="shield-exclamation" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
@@ -30,10 +30,10 @@ layout: hextra-home
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Domain based and path based routing" link="/docs/applications/routing/#request-routing" subtitle="Install apps at a domain, subdomain or at path level"  icon="map" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
-<!-- prettier-ignore --> {{< hextra/feature-card title="Preview Apps" link="/docs/applications/lifecycle/#preview-apps" subtitle="Create preview apps from CI, allowing for changes to be reviewed before merge"  icon="check" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
+<!-- prettier-ignore --> {{< hextra/feature-card title="Easy dev env setup" link="/docs/applications/overview/#apply-command" subtitle="Easily setup dev environment with zero config required"  icon="check" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Blue-green Deployment" link="/docs/applications/lifecycle/#staging-apps" subtitle="Staged deployment, for code changes and for config changes"  icon="chevron-double-up" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
-<!-- prettier-ignore --> {{< hextra/feature-card title="Security Sandbox" link="/docs/applications/appsecurity/#security-model" subtitle="Apps using Starlark based micro-framework use sandboxing for security"  icon="shield-check" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
+<!-- prettier-ignore --> {{< hextra/feature-card title="Security Sandbox" link="/docs/applications/appsecurity/#security-model" subtitle="Apps built in Starlark based micro-framework use sandboxing for security"  icon="shield-check" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
 {{< /hextra/feature-grid >}}
