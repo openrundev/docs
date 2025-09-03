@@ -84,11 +84,8 @@ The API supports the following parameters:
 The default response (when `stdout_file` is `False`) for the `exec` API (`value` within `plugin_response`) is of type list of strings. The stdout is scanned and split on newlines. The list of lines is returned. For example
 
 ```python {filename="app.star"}
-   ret = exec.run("ls", ["-l", "/"], process_partial=True)
-   if ret.error:
-       return {"Error": ret.error}
-
-   for line in ret.value:
+   ret = exec.run("ls", ["-l", "/"], process_partial=True).value
+   for line in ret:
        # Process lines
 ```
 

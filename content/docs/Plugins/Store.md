@@ -96,9 +96,6 @@ The `select` API returns a document iterator. Use a regular python `for` loop to
 ```python {filename="app.star"}
 ret = store.select(table.bookmark, {}, limit=100,
                     sort=["_created_at:desc"])
-if ret.error:
-    return ace.response({"error": ret.error}, "error")
-
 bookmarks = []
 for row in ret.value:
     bookmarks.append(row)
