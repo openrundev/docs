@@ -51,6 +51,6 @@ The project was started by [Ajay Kidave](https://www.linkedin.com/in/ajayvk/). A
 
 - Star the repo at [github.com/openrundev/openrun](https://github.com/openrundev/openrun)
 - Email at [contact@clace.io](mailto:contact@clace.io)
-- Follow on [Twitter](https://twitter.com/akclace)
+- Follow on [Twitter](https://twitter.com/ajay_kidave)
 - Subscribe to the blog [RSS feed](https://openrun.dev/blog/index.xml)
 - Connect on [Discord](https://discord.gg/t2P8pJFsd7)
