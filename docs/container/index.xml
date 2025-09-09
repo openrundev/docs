@@ -305,7 +305,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;p>multiple values are supported for &lt;code>cvol&lt;/code>.&lt;/p></description></item><item><title>Container Config</title><link>https://openrun.dev/docs/container/config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/config/</guid><description>
-&lt;p>The default configuration for the OpenRun server is defined &lt;a href="https://github.com/openrundev/openrun/blob/main/internal/system/openrun.default.toml" target="_blank" rel="noopener">here&lt;/a>. The container related config settings are&lt;/p>
+&lt;p>The default configuration for the OpenRun server is defined in &lt;a href="https://github.com/openrundev/openrun/blob/main/internal/system/openrun.default.toml" target="_blank" rel="noopener">openrun.default.toml&lt;/a>. The container related config settings are&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">app_config&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">

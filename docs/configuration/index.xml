@@ -13,7 +13,7 @@
 &lt;li>The run folder contains app specific temporary files.&lt;/li>
 &lt;/ul>
 &lt;h2>OpenRun Client CLI&lt;span class="hx:absolute hx:-mt-20" id="openrun-client-cli">&lt;/span>
-&lt;a href="#openrun-client-cli" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>By default, the OpenRun client uses Unix domain sockets to connect to the OpenRun server. &lt;code>$OPENRUN_HOME&lt;/code> should point to the same location for server and client. If no changes are done for the server defaults, then the client can connect to the server locally without any other configuration being required. See &lt;a href="https://openrun.dev/docs/configuration/security/#admin-api-access" >here&lt;/a> for details about the client configuration.&lt;/p>
+&lt;a href="#openrun-client-cli" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>By default, the OpenRun client uses Unix domain sockets to connect to the OpenRun server. &lt;code>$OPENRUN_HOME&lt;/code> should point to the same location for server and client. If no changes are done for the server defaults, then the client can connect to the server locally without any other configuration being required. See &lt;a href="https://openrun.dev/docs/configuration/security/#admin-api-access" >api-access&lt;/a> for details about the client configuration.&lt;/p>
 &lt;h2>App Config&lt;span class="hx:absolute hx:-mt-20" id="app-config">&lt;/span>
 &lt;a href="#app-config" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>In &lt;code>openrun.toml&lt;/code>, properties which apply to all apps can be defined under the &lt;code>[app_config]&lt;/code> section. For example&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
@@ -344,7 +344,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>All other server related config entries are ignored by the OpenRun client. Note that to connect to a OpenRun server over HTTP remotely, the server needs to be bound to the all interface(0.0.0.0), see &lt;a href="https://openrun.dev/docs/configuration/networking/" >here&lt;/a>.&lt;/p>
+&lt;p>All other server related config entries are ignored by the OpenRun client. Note that to connect to a OpenRun server over HTTP remotely, the server needs to be bound to the all interface(0.0.0.0), see &lt;a href="https://openrun.dev/docs/configuration/networking/" >networking&lt;/a>.&lt;/p>
 &lt;p>If server_uri is set to the https endpoint and the OpenRun server is running with a self-signed certificate, set &lt;code>skip_cert_check = true&lt;/code> in config to disable the TLS certificate check.&lt;/p>
 &lt;h2>Application Security&lt;span class="hx:absolute hx:-mt-20" id="application-security">&lt;/span>
 &lt;a href="#application-security" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>See &lt;a href="https://openrun.dev/docs/applications/appsecurity/" >appsecurity&lt;/a> for details about the application level sandboxing.&lt;/p>
