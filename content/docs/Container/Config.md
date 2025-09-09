@@ -4,7 +4,7 @@ weight: 200
 summary: "Overview of containerized app config and state management"
 ---
 
-The default configuration for the OpenRun server is defined [here](https://github.com/openrundev/openrun/blob/main/internal/system/openrun.default.toml). The container related config settings are
+The default configuration for the OpenRun server is defined in [openrun.default.toml](https://github.com/openrundev/openrun/blob/main/internal/system/openrun.default.toml). The container related config settings are
 
 ```toml
 [app_config]

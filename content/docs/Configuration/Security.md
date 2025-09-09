@@ -61,7 +61,7 @@ admin_password = "" # Change to actual password
 skip_cert_check = false # Change to true if using self-signed certs
 ```
 
-All other server related config entries are ignored by the OpenRun client. Note that to connect to a OpenRun server over HTTP remotely, the server needs to be bound to the all interface(0.0.0.0), see [here]({{< ref "networking" >}}).
+All other server related config entries are ignored by the OpenRun client. Note that to connect to a OpenRun server over HTTP remotely, the server needs to be bound to the all interface(0.0.0.0), see [networking]({{< ref "networking" >}}).
 
 If server_uri is set to the https endpoint and the OpenRun server is running with a self-signed certificate, set `skip_cert_check = true` in config to disable the TLS certificate check.
 

@@ -52,7 +52,7 @@ app = ace.app("My App",
        ) 
 ```
 
-A app which runs an command against a specified image (see [image-cmd spec](https://github.com/openrundev/appspecs/blob/main/image-cmd/app.star) is
+A app which runs an command against a specified image (see [image-cmd spec](https://github.com/openrundev/appspecs/blob/main/image-cmd/app.star)) is
 
 ```python {filename="app.star"}
 load("container.in", "container")

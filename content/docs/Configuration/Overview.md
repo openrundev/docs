@@ -24,7 +24,7 @@ The `OPENRUN_HOME` environment variable is used to locate the home directory for
 
 ## OpenRun Client CLI
 
-By default, the OpenRun client uses Unix domain sockets to connect to the OpenRun server. `$OPENRUN_HOME` should point to the same location for server and client. If no changes are done for the server defaults, then the client can connect to the server locally without any other configuration being required. See [here]({{< ref "security#admin-api-access" >}}) for details about the client configuration.
+By default, the OpenRun client uses Unix domain sockets to connect to the OpenRun server. `$OPENRUN_HOME` should point to the same location for server and client. If no changes are done for the server defaults, then the client can connect to the server locally without any other configuration being required. See [api-access]({{< ref "security#admin-api-access" >}}) for details about the client configuration.
 
 ## App Config
 

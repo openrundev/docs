@@ -144,7 +144,7 @@ The automatic error handling will not be invoked in this case since the `ret.err
 
 ```python {filename="app.star"}
 ret = store.insert(table.bookmark, new_bookmark)
-if not error:
+if not ret:
     return ace.response(ret, "error.go.html")
 ```
 
@@ -173,11 +173,11 @@ if not ret:
 
 ## Plugin Accounts
 
-Some plugins like `exec.in` do not require any account information. Others like `store.in` need some account information. The account configuration for a plugin is loaded from the OpenRun config file `openrun.toml`. For example, the default configuration for `store.in` is [here](https://github.com/openrundev/openrun/blob/e5ab0c1139d257c7f02fbe03d060a6bfe1b5f605/internal/system/openrun.default.toml#L54), which contains:
+Some plugins like `exec.in` do not require any account information. Others like `store.in` need some account information. The account configuration for a plugin is loaded from the OpenRun config file `openrun.toml`. For example, the default configuration for `store.in` is [here](https://github.com/openrundev/openrun/blob/4fa05f6ea642ad8b4b7fdd55c1f96b13a72e64d8/internal/system/openrun.default.toml#L78), which contains:
 
 ```toml {filename="openrun.toml"}
 [plugin."store.in"]
-db_connection = "sqlite:$OPENRUN_HOME/openrun_app.db"
+db_connection = "sqlite:$OPENRUN_HOME/clace_app_store.db"
 ```
 
 Any application using the `store.in` plugin will by default use the `$OPENRUN_HOME/openrun_app.db` sqlite database. To change the default account config used by apps, update `openrun.toml` and restart the OpenRun server. For example, adding the below will overwrite the default `store.in` config for all apps.
