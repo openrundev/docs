@@ -4,7 +4,7 @@ weight: 200
 summary: "Configuration options for the OpenRun server and client."
 ---
 
-Most configuration options specified in the following sections are for the OpenRun server. The OpenRun client CLI, which talks with the OpenRun server using unix domain sockets, uses a small subset of the config properties. If the OpenRun client runs on the same machine as the server, then the same config file can be used for both. See [here]({{< ref "security/#admin-api-access" >}}) for details.
+Most configuration options specified in the following sections are for the OpenRun server. The OpenRun client CLI, which talks with the OpenRun server using unix domain sockets, uses a small subset of the config properties. If the OpenRun client runs on the same machine as the server, then the same config file can be used for both. See [api-access]({{< ref "security/#admin-api-access" >}}) for details.
 
 {{< cards >}}
 {{< card link="overview" title="Overview" subtitle="Configuration overview, OPENRUN_HOME env" icon="information-circle" >}}
