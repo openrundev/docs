@@ -100,7 +100,28 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>This creates the app from the same branch as used during the &lt;code>apply&lt;/code>/&lt;code>sync&lt;/code> command.&lt;/p></description></item><item><title>Ports and Certificates</title><link>https://openrun.dev/docs/configuration/networking/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/configuration/networking/</guid><description>
+&lt;p>This creates the app from the same branch as used during the &lt;code>apply&lt;/code>/&lt;code>sync&lt;/code> command.&lt;/p>
+&lt;h2>Dynamic Config&lt;span class="hx:absolute hx:-mt-20" id="dynamic-config">&lt;/span>
+&lt;a href="#dynamic-config" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The &lt;code>openrun.toml&lt;/code> is statically read at service startup. In addition, dynamic config is supported which does not require a service restart. The current dynamic config is always available at &lt;code>$OPENRUN_HOME/config/dynamic_config.json&lt;/code>. To make changes, copy this file to a new location, make updates and then run &lt;code>openrun server update-config /tmp/dynamic-config.json&lt;/code>. This updates the service with the new config, persists the config to the metadata database and automatically notifies any additional OpenRun server instances to dynamically update its config.&lt;/p>
+&lt;p>The basic format of this config is&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;version_id&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;ver_32wLWdqboA08eCRDO1KEznxBxka&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;rbac&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;enabled&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>&lt;a href="https://openrun.dev/docs/configuration/rbac/" >RBAC&lt;/a> has more details about using the dynamic config.&lt;/p>
+&lt;p>Making a config update will automatically update the &lt;code>$OPENRUN_HOME/config/dynamic_config.json&lt;/code> file on all instances. The &lt;code>show-config&lt;/code> command can also show the latest config. The version id is auto-generated with a unique value. Subsequent updates need to pass the current version id, the &lt;code>update-config&lt;/code> will fail if a stale id is passed in. The &lt;code>--force&lt;/code> option can be used to overwrite the config.&lt;/p></description></item><item><title>Ports and Certificates</title><link>https://openrun.dev/docs/configuration/networking/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/configuration/networking/</guid><description>
 &lt;h2>HTTP&lt;span class="hx:absolute hx:-mt-20" id="http">&lt;/span>
 &lt;a href="#http" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>For HTTP requests, by default the OpenRun service listens on port 25222, on the localhost(127.0.0.1) interface. This means the HTTP port can be accessed from the same machine, it cannot be accessed remotely. To configure this, update the config file&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
@@ -485,7 +506,8 @@ title="Copy code"
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">auth&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">github_test&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">key&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;abcdefgh&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">secret&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;mysecret&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">secret&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;mysecret&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">scopes&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;profile&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;email&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="c"># empty by default, change as required&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
 &lt;button
 class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
 title="Copy code"
@@ -517,9 +539,9 @@ title="Copy code"
 &lt;a href="#oauth-config-details" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The config details depend on the provider type. The &lt;code>key&lt;/code> is generally the Client Id and the &lt;code>secret&lt;/code> is the Client Secret. For some providers, additional config config entries are supported. These are:&lt;/p>
 &lt;ul>
 &lt;li>&lt;strong>google&lt;/strong>: The google provider supports a &lt;code>hosted_domain&lt;/code> option. This is the domain name to verify on the user being logged in. For example, this can be set to &lt;code>openrun.dev&lt;/code>.&lt;/li>
-&lt;li>&lt;strong>okta&lt;/strong>: The Okta provider supports the &lt;code>org_url&lt;/code> config, the tenant url to verify.&lt;/li>
-&lt;li>&lt;strong>auth0&lt;/strong>: The Auth0 provider supports the &lt;code>domain&lt;/code> config.&lt;/li>
-&lt;li>&lt;strong>oidc&lt;/strong>: OIDC supports the &lt;code>discovery_url&lt;/code> config property.&lt;/li>
+&lt;li>&lt;strong>okta&lt;/strong>: The Okta provider requires the &lt;code>org_url&lt;/code> config, the tenant url to verify.&lt;/li>
+&lt;li>&lt;strong>auth0&lt;/strong>: The Auth0 provider requires the &lt;code>domain&lt;/code> config.&lt;/li>
+&lt;li>&lt;strong>oidc&lt;/strong>: OIDC requires the &lt;code>discovery_url&lt;/code> config property. For example, with Okta, use &lt;code>https://YOURDOMAIN-admin.okta.com/.well-known/openid-configuration&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;p>For all the providers, an optional &lt;code>scopes&lt;/code> property is also supported. This is the list of scopes to configure for the OAuth account.&lt;/p>
 &lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-yellow-100 hx:bg-yellow-50 hx:text-yellow-900 hx:dark:border-yellow-200/30 hx:dark:bg-yellow-700/30 hx:dark:text-yellow-200">
@@ -528,7 +550,93 @@ title="Copy code"
 &lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">The first time a new provider is added, it is important to manually verify an app, to verify if the required authentication restrictions are in place. For example, with google, any valid google user can login, including gmail.com accounts. The &lt;code>hosted_domain&lt;/code> config has to be used to restrict this.&lt;/div>
 &lt;/div>
 &lt;/div>
-&lt;p>The OAuth integration internally uses the &lt;a href="https://github.com/markbates/goth" target="_blank" rel="noopener">goth&lt;/a> library, see &lt;a href="https://github.com/markbates/goth/blob/master/examples/main.go" target="_blank" rel="noopener">examples&lt;/a> for implementation details.&lt;/p></description></item><item><title>Secrets Management</title><link>https://openrun.dev/docs/configuration/secrets/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/configuration/secrets/</guid><description>
+&lt;p>The OAuth integration internally uses the &lt;a href="https://github.com/markbates/goth" target="_blank" rel="noopener">goth&lt;/a> library, see &lt;a href="https://github.com/markbates/goth/blob/master/examples/main.go" target="_blank" rel="noopener">examples&lt;/a> for implementation details.&lt;/p>
+&lt;h2>OpenID Connect (OIDC)&lt;span class="hx:absolute hx:-mt-20" id="openid-connect-oidc">&lt;/span>
+&lt;a href="#openid-connect-oidc" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>When using &lt;a href="https://openrun.dev/docs/configuration/rbac/" >RBAC&lt;/a>, the OIDC provider is recommended. This allows the group information to be read from the IdP, without having to individually add each user in the RBAC dynamic config. A sample OIDC config will look like&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">auth&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">oidc_oktatest&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># https://localhost:25223/_openrun/auth/oidc_oktatest/callback&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">key&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;0oavknabcd&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">secret&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;nBTsFRY9BUZabcd&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">discovery_url&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;https://YOURDOMAIN.okta.com/.well-known/openid-configuration&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">scopes&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;openid&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;profile&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;email&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;groups&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>The IdP has to be configured to return the group information in the user profile under the &lt;code>groups&lt;/code> key. For example, see &lt;a href="https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1" target="_blank" rel="noopener">Okta forum&lt;/a> about configuring Okta.&lt;/p></description></item><item><title>Role Based Access Control</title><link>https://openrun.dev/docs/configuration/rbac/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/configuration/rbac/</guid><description>
+&lt;h2>RBAC Overview&lt;span class="hx:absolute hx:-mt-20" id="rbac-overview">&lt;/span>
+&lt;a href="#rbac-overview" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Role based access controls (RBAC) allows fine-grained control on which users are allowed to view, access and update apps. RBAC is supported using &lt;a href="https://openrun.dev/docs/configuration/authentication/#oauth-authentication" >OAuth&lt;/a> based auth (like GitHub, GitLab etc). When using OAuth, users have to be added to groups in the OpenRun RBAC config. RBAC is also supported with &lt;a href="https://openrun.dev/docs/configuration/authentication/#openid-connect-oidc" >OpenID Connect&lt;/a>, like Okta and Microsoft Entra etc. With OIDC, the group information can be detected automatically through the user profile information or it can be configured in the OpenRun config.&lt;/p>
+&lt;h2>Authentication versus Authorization&lt;span class="hx:absolute hx:-mt-20" id="authentication-versus-authorization">&lt;/span>
+&lt;a href="#authentication-versus-authorization" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>RBAC is used for multiple authorization checks, like &lt;code>list&lt;/code> (view app info), &lt;code>access&lt;/code> (access the app) and various update related actions. When RBAC is enabled at the system level, by default RBAC is used for the list and update actions. App access is controlled by the authentication check alone. For example, if app is using &lt;code>google&lt;/code> for auth, any user who can login to the google account can access the app. If app access also needs to be controlled using RBAC, then the app auth needs to be changed to &lt;code>rbac:google&lt;/code>. With that change, only users having &lt;code>access&lt;/code> grant on the app can access the app.&lt;/p>
+&lt;h2>RBAC Configuration&lt;span class="hx:absolute hx:-mt-20" id="rbac-configuration">&lt;/span>
+&lt;a href="#rbac-configuration" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The RBAC configuration is managed through &lt;a href="https://openrun.dev/docs/configuration/overview/#dynamic-config" >dynamic config&lt;/a>. The structure of the RBAC config is&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;version_id&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;ver_32wLWdqboA08eCRDO1KEznxBxka&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;rbac&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;enabled&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;groups&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;group1&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;github_local:abc&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;oidc_oktatest:def@example.com&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;group2&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;group:group1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;oidc_oktatest:xyz@example.com&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;roles&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;accessor&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;access&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;viewer&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;list&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;fullaccess&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;role:accessor&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;list&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;grants&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;description&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;view on all apps&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;users&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;group:group1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;github_local:xyz&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;roles&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;viewer&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;targets&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;all&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;description&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;access on one app&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;users&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;group:customgroup&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;roles&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;fullaccess&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;targets&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;example.com:/myapp&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>If &lt;code>enabled&lt;/code> is &lt;code>false&lt;/code> (default), RBAC is not used. &lt;code>groups&lt;/code> is a map of group name to group members. Members are user ids, prefixed with the auth provider name. Group composition is supported, for example group2 includes all group1 users. &lt;code>roles&lt;/code> is a map of role name to permissions. Roles also can be composed, for example role &lt;code>fullaccess&lt;/code> gets all permissions of role &lt;code>accessor&lt;/code>.&lt;/p>
+&lt;p>Users have no permissions by default. Grants have to be added for each permission. A grant has a:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>description&lt;/code> which is a note about the grant&lt;/li>
+&lt;li>&lt;code>users&lt;/code> which is list of users or groups&lt;/li>
+&lt;li>&lt;code>roles&lt;/code> which is list of roles granted&lt;/li>
+&lt;li>&lt;code>targets&lt;/code> which is the &lt;a href="https://openrun.dev/docs/applications/overview/#glob-pattern" >glob path&lt;/a> list of apps to which the grant applies.&lt;/li>
+&lt;/ul>
+&lt;p>The group name referenced in a grant can be a group which is seen at runtime in the user profile. This works for &lt;a href="https://openrun.dev/docs/configuration/authentication/#openid-connect-oidc" >OIDC&lt;/a> based auth, like Okta.&lt;/p>
+&lt;h2>Group Info&lt;span class="hx:absolute hx:-mt-20" id="group-info">&lt;/span>
+&lt;a href="#group-info" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To get the group info dynamically as part of the user login (instead of statically defining in the config file), the requirements are:&lt;/p>
+&lt;ul>
+&lt;li>OpenID Connect based auth is used&lt;/li>
+&lt;li>The appropriate scope is requested, like &lt;code>groups&lt;/code>&lt;/li>
+&lt;li>The Identity Provider is configured to return the groups info the in the user profile, with the &lt;code>groups&lt;/code> key. For example, see &lt;a href="https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1" target="_blank" rel="noopener">Okta forum&lt;/a> about configuring Okta.&lt;/li>
+&lt;li>The group name as returned in the user profile is used in the grant&lt;/li>
+&lt;/ul>
+&lt;h2>Notes&lt;span class="hx:absolute hx:-mt-20" id="notes">&lt;/span>
+&lt;a href="#notes" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;ul>
+&lt;li>The auth provider name has to be prefixed with &lt;code>rbac:&lt;/code> for the RBAC rules to apply for app &lt;code>access&lt;/code>.&lt;/li>
+&lt;li>Updates using the CLI client are done as the &lt;code>admin&lt;/code> system user. There are no RBAC restrictions on the &lt;code>admin&lt;/code>.&lt;/li>
+&lt;/ul></description></item><item><title>Secrets Management</title><link>https://openrun.dev/docs/configuration/secrets/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/configuration/secrets/</guid><description>
 &lt;p>OpenRun supports secret management when working with apps. Secrets can be passed to containerized apps through the environment params. Secrets can also be passed to any plugin as argument. For OAuth config, the client secrets can be configured as secret in the config file.&lt;/p>
 &lt;h2>Supported Providers&lt;span class="hx:absolute hx:-mt-20" id="supported-providers">&lt;/span>
 &lt;a href="#supported-providers" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun currently supports AWS Secrets Manager (ASM) and HashiCorp Vault as providers for secrets management. Secrets can also be read from the environment of the OpenRun server, which can be used in development and testing. Secrets can also be read from a local properties file.&lt;/p>

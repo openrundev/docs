@@ -21,6 +21,7 @@
 - [Ports and Certificates](https://openrun.dev/docs/configuration/networking/): OpenRun uses unix domain sockets for client CLI requests. HTTP and HTTPS are used for application …
 - [Security](https://openrun.dev/docs/configuration/security/): OpenRun Security related configuration
 - [App Authentication](https://openrun.dev/docs/configuration/authentication/): Details about authentication mechanisms for app access, including OAuth based auth
+- [Role Based Access Control](https://openrun.dev/docs/configuration/rbac/): Controlling access to applications using RBAC
 - [Secrets Management](https://openrun.dev/docs/configuration/secrets/): Details about working with secret managers
 
 ### Managing Apps
@@ -58,5 +59,5 @@
 - [Features](https://openrun.dev/features/): OpenRun Features
 
 ---
-Generated on 2025-09-21 03:13:23 UTC
+Generated on 2025-09-22 04:30:17 UTC
 Site: https://openrun.dev/
