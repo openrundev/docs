@@ -82,3 +82,22 @@ app("/" + branch + "/bookmarks", "github.com/openrundev/apps/utils/bookmarks", g
 ```
 
 This creates the app from the same branch as used during the `apply`/`sync` command.
+
+## Dynamic Config
+
+The `openrun.toml` is statically read at service startup. In addition, dynamic config is supported which does not require a service restart. The current dynamic config is always available at `$OPENRUN_HOME/config/dynamic_config.json`. To make changes, copy this file to a new location, make updates and then run `openrun server update-config /tmp/dynamic-config.json`. This updates the service with the new config, persists the config to the metadata database and automatically notifies any additional OpenRun server instances to dynamically update its config.
+
+The basic format of this config is
+
+```json
+{
+  "version_id": "ver_32wLWdqboA08eCRDO1KEznxBxka",
+  "rbac": {
+    "enabled": false
+  }
+}
+```
+
+[RBAC]({{< ref "RBAC" >}}) has more details about using the dynamic config.
+
+Making a config update will automatically update the `$OPENRUN_HOME/config/dynamic_config.json` file on all instances. The `show-config` command can also show the latest config. The version id is auto-generated with a unique value. Subsequent updates need to pass the current version id, the `update-config` will fail if a stale id is passed in. The `--force` option can be used to overwrite the config.

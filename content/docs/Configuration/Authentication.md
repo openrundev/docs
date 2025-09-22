@@ -68,6 +68,7 @@ The configuration format for each is
 [auth.github_test]
 key = "abcdefgh"
 secret = "mysecret"
+scopes = ["profile", "email"] # empty by default, change as required
 ```
 
 Here, the auth config entry name is `github_test`. The entry name can be one of the supported providers, or a supported provider name followed by a `_` and a qualifier. The provider name is case sensitive. So `github`, `google`, `github_prod`, `google_my_org` etc are valid config names. `github-test` and `my_org_google` are not valid.
@@ -92,9 +93,9 @@ The format for the callback url to use is `<CALLBACK_URL>/_openrun/auth/<PROVIDE
 The config details depend on the provider type. The `key` is generally the Client Id and the `secret` is the Client Secret. For some providers, additional config config entries are supported. These are:
 
 - **google**: The google provider supports a `hosted_domain` option. This is the domain name to verify on the user being logged in. For example, this can be set to `openrun.dev`.
-- **okta**: The Okta provider supports the `org_url` config, the tenant url to verify.
-- **auth0**: The Auth0 provider supports the `domain` config.
-- **oidc**: OIDC supports the `discovery_url` config property.
+- **okta**: The Okta provider requires the `org_url` config, the tenant url to verify.
+- **auth0**: The Auth0 provider requires the `domain` config.
+- **oidc**: OIDC requires the `discovery_url` config property. For example, with Okta, use `https://YOURDOMAIN-admin.okta.com/.well-known/openid-configuration`
 
 For all the providers, an optional `scopes` property is also supported. This is the list of scopes to configure for the OAuth account.
 
@@ -103,3 +104,18 @@ The first time a new provider is added, it is important to manually verify an ap
 {{</callout>}}
 
 The OAuth integration internally uses the [goth](https://github.com/markbates/goth) library, see [examples](https://github.com/markbates/goth/blob/master/examples/main.go) for implementation details.
+
+## OpenID Connect (OIDC)
+
+When using [RBAC]({{< ref "RBAC" >}}), the OIDC provider is recommended. This allows the group information to be read from the IdP, without having to individually add each user in the RBAC dynamic config. A sample OIDC config will look like
+
+```toml {filename="openrun.toml"}
+[auth.oidc_oktatest]
+# https://localhost:25223/_openrun/auth/oidc_oktatest/callback
+key = "0oavknabcd"
+secret = "nBTsFRY9BUZabcd"
+discovery_url = "https://YOURDOMAIN.okta.com/.well-known/openid-configuration"
+scopes = ["openid", "profile", "email", "groups"]
+```
+
+The IdP has to be configured to return the group information in the user profile under the `groups` key. For example, see [Okta forum](https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1) about configuring Okta.

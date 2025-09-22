@@ -1,6 +1,6 @@
 ---
 title: "Secrets Management"
-weight: 500
+weight: 600
 summary: "Details about working with secret managers"
 ---
 
