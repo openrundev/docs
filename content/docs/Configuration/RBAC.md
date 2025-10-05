@@ -6,7 +6,7 @@ summary: "Controlling access to applications using RBAC"
 
 ## RBAC Overview
 
-Role based access controls (RBAC) allows fine-grained control on which users are allowed to view, access and update apps. RBAC is supported using [OAuth]({{< ref "/docs/configuration/authentication/#oauth-authentication" >}}) based auth (like GitHub, GitLab etc). When using OAuth, users have to be added to groups in the OpenRun RBAC config. RBAC is also supported with [OpenID Connect]({{< ref "/docs/configuration/authentication/#openid-connect-oidc" >}}), like Okta and Microsoft Entra etc. With OIDC, the group information can be detected automatically through the user profile information or it can be configured in the OpenRun config.
+Role based access controls (RBAC) allows fine-grained control on which users are allowed to view, access and update apps. RBAC is supported using [OAuth]({{< ref "/docs/configuration/authentication/#oauth-authentication" >}}) based auth (like GitHub, GitLab etc). When using OAuth, users have to be explicitly added to groups in the OpenRun RBAC config. RBAC is also supported for [OpenID Connect]({{< ref "/docs/configuration/authentication/#openid-connect-oidc" >}}) and [SAML]({{< ref "/docs/configuration/authentication/#saml" >}}), like Okta and Microsoft Entra etc. With OIDC, the group information can be detected automatically through the user profile information or it can be explicitly configured in the OpenRun config.
 
 ## Authentication versus Authorization
 
@@ -63,12 +63,13 @@ The group name referenced in a grant can be a group which is seen at runtime in 
 
 To get the group info dynamically as part of the user login (instead of statically defining in the config file), the requirements are:
 
-- OpenID Connect based auth is used
-- The appropriate scope is requested, like `groups`
-- The Identity Provider is configured to return the groups info in the user profile, with the `groups` key. For example, see [Okta forum](https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1) about configuring Okta.
+- OpenID Connect based auth or SAML is used
+- For OpenId, the appropriate scope is requested, like `groups`
+- The Identity Provider is configured to return the groups info in the user profile, with the `groups` key. For example, see [Okta forum](https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1) about configuring Okta with OIDC.
 - The group name as returned in the user profile is used in the grant
 
 ## Notes
 
-- The auth provider name has to be prefixed with `rbac:` for the RBAC rules to apply for app `access`.
+- The auth provider name has to be prefixed with `rbac:` for the RBAC rules to apply for app `access` permission.
 - Updates using the CLI client are done as the `admin` system user. There are no RBAC restrictions on the `admin`.
+- For apps with no authentication (using `none` auth), the user id to use in RBAC is `anonymous`, without the auth type prefix.

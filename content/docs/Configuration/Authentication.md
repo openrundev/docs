@@ -153,4 +153,6 @@ then the `Single sign-on URL` should be set to `https://example.com:25223/_openr
 
 The format for the Single Sign-on URL is `<CALLBACK_URL>/_openrun/sso/<PROVIDER>/acs`. The SP Entity Id format is `<CALLBACK_URL>/_openrun/sso/<PROVIDER>/metadata`. The `PROVIDER` should have the `saml_` prefix.
 
-If using RBAC, ensure that the group info is available under the `groups` attribute.
+If using RBAC, ensure that the group info is available under the `groups` attribute, or set `groups_attr` as required.
+
+The service provide metadata is available for download at the `https://example.com:25223/_openrun/sso/saml_testokta/metadata` endpoint if the key and cert have been specified.
