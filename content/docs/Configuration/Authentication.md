@@ -46,6 +46,17 @@ curl -k --cert client.crt --key client.key https://localhost:25223/myapp
 
 If the client cert has been signed with the root CA defined in /data/certs/ca1.crt, the API call will succeed. Otherwise it fails. HTTP requests are not allowed when client cert authentication is used.
 
+## Callback Url
+
+To enable any OAuth/OIDC/SAML provider, the callback url domain has to be specified in the server config. Add
+
+```toml {filename="openrun.toml"}
+[security]
+callback_url = "https://example.com:25223"
+```
+
+in the `openrun.toml`. This does not have to be the same domain as used for the apps being authenticated.
+
 ## OAuth Authentication
 
 OAuth based authentication is supported for the following providers:
@@ -75,16 +86,7 @@ Here, the auth config entry name is `github_test`. The entry name can be one of 
 
 The server `openrun.toml` can have multiple auth configs defined. One of them can be set to be the default using `app_default_auth_type` config. Apps can be configured to use one of `system` or `none` or a valid auth config name as the `auth`. For example, app 1 can use `system` and app 2 can use `github_test`.
 
-## Callback Url
-
-To enable any OAuth provider, the callback url domain has to be specified in the server config. Add
-
-```toml {filename="openrun.toml"}
-[security]
-callback_url = "https://example.com:25223"
-```
-
-in the `openrun.toml`. In the OAuth account, for an entry `github_test`, the callback url to use will be `https://example.com:25223/_openrun/auth/github_test/callback`.
+In the OAuth account, for an entry `github_test`, the callback url to use will be `https://example.com:25223/_openrun/auth/github_test/callback`.
 
 The format for the callback url to use is `<CALLBACK_URL>/_openrun/auth/<PROVIDER_ENTRY_NAME>/callback`. The callback url has to exactly match this format.
 
@@ -119,3 +121,36 @@ scopes = ["openid", "profile", "email", "groups"]
 ```
 
 The IdP has to be configured to return the group information in the user profile under the `groups` key. For example, see [Okta forum](https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1) about configuring Okta.
+
+## SAML
+
+To configure an SAML based provider, add in config
+
+```toml {filename="openrun.toml"}
+[saml."testokta"]
+metadata_url = "https://integrator-3366111.okta.com/app/exkvzxe13p1ssdsd/sso/saml/metadata"
+```
+
+Here, the provider name is `saml_testokta`. All SAML providers have the prefix `saml_`. The various config options supported for a SAML provider are
+
+- `metadata_url`(string) : The url for the IdP metadata. This is the only required property.
+- `groups_attr`(string): The attribute which provides the groups information. Default `groups`
+- `use_post`(bool): Use POST request for starting the SAML flow. Default is to use Redirect
+- `force_authn`(bool): Force re-authentication when session expires, default false
+- `sp_key_file`(string): The service provider key file, if required by the IdP
+- `sp_cert_file`(string): The service provider certificate file, if required by the IdP
+
+The `metadata_url` is required, all other options are optional.
+
+On the IdP, configure the application with the following details. If the `callback_url` is set to
+
+```toml {filename="openrun.toml"}
+[security]
+callback_url = "https://example.com:25223"
+```
+
+then the `Single sign-on URL` should be set to `https://example.com:25223/_openrun/sso/saml_testokta/acs` and the `Audience URI (SP Entity ID)` should be set to `https://example.com:25223/_openrun/sso/saml_testokta/metadata`.
+
+The format for the Single Sign-on URL is `<CALLBACK_URL>/_openrun/sso/<PROVIDER>/acs`. The SP Entity Id format is `<CALLBACK_URL>/_openrun/sso/<PROVIDER>/metadata`. The `PROVIDER` should have the `saml_` prefix.
+
+If using RBAC, ensure that the group info is available under the `groups` attribute.

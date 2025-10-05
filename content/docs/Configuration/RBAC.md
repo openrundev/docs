@@ -65,7 +65,7 @@ To get the group info dynamically as part of the user login (instead of statical
 
 - OpenID Connect based auth is used
 - The appropriate scope is requested, like `groups`
-- The Identity Provider is configured to return the groups info the in the user profile, with the `groups` key. For example, see [Okta forum](https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1) about configuring Okta.
+- The Identity Provider is configured to return the groups info in the user profile, with the `groups` key. For example, see [Okta forum](https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1) about configuring Okta.
 - The group name as returned in the user profile is used in the grant
 
 ## Notes
