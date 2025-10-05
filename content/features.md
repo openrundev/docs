@@ -26,7 +26,7 @@ layout: hextra-home
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Auto TLS Certificates" link="/docs/configuration/networking/#enable-automatic-signed-certificate" subtitle="Automatically generate TLS certificates, for multiple domains"  icon="shield-check" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
-<!-- prettier-ignore --> {{< hextra/feature-card title="OAuth authentication" link="/docs/configuration/authentication/#oauth-authentication" subtitle="Add OAuth2 or OIDC based authentication to any app"  icon="globe-alt" icon="shield-check"  style="background:radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
+<!-- prettier-ignore --> {{< hextra/feature-card title="Powerful access controls" link="/docs/configuration/authentication" subtitle="OAuth/OpenID/SAML/Client-cert based auth, with full RBAC support"  icon="globe-alt" icon="shield-check"  style="background:radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Domain based and path based routing" link="/docs/applications/routing/#request-routing" subtitle="Install apps at a domain, subdomain or at path level"  icon="map" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
