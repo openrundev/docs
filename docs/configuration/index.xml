@@ -487,6 +487,21 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;p>If the client cert has been signed with the root CA defined in /data/certs/ca1.crt, the API call will succeed. Otherwise it fails. HTTP requests are not allowed when client cert authentication is used.&lt;/p>
+&lt;h2>Callback Url&lt;span class="hx:absolute hx:-mt-20" id="callback-url">&lt;/span>
+&lt;a href="#callback-url" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To enable any OAuth/OIDC/SAML provider, the callback url domain has to be specified in the server config. Add&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">security&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">callback_url&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;https://example.com:25223&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>in the &lt;code>openrun.toml&lt;/code>. This does not have to be the same domain as used for the apps being authenticated.&lt;/p>
 &lt;h2>OAuth Authentication&lt;span class="hx:absolute hx:-mt-20" id="oauth-authentication">&lt;/span>
 &lt;a href="#oauth-authentication" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OAuth based authentication is supported for the following providers:&lt;/p>
 &lt;ul>
@@ -519,21 +534,7 @@ title="Copy code"
 &lt;/div>
 &lt;p>Here, the auth config entry name is &lt;code>github_test&lt;/code>. The entry name can be one of the supported providers, or a supported provider name followed by a &lt;code>_&lt;/code> and a qualifier. The provider name is case sensitive. So &lt;code>github&lt;/code>, &lt;code>google&lt;/code>, &lt;code>github_prod&lt;/code>, &lt;code>google_my_org&lt;/code> etc are valid config names. &lt;code>github-test&lt;/code> and &lt;code>my_org_google&lt;/code> are not valid.&lt;/p>
 &lt;p>The server &lt;code>openrun.toml&lt;/code> can have multiple auth configs defined. One of them can be set to be the default using &lt;code>app_default_auth_type&lt;/code> config. Apps can be configured to use one of &lt;code>system&lt;/code> or &lt;code>none&lt;/code> or a valid auth config name as the &lt;code>auth&lt;/code>. For example, app 1 can use &lt;code>system&lt;/code> and app 2 can use &lt;code>github_test&lt;/code>.&lt;/p>
-&lt;h2>Callback Url&lt;span class="hx:absolute hx:-mt-20" id="callback-url">&lt;/span>
-&lt;a href="#callback-url" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To enable any OAuth provider, the callback url domain has to be specified in the server config. Add&lt;/p>
-&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
-&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">security&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">callback_url&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;https://example.com:25223&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
-&lt;button
-class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
-title="Copy code"
->
-&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
-&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
-&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;p>in the &lt;code>openrun.toml&lt;/code>. In the OAuth account, for an entry &lt;code>github_test&lt;/code>, the callback url to use will be &lt;code>https://example.com:25223/_openrun/auth/github_test/callback&lt;/code>.&lt;/p>
+&lt;p>In the OAuth account, for an entry &lt;code>github_test&lt;/code>, the callback url to use will be &lt;code>https://example.com:25223/_openrun/auth/github_test/callback&lt;/code>.&lt;/p>
 &lt;p>The format for the callback url to use is &lt;code>&amp;lt;CALLBACK_URL&amp;gt;/_openrun/auth/&amp;lt;PROVIDER_ENTRY_NAME&amp;gt;/callback&lt;/code>. The callback url has to exactly match this format.&lt;/p>
 &lt;h2>OAuth Config Details&lt;span class="hx:absolute hx:-mt-20" id="oauth-config-details">&lt;/span>
 &lt;a href="#oauth-config-details" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The config details depend on the provider type. The &lt;code>key&lt;/code> is generally the Client Id and the &lt;code>secret&lt;/code> is the Client Secret. For some providers, additional config config entries are supported. These are:&lt;/p>
@@ -569,7 +570,47 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>The IdP has to be configured to return the group information in the user profile under the &lt;code>groups&lt;/code> key. For example, see &lt;a href="https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1" target="_blank" rel="noopener">Okta forum&lt;/a> about configuring Okta.&lt;/p></description></item><item><title>Role Based Access Control</title><link>https://openrun.dev/docs/configuration/rbac/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/configuration/rbac/</guid><description>
+&lt;p>The IdP has to be configured to return the group information in the user profile under the &lt;code>groups&lt;/code> key. For example, see &lt;a href="https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1" target="_blank" rel="noopener">Okta forum&lt;/a> about configuring Okta.&lt;/p>
+&lt;h2>SAML&lt;span class="hx:absolute hx:-mt-20" id="saml">&lt;/span>
+&lt;a href="#saml" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To configure an SAML based provider, add in config&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">saml&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="s2">&amp;#34;testokta&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">metadata_url&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;https://integrator-3366111.okta.com/app/exkvzxe13p1ssdsd/sso/saml/metadata&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>Here, the provider name is &lt;code>saml_testokta&lt;/code>. All SAML providers have the prefix &lt;code>saml_&lt;/code>. The various config options supported for a SAML provider are&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>metadata_url&lt;/code>(string) : The url for the IdP metadata. This is the only required property.&lt;/li>
+&lt;li>&lt;code>groups_attr&lt;/code>(string): The attribute which provides the groups information. Default &lt;code>groups&lt;/code>&lt;/li>
+&lt;li>&lt;code>use_post&lt;/code>(bool): Use POST request for starting the SAML flow. Default is to use Redirect&lt;/li>
+&lt;li>&lt;code>force_authn&lt;/code>(bool): Force re-authentication when session expires, default false&lt;/li>
+&lt;li>&lt;code>sp_key_file&lt;/code>(string): The service provider key file, if required by the IdP&lt;/li>
+&lt;li>&lt;code>sp_cert_file&lt;/code>(string): The service provider certificate file, if required by the IdP&lt;/li>
+&lt;/ul>
+&lt;p>The &lt;code>metadata_url&lt;/code> is required, all other options are optional.&lt;/p>
+&lt;p>On the IdP, configure the application with the following details. If the &lt;code>callback_url&lt;/code> is set to&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">security&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">callback_url&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;https://example.com:25223&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>then the &lt;code>Single sign-on URL&lt;/code> should be set to &lt;code>https://example.com:25223/_openrun/sso/saml_testokta/acs&lt;/code> and the &lt;code>Audience URI (SP Entity ID)&lt;/code> should be set to &lt;code>https://example.com:25223/_openrun/sso/saml_testokta/metadata&lt;/code>.&lt;/p>
+&lt;p>The format for the Single Sign-on URL is &lt;code>&amp;lt;CALLBACK_URL&amp;gt;/_openrun/sso/&amp;lt;PROVIDER&amp;gt;/acs&lt;/code>. The SP Entity Id format is &lt;code>&amp;lt;CALLBACK_URL&amp;gt;/_openrun/sso/&amp;lt;PROVIDER&amp;gt;/metadata&lt;/code>. The &lt;code>PROVIDER&lt;/code> should have the &lt;code>saml_&lt;/code> prefix.&lt;/p>
+&lt;p>If using RBAC, ensure that the group info is available under the &lt;code>groups&lt;/code> attribute.&lt;/p></description></item><item><title>Role Based Access Control</title><link>https://openrun.dev/docs/configuration/rbac/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/configuration/rbac/</guid><description>
 &lt;h2>RBAC Overview&lt;span class="hx:absolute hx:-mt-20" id="rbac-overview">&lt;/span>
 &lt;a href="#rbac-overview" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Role based access controls (RBAC) allows fine-grained control on which users are allowed to view, access and update apps. RBAC is supported using &lt;a href="https://openrun.dev/docs/configuration/authentication/#oauth-authentication" >OAuth&lt;/a> based auth (like GitHub, GitLab etc). When using OAuth, users have to be added to groups in the OpenRun RBAC config. RBAC is also supported with &lt;a href="https://openrun.dev/docs/configuration/authentication/#openid-connect-oidc" >OpenID Connect&lt;/a>, like Okta and Microsoft Entra etc. With OIDC, the group information can be detected automatically through the user profile information or it can be configured in the OpenRun config.&lt;/p>
 &lt;h2>Authentication versus Authorization&lt;span class="hx:absolute hx:-mt-20" id="authentication-versus-authorization">&lt;/span>
@@ -629,7 +670,7 @@ title="Copy code"
 &lt;ul>
 &lt;li>OpenID Connect based auth is used&lt;/li>
 &lt;li>The appropriate scope is requested, like &lt;code>groups&lt;/code>&lt;/li>
-&lt;li>The Identity Provider is configured to return the groups info the in the user profile, with the &lt;code>groups&lt;/code> key. For example, see &lt;a href="https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1" target="_blank" rel="noopener">Okta forum&lt;/a> about configuring Okta.&lt;/li>
+&lt;li>The Identity Provider is configured to return the groups info in the user profile, with the &lt;code>groups&lt;/code> key. For example, see &lt;a href="https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1" target="_blank" rel="noopener">Okta forum&lt;/a> about configuring Okta.&lt;/li>
 &lt;li>The group name as returned in the user profile is used in the grant&lt;/li>
 &lt;/ul>
 &lt;h2>Notes&lt;span class="hx:absolute hx:-mt-20" id="notes">&lt;/span>
