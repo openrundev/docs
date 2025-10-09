@@ -10,7 +10,7 @@ This use-case documents the scenario where you want to:
 
 - Setup an instance on the public internet to host web apps for use by yourself and for family and friends
 - Use an OAuth provider like Google for login
-- Setup an automate GitOps workflow for app updates and new app creation
+- Setup an automated GitOps workflow for app updates and new app creation
 
 For this use case, we will use a Google Oauth account for authentication and a GitHub account for source control.
 
@@ -21,7 +21,7 @@ To get OpenRun running, the initial setup involves:
 - Create a Linux machine, publicly accessible on port 443.
 - Create a DNS entry pointing to the machine's IP address, for example an `A` record for `apps.example.com`. A wildcard DNS entry `*.apps.example.com` will make it easier to install apps at the domain level.
 - Create a Google OAuth by visiting [Google Console](https://console.cloud.google.com/auth/clients). The callback url would be `https://apps.example.com/_openrun/auth/google/callback`. Note down the client id and secret.
-- Create a [GitHub Personal Access Token](https://github.com/settings/personal-access-tokens). Set the scope to the repositories you want to use for your apps. Note down the token.
+- Create a GitHub Personal Access Token in [GitHub settings](https://github.com/settings/personal-access-tokens). Set the scope to the repositories you want to use for your apps. Note down the token.
 
 ## Installation
 
@@ -33,11 +33,11 @@ curl -sSL https://raw.githubusercontent.com/openrundev/openrun/refs/heads/main/d
 
 This will create a user `openrun` and install the service under `/var/lib/openrun`.
 
-To run containerized apps, ensure that Docker or Podman is installed and running on the machine. For Docker, the `openrun` user should be added to the docker group. As `openrun` user, run `docker ps` or `podman ps` to verify that the container manager is functional.
+To run [containerized apps]({{< ref "docs/container/overview/" >}}), ensure that Docker or Podman is installed and running on the machine. For Docker, the `openrun` user should be added to the docker group. As `openrun` user, run `docker ps` or `podman ps` to verify that the container manager is functional.
 
 ## Configuration
 
-Change to the `openrun` account by running `sudo su -l openrun`. Edit the openrun config `/var/lib/openrun/openrun.toml`. Update it to have below contents (replace values which say `CHANGEME`):
+Change to the `openrun` account by running `sudo su -l openrun`. Edit the openrun [config]({{< ref "/docs/configuration/overview/" >}}) `/var/lib/openrun/openrun.toml`. Update it to have below contents (replace values which say `CHANGEME`):
 
 ```toml {filename="/var/lib/openrun/openrun.toml"}
 [security]
@@ -72,7 +72,7 @@ This sets the default ports to 80 and 443, sets the apps to use google for auth 
 
 ## RBAC Config
 
-At this point, all apps are authenticated by the google oauth account, but anyone with a Google account can access the apps. To restrict which user has access to what apps, RBAC can be used. RBAC uses the dynamic config, which does not require restarting the OpenRun server. We will setup a RBAC schema where:
+At this point, all apps are authenticated by the google oauth account, but anyone with a Google account can access the apps. To restrict which user has access to what apps, [RBAC]({{< ref "docs/configuration/rbac/" >}}) can be used. RBAC uses the [dynamic config]({{< ref "docs/configuration/overview/#dynamic-config" >}}), which does not require restarting the OpenRun server. We will setup a RBAC schema where:
 
 - Apps under /family will be shared with family members
 - Apps under /shared will be shared with family members and friends
@@ -124,13 +124,11 @@ To update the RBAC config, run
 openrun server update-config /var/lib/openrun/config/dynamic_config.json
 ```
 
-This will upload the RBAC config to the metadata server (and also update the file on disk). Use the current `version_id`, or use the `--force` option to overwrite.
-
-The server is now ready for installing apps.
+This will upload the RBAC config to the metadata server (and also update the file on disk). Use the current `version_id`, or use the `--force` option to overwrite. The server is now ready for installing apps.
 
 ## App Installation
 
-OpenRun supports installing apps using the imperative CLI interface or using the declarative config files. We will use the declarative approach here.
+OpenRun supports installing apps using the imperative [CLI interface]({{< ref "docs/applications/overview/#app-management" >}}) or using the [declarative]({{< ref "docs/applications/overview/#declarative-app-management" >}}) config files. We will use the declarative approach here.
 
 In one of the GitHub repos which is accessible using the PAT created above, create a app config file like
 
@@ -158,6 +156,6 @@ If this file is checked into the main branch in the `myuser/myrepo` repo, then r
 openrun sync schedule --minutes 1 --approve --promote github.com/myuser/myrepo/apps.star
 ```
 
-will setup a sync which checks every minute for new updates to the file. If an app is created with `auth="google"`, instead of the default `auth="rbac:google"`, then anyone can access the app after google login. If `auth="none"` is used, then no auth is required to access the app.
+will setup a [sync]({{< ref "docs/applications/overview/#automated-sync" >}}) which checks every minute for new updates to the file. If an app is created with `auth="google"`, instead of the default `auth="rbac:google"`, then anyone can access the app after Google login. If `auth="none"` is used, then no auth is required to access the app.
 
 Any new apps declared will be automatically created. Any code changes in the repos referenced or config changes in the apps will also automatically be applied on the existing apps. No further manual updates are required on the machine. All updates can be done by just checking in changes into the declarative config - **Full GitOps CI/CD, in one command.**
