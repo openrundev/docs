@@ -10,6 +10,7 @@ OpenRun is an open-source Apache-2.0 licensed project for easy development and d
 {{< card link="quickstart" title="Quick Start" subtitle="Quick overview of using OpenRun"  icon="pencil" >}}
 {{< card link="installation" title="Installation" subtitle="Details about installing OpenRun server"  icon="server" >}}
 {{< card link="configuration" title="Configuration" subtitle="OpenRun server configuration details" icon="adjustments" >}}
+{{< card link="use-cases" title="Use-Cases" subtitle="How to configure OpenRun for specific use-cases" icon="map" >}}
 {{< card link="applications" title="Managing apps" subtitle="Working with OpenRun apps" icon="document-duplicate" >}}
 {{< card link="app" title="Developing apps" subtitle="Developing OpenRun apps" icon="sparkles" >}}
 {{< card link="plugins" title="Plugins" subtitle="Details about OpenRun plugins" icon="template" >}}
