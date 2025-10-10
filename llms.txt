@@ -26,6 +26,7 @@
 
 ### Use Cases
 - [Family and Friends](https://openrun.dev/docs/use-cases/personal/): Deploying apps for personal use and for sharing with family and friends
+- [Internal Tools for Teams](https://openrun.dev/docs/use-cases/team/): Deploying apps for use by teams across an enterprise
 
 ### Managing Apps
 - [App Management Overview](https://openrun.dev/docs/applications/overview/): Overview of managing OpenRun applications
@@ -62,5 +63,5 @@
 - [Features](https://openrun.dev/features/): OpenRun Features
 
 ---
-Generated on 2025-10-09 02:21:55 UTC
+Generated on 2025-10-10 18:55:20 UTC
 Site: https://openrun.dev/
