@@ -68,7 +68,7 @@ key = "37019xxxxx-u8e2lltb1tmxxxxxx.apps.googleusercontent.com" # CHANGEME
 secret = "GOCSPX-ybUAedirQiexxxxxxxxxx" # CHANGEME
 ```
 
-This sets the default ports to 80 and 443, sets the apps to use google for auth and sets the github PAT. As the regular user (since `openrun` user might not have sudo access), run `sudo systemctl restart openrun` to pick up the config update. The `admin_password_bcrypt` is not used in this scenario, it can kept at its original value or changed.
+This sets the default ports to 80 and 443, sets the apps to use google for auth and sets the github PAT. Automatic TLS cert creation is also enabled. As the regular user (since `openrun` user might not have sudo access), run `sudo systemctl restart openrun` to pick up the config update. The `admin_password_bcrypt` is not used in this scenario, it can kept at its original value or changed.
 
 ## RBAC Config
 
