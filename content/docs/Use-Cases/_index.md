@@ -8,5 +8,5 @@ How-To guides which describe the complete OpenRun configuration for specific use
 
 {{< cards >}}
 {{< card link="personal" title="Personal App Deployment" subtitle="Deploying apps for personal use and for sharing with friends and family" icon="sparkles">}}
-{{< card link="team" title="Internal tools for teams" subtitle="Deploying apps for use by teams across an enterprise" icon="shield-check">}}
+{{< card link="team" title="Internal Tools for Teams" subtitle="Deploying apps for use by teams across an enterprise" icon="shield-check">}}
 {{< /cards >}}
