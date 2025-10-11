@@ -30,7 +30,7 @@ layout: hextra-home
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Domain based and path based routing" link="/docs/applications/routing/#request-routing" subtitle="Install apps at a domain, subdomain or at path level"  icon="map" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
-<!-- prettier-ignore --> {{< hextra/feature-card title="Easy dev env setup" link="/docs/applications/overview/#apply-command" subtitle="Easily setup dev environment with zero config required"  icon="check" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
+<!-- prettier-ignore --> {{< hextra/feature-card title="Zero-config dev env setup" link="/docs/applications/overview/#apply-command" subtitle="Easily setup dev environment with zero config required"  icon="check" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Blue-green Deployment" link="/docs/applications/lifecycle/#staging-apps" subtitle="Staged deployment, for code changes and for config changes"  icon="chevron-double-up" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
