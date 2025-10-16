@@ -1,5 +1,5 @@
 ---
-title: "Python as a Configuration Language"
+title: "Python as a Configuration Language Using Starlark"
 summary: "Experience with using Starlark (which has a Pythonic syntax) for most configuration needs in OpenRun."
 date: 2025-10-14
 ---
