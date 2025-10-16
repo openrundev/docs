@@ -108,7 +108,7 @@ title="Copy code"
 &lt;h3>Cons&lt;span class="hx:absolute hx:-mt-20" id="cons">&lt;/span>
 &lt;a href="#cons" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h3>&lt;ul>
 &lt;li>Reading Starlark based config is not as easy as doing a &lt;code>json.load&lt;/code> or &lt;code>yaml.load&lt;/code>. For Starlark, each new builtin needs to have a &lt;a href="https://github.com/openrundev/openrun/blob/main/internal/app/apptype/builtins.go" target="_blank" rel="noopener">Unpacker&lt;/a> defined. How this is done depends on the host language. Only &lt;a href="https://github.com/laurentlb/awesome-starlark?tab=readme-ov-file#getting-started" target="_blank" rel="noopener">Java, Go and Rust&lt;/a> are supported.&lt;/li>
-&lt;li>Programmatically updating a Starlark config is not possible, there is no &lt;code>dump&lt;/code> or &lt;code>unmarshal&lt;/code>&lt;/li>
+&lt;li>Programmatically updating a Starlark config is not possible, there is no &lt;code>dump&lt;/code> or &lt;code>marshal&lt;/code> to Starlark. &lt;strong>EDIT&lt;/strong>: I was informed that the Bazel team has a build file specific tool called &lt;a href="https://github.com/bazelbuild/buildtools/tree/main/buildozer" target="_blank" rel="noopener">Buildozer&lt;/a> which can do limited updates to properly formatted buildfiles files. HT: Jade Lovelace&lt;/li>
 &lt;/ul>
 &lt;p>Overall, if the use case does not require reading the config from multiple host languages, Starlark is a great option to consider for allowing end-users to write configuration files.&lt;/p>
 &lt;h2>Does Starlark work for all Config Scenarios?&lt;span class="hx:absolute hx:-mt-20" id="does-starlark-work-for-all-config-scenarios">&lt;/span>
