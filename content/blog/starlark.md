@@ -10,7 +10,7 @@ date: 2025-10-14
 
 OpenRun implements a platform for deploying web apps declaratively. The specific focus is on enabling teams to build and deploy internal tools, but it works as a general purpose web app deployment service. For most end users, using OpenRun is as simple as starting the service and using imperative CLI commands to manage apps.
 
-For teams, a declarative interface works better than imperative commands. GitOps enables you to define your config and do code reviews and version management for your config, same as done for code. OpenRun implements a declarative interface using [Starlark](https://starlark-lang.org/).
+For teams, a declarative interface works better than imperative commands. GitOps enables you to do code reviews and version management for your config, same as done for code. OpenRun implements a declarative interface using [Starlark](https://starlark-lang.org/) for deploying web apps.
 
 Starlark, a dialect of Python, is designed to be embedded in other applications for configuration or scripting abilities. Starlark was initially developed in Google for build tools like Blaze/Bazel, but it is now being used for other [use-cases](https://github.com/laurentlb/awesome-starlark?tab=readme-ov-file#users). There has been lots of discussions about the issues with YAML and other config languages. This post looks at the experience with using Starlark as the configuration language in OpenRun.
 
@@ -50,7 +50,7 @@ app("fasthtml.:", "github.com/AnswerDotAI/fasthtml/examples",
 
 Each call to `app` declares an app, specifying its install path (URL) and source code path (from git or from disk) and other options. It is easy to avoid duplication. For example, the container `limits` are set once and used for multiple apps.
 
-Considering that this is declaring the CI/CD build config, the web server routing config and the container runtime settings, the config is very simple. For equivalent declarative config in Kubernetes, there would hundreds of line of YAML just for the infrastructure config. Plus ArgoCD config. Plus OAuth/SAML config, which is automatically handled by OpenRun.
+Considering that this is declaring the CI/CD build config, the web server routing config and the container runtime settings, the config is very simple. For equivalent declarative config in Kubernetes, there would hundreds of line of YAML just for the infrastructure config. Plus ArgoCD config. Plus OAuth/SAML config, all of which are automatically handled by OpenRun.
 
 ### App Declaration with Path Customization
 
