@@ -95,7 +95,7 @@ This is not purely config, there is some logic involved. It is easy to understan
 ### Cons
 
 - Reading Starlark based config is not as easy as doing a `json.load` or `yaml.load`. For Starlark, each new builtin needs to have a [Unpacker](https://github.com/openrundev/openrun/blob/main/internal/app/apptype/builtins.go) defined. How this is done depends on the host language. Only [Java, Go and Rust](https://github.com/laurentlb/awesome-starlark?tab=readme-ov-file#getting-started) are supported.
-- Programmatically updating a Starlark config is not possible, there is no `dump` or `unmarshal`
+- Programmatically updating a Starlark config is not possible, there is no `dump` or `marshal` to Starlark. **EDIT**: I was informed that the Bazel team has a build file specific tool called [Buildozer](https://github.com/bazelbuild/buildtools/tree/main/buildozer) which can do limited updates to properly formatted buildfiles files. HT: Jade Lovelace
 
 Overall, if the use case does not require reading the config from multiple host languages, Starlark is a great option to consider for allowing end-users to write configuration files.
 
