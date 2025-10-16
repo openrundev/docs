@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OpenRun - App Deployment Simplified – Blog</title><link>https://openrun.dev/blog/</link><description>Recent content in Blog on OpenRun - App Deployment Simplified</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 17 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://openrun.dev/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>App-Level Isolation in Web Server Config</title><link>https://openrun.dev/blog/webserver/</link><pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate><guid>https://openrun.dev/blog/webserver/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OpenRun - App Deployment Simplified – Blog</title><link>https://openrun.dev/blog/</link><description>Recent content in Blog on OpenRun - App Deployment Simplified</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 14 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://openrun.dev/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Python as a Configuration Language</title><link>https://openrun.dev/blog/starlark/</link><pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate><guid>https://openrun.dev/blog/starlark/</guid><description>
 &lt;div
 class="hx:overflow-x-auto hx:md:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 ltr:hx:pr-4 rtl:hx:pl-4 contrast-more:hx:border-current contrast-more:dark:hx:border-current hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200">
 &lt;div class="ltr:hx:pl-3 ltr:hx:pr-2 rtl:hx:pr-3 rtl:hx:pl-2">
@@ -13,8 +13,124 @@ style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
 OpenRun is an
 &lt;a href="https://github.com/openrundev/openrun">open source&lt;/a>
 alternative to Google Cloud Run and AWS App Runner. OpenRun is built for
-teams to easily deploy internal tools. OpenRun supports zero-config
-deployment of apps built with frameworks like Streamlit, Gradio, FastHTML,
+teams to declaratively deploy internal tools. OpenRun supports easy
+deployment of apps built in frameworks like Streamlit, Gradio, FastHTML,
+NiceGUI etc.
+&lt;br />
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;h2>Background&lt;span class="hx:absolute hx:-mt-20" id="background">&lt;/span>
+&lt;a href="#background" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun implements a platform for deploying web apps declaratively. The specific focus is on enabling teams to build and deploy internal tools, but it works as a general purpose web app deployment service. For most end users, using OpenRun is as simple as starting the service and using imperative CLI commands to manage apps.&lt;/p>
+&lt;p>For teams, a declarative interface works better than imperative commands. GitOps enables you to define your config and do code reviews and version management for your config, same as done for code. OpenRun implements a declarative interface using &lt;a href="https://starlark-lang.org/" target="_blank" rel="noopener">Starlark&lt;/a>.&lt;/p>
+&lt;p>Starlark, a dialect of Python, is designed to be embedded in other applications for configuration or scripting abilities. Starlark was initially developed in Google for build tools like Blaze/Bazel, but it is now being used for other &lt;a href="https://github.com/laurentlb/awesome-starlark?tab=readme-ov-file#users" target="_blank" rel="noopener">use-cases&lt;/a>. There has been lots of discussions about the issues with YAML and other config languages. This post looks at the experience with using Starlark as the configuration language in OpenRun.&lt;/p>
+&lt;h2>How OpenRun Uses Starlark&lt;span class="hx:absolute hx:-mt-20" id="how-openrun-uses-starlark">&lt;/span>
+&lt;a href="#how-openrun-uses-starlark" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun uses Starlark for these configurations:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://openrun.dev/docs/applications/overview/#declarative-app-management" >&lt;strong>App declaration&lt;/strong>&lt;/a>: Configure app source code and install path, with all required settings&lt;/li>
+&lt;li>&lt;a href="https://openrun.dev/docs/develop/" >&lt;strong>App definition&lt;/strong>&lt;/a>: Define app behavior, including proxying of requests, url routing, static files, container config and API handlers definition.&lt;/li>
+&lt;li>&lt;a href="https://openrun.dev/docs/develop/#app-parameters" >&lt;strong>Parameter definition&lt;/strong>&lt;/a>: Specify configurable parameter for apps&lt;/li>
+&lt;li>&lt;a href="https://openrun.dev/docs/plugins/store/#schema-definition" >&lt;strong>Schema definition&lt;/strong>&lt;/a>: Table schema definition for apps which persist data&lt;/li>
+&lt;/ul>
+&lt;p>App definition enables all features of Starlark, including allowing external calls using plugins. All other use cases use the more restrictive variant of Starlark where features like recursive function calls are disabled.&lt;/p>
+&lt;h2>How does this look like?&lt;span class="hx:absolute hx:-mt-20" id="how-does-this-look-like">&lt;/span>
+&lt;a href="#how-does-this-look-like" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;h3>Simple App Declaration&lt;span class="hx:absolute hx:-mt-20" id="simple-app-declaration">&lt;/span>
+&lt;a href="#simple-app-declaration" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h3>&lt;p>Looking at the app declaration scenario, example declaration files are at &lt;a href="https://github.com/openrundev/openrun/blob/main/examples/utils.star" target="_blank" rel="noopener">https://github.com/openrundev/openrun/blob/main/examples/utils.star&lt;/a> and &lt;a href="https://github.com/openrundev/openrun/blob/main/examples/streamlit.star" target="_blank" rel="noopener">https://github.com/openrundev/openrun/blob/main/examples/streamlit.star&lt;/a>. Each app is one or two lines of config, like:&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Install couple of Hypermedia based apps&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/utils/bookmarks&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;github.com/openrundev/apps/utils/bookmarks&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/utils/disk_usage&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;github.com/openrundev/apps/system/disk_usage&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Install a proxy app and a static file app&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;openrun.:&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;-&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">spec&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;proxy&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s2">&amp;#34;url&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;https://openrun.dev&amp;#34;&lt;/span>&lt;span class="p">})&lt;/span> &lt;span class="c1"># Installs on openrun.localhost domain&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/misc/event_planner&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;github.com/simonw/tools&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">spec&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;static_single&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s2">&amp;#34;index&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;event-planner.html&amp;#34;&lt;/span>&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Install container based apps&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">limits&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s2">&amp;#34;cpus&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;2&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;memory&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;512m&amp;#34;&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="c1"># Container limits&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/misc/streamlit_example&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;github.com/streamlit/streamlit-example&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">git_branch&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;master&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">spec&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;python-streamlit&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">container_opts&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">limits&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;fasthtml.:&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;github.com/AnswerDotAI/fasthtml/examples&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">spec&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;python-fasthtml&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="s2">&amp;#34;APP_MODULE&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="s2">&amp;#34;basic_ws:app&amp;#34;&lt;/span>&lt;span class="p">},&lt;/span> &lt;span class="n">container_opts&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">limits&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>Each call to &lt;code>app&lt;/code> declares an app, specifying its install path (URL) and source code path (from git or from disk) and other options. It is easy to avoid duplication. For example, the container &lt;code>limits&lt;/code> are set once and used for multiple apps.&lt;/p>
+&lt;p>Considering that this is declaring the CI/CD build config, the web server routing config and the container runtime settings, the config is very simple. For equivalent declarative config in Kubernetes, there would hundreds of line of YAML just for the infrastructure config. Plus ArgoCD config. Plus OAuth/SAML config, which is automatically handled by OpenRun.&lt;/p>
+&lt;h3>App Declaration with Path Customization&lt;span class="hx:absolute hx:-mt-20" id="app-declaration-with-path-customization">&lt;/span>
+&lt;a href="#app-declaration-with-path-customization" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h3>&lt;p>For a scenario with little bit more customization, consider the app declaration at &lt;a href="https://github.com/openrundev/apps/blob/main/tools.star" target="_blank" rel="noopener">https://github.com/openrundev/apps/blob/main/tools.star&lt;/a>. A utility function &lt;code>create_app&lt;/code> is used to customize the path, based on the git branch being used.&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">create_app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">app_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">source_path&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">path_split&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">app_path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;:&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># split out the domain name&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">path_split&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path_split&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="n">path_split&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">branch&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">config&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;_branch&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">branch&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Add branch name to app path&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;/&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">branch&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">path&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">config&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;_dev&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">False&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;/dev&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">path&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path_split&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Add the domain name back&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">path_split&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;:&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">path&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;github.com/openrundev/apps&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">source_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">git_branch&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">branch&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">create_app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/monitor/disk&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;/system/disk_usage&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">create_app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/monitor/memory&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;/system/memory_usage&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">create_app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/admin/audit&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;/openrun/audit_viewer&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">create_app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/admin/list&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;/openrun/list_apps&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>This is not purely config, there is some logic involved. It is easy to understand, while being deterministic and hermetic (properties of Starlark, meaning executions will behave the same each time, without having any side-effects). Values like &lt;code>_dev&lt;/code> are properly typed, instead of everything being stringly-typed. Regular config approaches would have required maintaining multiple copies of this config or performing templating tricks to achieve the same flexibility.&lt;/p>
+&lt;h2>Experience with Starlark&lt;span class="hx:absolute hx:-mt-20" id="experience-with-starlark">&lt;/span>
+&lt;a href="#experience-with-starlark" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;h3>Pros&lt;span class="hx:absolute hx:-mt-20" id="pros">&lt;/span>
+&lt;a href="#pros" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h3>&lt;ul>
+&lt;li>Config in Starlark can be much more concise than YAML and JSON&lt;/li>
+&lt;li>Easy to use utility methods to avoid repetition&lt;/li>
+&lt;li>Easy to use programming constructs and perform conditional logic&lt;/li>
+&lt;li>Config can use IDE features like auto-formatters, lint checks and type checkers&lt;/li>
+&lt;li>While programming language like features are available, you get safety features which limit what the config can do&lt;/li>
+&lt;/ul>
+&lt;h3>Cons&lt;span class="hx:absolute hx:-mt-20" id="cons">&lt;/span>
+&lt;a href="#cons" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h3>&lt;ul>
+&lt;li>Reading Starlark based config is not as easy as doing a &lt;code>json.load&lt;/code> or &lt;code>yaml.load&lt;/code>. For Starlark, each new builtin needs to have a &lt;a href="https://github.com/openrundev/openrun/blob/main/internal/app/apptype/builtins.go" target="_blank" rel="noopener">Unpacker&lt;/a> defined. How this is done depends on the host language. Only &lt;a href="https://github.com/laurentlb/awesome-starlark?tab=readme-ov-file#getting-started" target="_blank" rel="noopener">Java, Go and Rust&lt;/a> are supported.&lt;/li>
+&lt;li>Programmatically updating a Starlark config is not possible, there is no &lt;code>dump&lt;/code> or &lt;code>unmarshal&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>Overall, if the use case does not require reading the config from multiple host languages, Starlark is a great option to consider for allowing end-users to write configuration files.&lt;/p>
+&lt;h2>Does Starlark work for all Config Scenarios?&lt;span class="hx:absolute hx:-mt-20" id="does-starlark-work-for-all-config-scenarios">&lt;/span>
+&lt;a href="#does-starlark-work-for-all-config-scenarios" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>In addition to Starlark, OpenRun uses a TOML for the static config file. See &lt;a href="https://openrun.dev/docs/use-cases/team/" >use-cases&lt;/a> for a full config scenario. TOML works great when the config has to be kept simple and there is no need to allow any custom logic in the configuration.&lt;/p>
+&lt;p>For API interaction and data serialization, OpenRun uses JSON. For example, the Dynamic config uses JSON since there are API calls which can update the values dynamically. JSON works well for that scenario. Its limitations like not being abe to add comments do not matter when the user is expected to use an UI to update the dynamic values.&lt;/p>
+&lt;p>For scenarios where configuration flexibility is good to have, Starlark is a great option.&lt;/p></description></item><item><title>App-Level Isolation in Web Server Config</title><link>https://openrun.dev/blog/webserver/</link><pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate><guid>https://openrun.dev/blog/webserver/</guid><description>
+&lt;div
+class="hx:overflow-x-auto hx:md:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 ltr:hx:pr-4 rtl:hx:pl-4 contrast-more:hx:border-current contrast-more:dark:hx:border-current hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200">
+&lt;div class="ltr:hx:pl-3 ltr:hx:pr-2 rtl:hx:pr-3 rtl:hx:pl-2">
+&lt;div
+class="hx:select-none hx:text-xl"
+style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+📎
+&lt;/div>
+&lt;/div>
+&lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
+&lt;div class="hx:mx-4 hx:leading-7 first:hx:mt-0">
+OpenRun is an
+&lt;a href="https://github.com/openrundev/openrun">open source&lt;/a>
+alternative to Google Cloud Run and AWS App Runner. OpenRun is built for
+teams to declaratively deploy internal tools. OpenRun supports easy
+deployment of apps built in frameworks like Streamlit, Gradio, FastHTML,
 NiceGUI etc.
 &lt;br />
 &lt;/div>
@@ -50,8 +166,8 @@ style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
 OpenRun is an
 &lt;a href="https://github.com/openrundev/openrun">open source&lt;/a>
 alternative to Google Cloud Run and AWS App Runner. OpenRun is built for
-teams to easily deploy internal tools. OpenRun supports zero-config
-deployment of apps built with frameworks like Streamlit, Gradio, FastHTML,
+teams to declaratively deploy internal tools. OpenRun supports easy
+deployment of apps built in frameworks like Streamlit, Gradio, FastHTML,
 NiceGUI etc.
 &lt;br />
 &lt;/div>
@@ -148,8 +264,8 @@ style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
 OpenRun is an
 &lt;a href="https://github.com/openrundev/openrun">open source&lt;/a>
 alternative to Google Cloud Run and AWS App Runner. OpenRun is built for
-teams to easily deploy internal tools. OpenRun supports zero-config
-deployment of apps built with frameworks like Streamlit, Gradio, FastHTML,
+teams to declaratively deploy internal tools. OpenRun supports easy
+deployment of apps built in frameworks like Streamlit, Gradio, FastHTML,
 NiceGUI etc.
 &lt;br />
 &lt;/div>
@@ -237,8 +353,8 @@ style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
 OpenRun is an
 &lt;a href="https://github.com/openrundev/openrun">open source&lt;/a>
 alternative to Google Cloud Run and AWS App Runner. OpenRun is built for
-teams to easily deploy internal tools. OpenRun supports zero-config
-deployment of apps built with frameworks like Streamlit, Gradio, FastHTML,
+teams to declaratively deploy internal tools. OpenRun supports easy
+deployment of apps built in frameworks like Streamlit, Gradio, FastHTML,
 NiceGUI etc.
 &lt;br />
 &lt;/div>
@@ -327,8 +443,8 @@ style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
 OpenRun is an
 &lt;a href="https://github.com/openrundev/openrun">open source&lt;/a>
 alternative to Google Cloud Run and AWS App Runner. OpenRun is built for
-teams to easily deploy internal tools. OpenRun supports zero-config
-deployment of apps built with frameworks like Streamlit, Gradio, FastHTML,
+teams to declaratively deploy internal tools. OpenRun supports easy
+deployment of apps built in frameworks like Streamlit, Gradio, FastHTML,
 NiceGUI etc.
 &lt;br />
 &lt;/div>
@@ -404,8 +520,8 @@ style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
 OpenRun is an
 &lt;a href="https://github.com/openrundev/openrun">open source&lt;/a>
 alternative to Google Cloud Run and AWS App Runner. OpenRun is built for
-teams to easily deploy internal tools. OpenRun supports zero-config
-deployment of apps built with frameworks like Streamlit, Gradio, FastHTML,
+teams to declaratively deploy internal tools. OpenRun supports easy
+deployment of apps built in frameworks like Streamlit, Gradio, FastHTML,
 NiceGUI etc.
 &lt;br />
 &lt;/div>
