@@ -4,7 +4,7 @@
 
 
 ## Blog
-- [Python as a Configuration Language](https://openrun.dev/blog/starlark/): Experience with using Starlark (which has a Pythonic syntax) for most configuration needs in … - Published 2025-10-14
+- [Python as a Configuration Language Using Starlark](https://openrun.dev/blog/starlark/): Experience with using Starlark (which has a Pythonic syntax) for most configuration needs in … - Published 2025-10-14
 - [App-Level Isolation in Web Server Config](https://openrun.dev/blog/webserver/): Most web servers provide an update interface that does not isolate applications from one another. As … - Published 2025-01-17
 - [Go Composition does not work well with Implicit Interfaces](https://openrun.dev/blog/go-composition/): Go supports composition as against inheritance for extending behavior. Composition can break code … - Published 2024-12-24
 - [Errors and Exceptions: Is there a third option?](https://openrun.dev/blog/errors/): Error handling for glue code, how to avoid verbosity while allowing custom error handling. - Published 2024-12-09
@@ -64,5 +64,5 @@
 - [Features](https://openrun.dev/features/): OpenRun Features
 
 ---
-Generated on 2025-10-16 19:00:33 UTC
+Generated on 2025-10-16 19:38:10 UTC
 Site: https://openrun.dev/
