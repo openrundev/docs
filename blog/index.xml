@@ -114,7 +114,13 @@ title="Copy code"
 &lt;h2>Does Starlark work for all Config Scenarios?&lt;span class="hx:absolute hx:-mt-20" id="does-starlark-work-for-all-config-scenarios">&lt;/span>
 &lt;a href="#does-starlark-work-for-all-config-scenarios" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>In addition to Starlark, OpenRun uses a TOML for the static config file. See &lt;a href="https://openrun.dev/docs/use-cases/team/" >use-cases&lt;/a> for a full config scenario. TOML works great when the config has to be kept simple and there is no need to allow any custom logic in the configuration.&lt;/p>
 &lt;p>For API interaction and data serialization, OpenRun uses JSON. For example, the Dynamic config uses JSON since there are API calls which can update the values dynamically. JSON works well for that scenario. Its limitations like not being abe to add comments do not matter when the user is expected to use an UI to update the dynamic values.&lt;/p>
-&lt;p>For scenarios where configuration flexibility is good to have, Starlark is a great option.&lt;/p></description></item><item><title>App-Level Isolation in Web Server Config</title><link>https://openrun.dev/blog/webserver/</link><pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate><guid>https://openrun.dev/blog/webserver/</guid><description>
+&lt;p>For scenarios where configuration flexibility is good to have, Starlark is a great option.&lt;/p>
+&lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-orange-100 hx:bg-orange-50 hx:text-orange-800 hx:dark:border-orange-400/30 hx:dark:bg-orange-400/20 hx:dark:text-orange-300">
+&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;div class="hx:select-none hx:text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">💬&lt;/div>&lt;/div>
+&lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
+&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">Discussion thread on &lt;a href="https://lobste.rs/s/knnz1l/python_as_configuration_language_via" target="_blank" rel="noopener">lobste.rs&lt;/a>&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>App-Level Isolation in Web Server Config</title><link>https://openrun.dev/blog/webserver/</link><pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate><guid>https://openrun.dev/blog/webserver/</guid><description>
 &lt;div
 class="hx:overflow-x-auto hx:md:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 ltr:hx:pr-4 rtl:hx:pl-4 contrast-more:hx:border-current contrast-more:dark:hx:border-current hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200">
 &lt;div class="ltr:hx:pl-3 ltr:hx:pr-2 rtl:hx:pr-3 rtl:hx:pl-2">
