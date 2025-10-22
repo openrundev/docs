@@ -71,7 +71,7 @@ See [appsecurity]({{< ref "appsecurity" >}}) for details about the application l
 
 ## Private Repository Access
 
-The `app create` and `app reload` commands can read public GitHub repositories. If the repository is private, to be able to access the repo, the [ssh key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) or [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) needs to be specified.
+OpenRun can read public GitHub/GitLab repositories automatically. If the repository is private, to be able to access the repo, the [ssh key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) or [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) needs to be specified. Same for GitLab.
 
 ### SSH Keys
 
@@ -115,3 +115,9 @@ openrun app update-settings git-auth newkey /myapp
 ```
 
 The git auth is not a staged changed, it applies immediately for the staging and prod apps and preview apps.
+
+## GitLab Groups and Subgroups
+
+GitLab Cloud and on-prem supports [group and sub-groups](https://docs.gitlab.com/user/group/). By default in OpenRun, a git path like `gitlab.com/myuser/a/b/c` is assumed to be referencing `myuser` user or org, repo `a` and folder `b/c`. If using groups in GitLab, this might be incorrect. Two forward slashes `//` are required to indicate the end of the repo name. If `b` is the repo name, the above path would have to be referenced as `gitlab.com/myuser/a/b//c`. In that case, repo will be `a/b` and folder will be `c`.
+
+If no folder is present, that is if `c` is the repo, then the path should be specified as `gitlab.com/myuser/a/b/c//`. Without the `//` delimiter, the repo name is assumed to immediately follow the user name.
