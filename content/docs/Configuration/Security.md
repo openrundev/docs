@@ -67,7 +67,11 @@ If server_uri is set to the https endpoint and the OpenRun server is running wit
 
 ## Application Security
 
-See [appsecurity]({{< ref "appsecurity" >}}) for details about the application level sandboxing.
+See [appsecurity]({{< ref "appsecurity" >}}) for details about the application level sandboxing and [authentication]({{< ref "authentication" >}}) for details about adding OAuth/OIDC/SAML/Cert based auth for apps.
+
+## CSRF Protection
+
+CSRF protection is automatically enabled for OpenRun internal APIs and for API calls to apps. This uses the [CrossOriginProtection](https://pkg.go.dev/net/http#CrossOriginProtection) middleware. Use `app_config.security.disable_csrf_protection = true` in `openrun.toml` to disable globally for all apps. CSRF protection can be disabled individually for apps by running `openrun app update-metadata conf --promote 'security.disable_csrf_protection=true' /myapp`
 
 ## Private Repository Access
 
