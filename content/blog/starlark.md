@@ -106,3 +106,7 @@ In addition to Starlark, OpenRun uses a TOML for the static config file. See [us
 For API interaction and data serialization, OpenRun uses JSON. For example, the Dynamic config uses JSON since there are API calls which can update the values dynamically. JSON works well for that scenario. Its limitations like not being abe to add comments do not matter when the user is expected to use an UI to update the dynamic values.
 
 For scenarios where configuration flexibility is good to have, Starlark is a great option.
+
+{{<callout emoji="💬" >}}
+Discussion thread on [lobste.rs](https://lobste.rs/s/knnz1l/python_as_configuration_language_via)
+{{</callout>}}
