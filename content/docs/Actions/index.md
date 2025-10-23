@@ -49,15 +49,16 @@ The app, when accessed will look as shown below, with the `ls` command output di
 
 An action is defined using the `ace.action` struct. The fields in this structure are:
 
-|   Property    | Optional |     Type     | Default |                            Notes                            |
-| :-----------: | :------: | :----------: | :-----: | :---------------------------------------------------------: |
-|     name      |  false   |    string    |         |                       The action name                       |
-|     path      |  false   |    string    |         |               The path to use within app path               |
-|      run      |  false   |   function   |         |              The function to run on execution               |
-|    suggest    |   true   |   function   |  none   |               The function to run on suggest                |
-|  description  |   true   |    string    |  none   |               The description for the action                |
-|    hidden     |   true   | list strings |  none   | The params which should be hidden in the UI for this Action |
-| show_validate |   true   |   boolean    |  False  |     Whether to show an Validate option for this action      |
+|   Property    | Optional |     Type     | Default |                                                 Notes                                                  |
+| :-----------: | :------: | :----------: | :-----: | :----------------------------------------------------------------------------------------------------: |
+|     name      |  false   |    string    |         |                                            The action name                                             |
+|     path      |  false   |    string    |         |                                    The path to use within app path                                     |
+|      run      |  false   |   function   |         |                                    The function to run on execution                                    |
+|    suggest    |   true   |   function   |  none   |                                     The function to run on suggest                                     |
+|  description  |   true   |    string    |  none   |                                     The description for the action                                     |
+|    hidden     |   true   | list strings |  none   |                      The params which should be hidden in the UI for this Action                       |
+| show_validate |   true   |   boolean    |  False  |                           Whether to show an Validate option for this action                           |
+|    permit     |   true   | list string  |   []    | List of custom RBAC permissions, any one of which need to be granted for the user to allow this action |
 
 The name and description are shown in the app UI. The app params are displayed in a form. `BOOLEAN` types are checkboxes, others are text boxes.
 

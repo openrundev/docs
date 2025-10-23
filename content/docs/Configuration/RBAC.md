@@ -39,7 +39,7 @@ The RBAC configuration is managed through [dynamic config]({{< ref "docs/configu
       },
       {
         "description": "access on one app",
-        "users": ["group:customgroup"],
+        "users": ["group:mygroup"],
         "roles": ["fullaccess"],
         "targets": ["example.com:/myapp"]
       }
@@ -67,6 +67,19 @@ To get the group info dynamically as part of the user login (instead of statical
 - For OpenId, the appropriate scope is requested, like `groups`
 - The Identity Provider is configured to return the groups info in the user profile, with the `groups` key. For example, see [Okta forum](https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1) about configuring Okta with OIDC.
 - The group name as returned in the user profile is used in the grant
+
+## Regex User Name
+
+In the `groups.<group_name>` property and in `grant.users`, the user name can be specified as a regex. If the value starts with `regex:` prefix, the subsequent value is considered as a regex. For example, `regex:google:^.*@example.com$` matches any user id with google provider.
+
+## Custom Permissions
+
+Permissions like `access`, `list`, `update` etc are OpenRun defined permissions. They control what actions can be performed by the user in OpenRun. In addition to these, custom permissions are supported. Custom permissions are defined in the config with the `custom:` prefix. These permissions are ignored by OpenRun. They are passed to the app. For apps where requests are proxied through OpenRun (like containerized apps), these permissions are available in the HTTP headers
+
+- `X-Openrun-User`: This is the user performing the request. The user id is prefixed with the provider name (like `google:test@example.com`). The user name is `anonymous` for anonymous requests and `admin` for admin requests.
+- `X-Openrun-Perms`: The list of custom permissions available to this user on this app. The list is comma separated, without the `custom:` prefix, like `appread,appdelete`.
+
+For [Action apps]({{< ref "Actions" >}}), custom perms can be used to limit which user can perform what operations. In the action definition, adding `permit=['appread']` means that the Action will be available only to user who have any one of the custom permissions specified in the list. The default action should be available to everyone, other actions can be controlled using custom permissions.
 
 ## Notes
 
