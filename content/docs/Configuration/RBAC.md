@@ -78,6 +78,7 @@ Permissions like `access`, `list`, `update` etc are OpenRun defined permissions.
 
 - `X-Openrun-User`: This is the user performing the request. The user id is prefixed with the provider name (like `google:test@example.com`). The user name is `anonymous` for anonymous requests and `admin` for admin requests.
 - `X-Openrun-Perms`: The list of custom permissions available to this user on this app. The list is comma separated, without the `custom:` prefix, like `appread,appdelete`.
+- `X-Openrun-Rbac-Enabled`: Whether RBAC is enabled for the app, `true` or `false`
 
 For [Action apps]({{< ref "Actions" >}}), custom perms can be used to limit which user can perform what operations. In the action definition, adding `permit=['appread']` means that the Action will be available only to user who have any one of the custom permissions specified in the list. The default action should be available to everyone, other actions can be controlled using custom permissions. If no permits are set or if RBAC is not enabled for the app, then all actions are available to authenticated users.
 
