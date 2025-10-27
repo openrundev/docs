@@ -4838,6 +4838,7 @@ title="Copy code"
 &lt;ul>
 &lt;li>&lt;code>X-Openrun-User&lt;/code>: This is the user performing the request. The user id is prefixed with the provider name (like &lt;code>google:test@example.com&lt;/code>). The user name is &lt;code>anonymous&lt;/code> for anonymous requests and &lt;code>admin&lt;/code> for admin requests.&lt;/li>
 &lt;li>&lt;code>X-Openrun-Perms&lt;/code>: The list of custom permissions available to this user on this app. The list is comma separated, without the &lt;code>custom:&lt;/code> prefix, like &lt;code>appread,appdelete&lt;/code>.&lt;/li>
+&lt;li>&lt;code>X-Openrun-Rbac-Enabled&lt;/code>: Whether RBAC is enabled for the app, &lt;code>true&lt;/code> or &lt;code>false&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;p>For &lt;a href="https://openrun.dev/docs/actions/" >Action apps&lt;/a>, custom perms can be used to limit which user can perform what operations. In the action definition, adding &lt;code>permit=['appread']&lt;/code> means that the Action will be available only to user who have any one of the custom permissions specified in the list. The default action should be available to everyone, other actions can be controlled using custom permissions. If no permits are set or if RBAC is not enabled for the app, then all actions are available to authenticated users.&lt;/p>
 &lt;h2>Notes&lt;span class="hx:absolute hx:-mt-20" id="notes">&lt;/span>
