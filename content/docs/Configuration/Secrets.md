@@ -8,7 +8,7 @@ OpenRun supports secret management when working with apps. Secrets can be passed
 
 ## Supported Providers
 
-OpenRun currently supports AWS Secrets Manager (ASM) and HashiCorp Vault as providers for secrets management. Secrets can also be read from the environment of the OpenRun server, which can be used in development and testing. Secrets can also be read from a local properties file.
+OpenRun currently supports AWS Secrets Manager (ASM), AWS SSM and HashiCorp Vault as providers for secrets management. Secrets can also be read from the environment of the OpenRun server, which can be used in development and testing. Secrets can also be read from a local properties file.
 
 ## AWS Secrets Manager
 
@@ -25,6 +25,22 @@ profile = "myaccount"
 creates two ASM configs. `asm` uses the default profile and `asm_prod` uses the `myaccount` profile. The default config is read from the home directory ~/.aws/config and ~/.aws/credentials as documented in [AWS docs](https://docs.aws.amazon.com/sdkref/latest/guide/file-location.html). The user id under which the OpenRun server was started is looked up for the aws config file.
 
 To access a secret in app parameters from `asm_prod` config, use `--param MYPARAM='{{secret_from "asm_prod" "MY_SECRET_KEY"}}'` as the param value. Use `--param MYPARAM='{{secret "MY_SECRET_KEY"}}'` to read from the default provider.
+
+## AWS Systems Manager (SSM)
+
+To enable SSM, add one or more entries in the `openrun.toml` config. The config name should be `ssm` or should start with `ssm_`. For example
+
+```toml {filename="openrun.toml"}
+[secret.ssm]
+
+[secret.ssm_prod]
+profile = "myaccount"
+
+```
+
+creates two SSM configs. `ssm` uses the default profile and `ssm_prod` uses the `myaccount` profile. The default config is read from the home directory ~/.aws/config and ~/.aws/credentials as documented in [AWS docs](https://docs.aws.amazon.com/sdkref/latest/guide/file-location.html). The user id under which the OpenRun server was started is looked up for the aws config file.
+
+To access a secret in app parameters from `ssm_prod` config, use `--param MYPARAM='{{secret_from "ssm_prod" "MY_SECRET_KEY"}}'` as the param value. Use `--param MYPARAM='{{secret "MY_SECRET_KEY"}}'` to read from the default provider.
 
 ## HashiCorp Vault
 
