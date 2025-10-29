@@ -317,6 +317,8 @@ title="Copy code"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># Idle Shutdown Config&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">idle_shutdown_secs&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">180&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">idle_shutdown_dev_apps&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">idle_bytes_high_watermark&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">1500&lt;/span> &lt;span class="c"># bytes high watermark for idle shutdown&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c"># (1500 bytes sent and recv over 180 seconds)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># Status check Config&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status_check_interval_secs&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">5&lt;/span>
@@ -332,7 +334,7 @@ title="Copy code"
 &lt;/div>
 &lt;p>A health check is done on the container after container is started. If the health check fails 30 times, the container is assumed to be down.&lt;/p>
 &lt;p>In the running state, a status check is done on the app every five seconds. If three of those checks fail, then the container is assumed to be down.&lt;/p>
-&lt;p>If an app does not receive any API request for 180 seconds, the app is assumed to be idle and the container is stopped. The idle shutdown does not apply for dev apps, only for prod mode apps.&lt;/p>
+&lt;p>If an app does not receive any REST API request for 180 seconds and the total data transfer from/to to the app is below 1500 bytes over 180 seconds, the app is assumed to be idle and the container is stopped. The idle shutdown does not apply for dev apps, only for prod mode apps. For frameworks like Streamlit where Websockets is used for communication between the UI and app, there will not be an REST API calls. The data transfer is used to determine whether the app is idle.&lt;/p>
 &lt;h2>Changing Config&lt;span class="hx:absolute hx:-mt-20" id="changing-config">&lt;/span>
 &lt;a href="#changing-config" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The &lt;code>openrun.toml&lt;/code> can be updated to have a different value for any of the properties. After the server restart, the config change will apply for all apps.&lt;/p>
 &lt;p>To apply the config at the app level, the app metadata can be updated. For example the command&lt;/p>
