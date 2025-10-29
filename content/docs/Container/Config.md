@@ -17,6 +17,8 @@ container.health_timeout_secs = 5
 # Idle Shutdown Config
 container.idle_shutdown_secs = 180
 container.idle_shutdown_dev_apps = false
+container.idle_bytes_high_watermark = 1500 # bytes high watermark for idle shutdown
+                                           # (1500 bytes sent and recv over 180 seconds)
 
 # Status check Config
 container.status_check_interval_secs = 5
@@ -27,7 +29,7 @@ A health check is done on the container after container is started. If the healt
 
 In the running state, a status check is done on the app every five seconds. If three of those checks fail, then the container is assumed to be down.
 
-If an app does not receive any API request for 180 seconds, the app is assumed to be idle and the container is stopped. The idle shutdown does not apply for dev apps, only for prod mode apps.
+If an app does not receive any REST API request for 180 seconds and the total data transfer from/to to the app is below 1500 bytes over 180 seconds, the app is assumed to be idle and the container is stopped. The idle shutdown does not apply for dev apps, only for prod mode apps. For frameworks like Streamlit where Websockets is used for communication between the UI and app, there will not be an REST API calls. The data transfer is used to determine whether the app is idle.
 
 ## Changing Config
 
