@@ -697,7 +697,7 @@ title="Copy code"
 &lt;/ul></description></item><item><title>Secrets Management</title><link>https://openrun.dev/docs/configuration/secrets/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/configuration/secrets/</guid><description>
 &lt;p>OpenRun supports secret management when working with apps. Secrets can be passed to containerized apps through the environment params. Secrets can also be passed to any plugin as argument. For OAuth config, the client secrets can be configured as secret in the config file.&lt;/p>
 &lt;h2>Supported Providers&lt;span class="hx:absolute hx:-mt-20" id="supported-providers">&lt;/span>
-&lt;a href="#supported-providers" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun currently supports AWS Secrets Manager (ASM) and HashiCorp Vault as providers for secrets management. Secrets can also be read from the environment of the OpenRun server, which can be used in development and testing. Secrets can also be read from a local properties file.&lt;/p>
+&lt;a href="#supported-providers" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun currently supports AWS Secrets Manager (ASM), AWS SSM and HashiCorp Vault as providers for secrets management. Secrets can also be read from the environment of the OpenRun server, which can be used in development and testing. Secrets can also be read from a local properties file.&lt;/p>
 &lt;h2>AWS Secrets Manager&lt;span class="hx:absolute hx:-mt-20" id="aws-secrets-manager">&lt;/span>
 &lt;a href="#aws-secrets-manager" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To enable ASM, add one or more entries in the &lt;code>openrun.toml&lt;/code> config. The config name should be &lt;code>asm&lt;/code> or should start with &lt;code>asm_&lt;/code>. For example&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
@@ -716,6 +716,24 @@ title="Copy code"
 &lt;/div>
 &lt;p>creates two ASM configs. &lt;code>asm&lt;/code> uses the default profile and &lt;code>asm_prod&lt;/code> uses the &lt;code>myaccount&lt;/code> profile. The default config is read from the home directory ~/.aws/config and ~/.aws/credentials as documented in &lt;a href="https://docs.aws.amazon.com/sdkref/latest/guide/file-location.html" target="_blank" rel="noopener">AWS docs&lt;/a>. The user id under which the OpenRun server was started is looked up for the aws config file.&lt;/p>
 &lt;p>To access a secret in app parameters from &lt;code>asm_prod&lt;/code> config, use &lt;code>--param MYPARAM='{{secret_from &amp;quot;asm_prod&amp;quot; &amp;quot;MY_SECRET_KEY&amp;quot;}}'&lt;/code> as the param value. Use &lt;code>--param MYPARAM='{{secret &amp;quot;MY_SECRET_KEY&amp;quot;}}'&lt;/code> to read from the default provider.&lt;/p>
+&lt;h2>AWS Systems Manager (SSM)&lt;span class="hx:absolute hx:-mt-20" id="aws-systems-manager-ssm">&lt;/span>
+&lt;a href="#aws-systems-manager-ssm" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To enable SSM, add one or more entries in the &lt;code>openrun.toml&lt;/code> config. The config name should be &lt;code>ssm&lt;/code> or should start with &lt;code>ssm_&lt;/code>. For example&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">secret&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ssm&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">secret&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ssm_prod&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">profile&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;myaccount&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>creates two SSM configs. &lt;code>ssm&lt;/code> uses the default profile and &lt;code>ssm_prod&lt;/code> uses the &lt;code>myaccount&lt;/code> profile. The default config is read from the home directory ~/.aws/config and ~/.aws/credentials as documented in &lt;a href="https://docs.aws.amazon.com/sdkref/latest/guide/file-location.html" target="_blank" rel="noopener">AWS docs&lt;/a>. The user id under which the OpenRun server was started is looked up for the aws config file.&lt;/p>
+&lt;p>To access a secret in app parameters from &lt;code>ssm_prod&lt;/code> config, use &lt;code>--param MYPARAM='{{secret_from &amp;quot;ssm_prod&amp;quot; &amp;quot;MY_SECRET_KEY&amp;quot;}}'&lt;/code> as the param value. Use &lt;code>--param MYPARAM='{{secret &amp;quot;MY_SECRET_KEY&amp;quot;}}'&lt;/code> to read from the default provider.&lt;/p>
 &lt;h2>HashiCorp Vault&lt;span class="hx:absolute hx:-mt-20" id="hashicorp-vault">&lt;/span>
 &lt;a href="#hashicorp-vault" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To enable Vault secret provider, add one or more entries in the &lt;code>openrun.toml&lt;/code> config. The config name should be &lt;code>vault&lt;/code> or should start with &lt;code>vault_&lt;/code>. For example&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
