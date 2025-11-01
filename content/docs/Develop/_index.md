@@ -62,7 +62,7 @@ The default response type is `ace.HTML`. `ace.TEXT` and `ace.JSON` are the other
 
 ## Building Apps from Spec
 
-A spec (specification) can be set for an app. This makes OpenRun use the spec as a template to specify the app configuration. Use `app create --spec python-flask` while creating an app or change the spec using `app update-metadata spec python-flask /myapp`. The spec brings in a set of predefined files. If a file with the same name is already present in the app code, then the spec file is ignored. So if the app code and spec both define a `Containerfile`, the file from the app code takes precedence. If the app folder contains just `app.py`
+A spec (specification) can be set for an app. This makes OpenRun use the spec as a template to specify the app configuration. Use `app create --spec python-flask` while creating an app or change the spec using `app update spec python-flask /myapp`. The spec brings in a set of predefined files. If a file with the same name is already present in the app code, then the spec file is ignored. So if the app code and spec both define a `Containerfile`, the file from the app code takes precedence. If the app folder contains just `app.py`
 
 ```python {filename="flaskapp/app.py"}
 from flask import Flask

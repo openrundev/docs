@@ -6,7 +6,7 @@ summary: "Details about authentication mechanisms for app access, including OAut
 
 By default, apps are created with the `none` authentication type. A `system` auth is available which uses `admin` as the username. The password is displayed on the screen during the initial setup of the OpenRun server config.
 
-To set the auth type, add `--auth system` to the app create command. After an app is created, the auth type can be changed by running `app update-settings auth system /myapp`.
+To set the auth type, add `--auth system` to the app create command. After an app is created, the auth type can be changed by running `app update auth --promote system /myapp`.
 
 ## Default Authentication Type
 
@@ -36,7 +36,7 @@ ca_cert_file="/data/certs/ca1.crt"
 ca_cert_file="/data/certs/ca2.crt"
 ```
 
-defines two client_auth configs: `cert_test1` using ca1.crt and `cert_test2` using ca2.crt. Apps can be updated to use this auth config by running `app update-settings auth cert_test1 /myapp` or `app update-settings auth cert_test2 /myapp`.
+defines two client_auth configs: `cert_test1` using ca1.crt and `cert_test2` using ca2.crt. Apps can be updated to use this auth config by running `app update auth --promote cert_test1 /myapp` or `app update auth --promote  cert_test2 /myapp`.
 
 Any API call to the app has to pass the client certificates. Using curl, the call would look like:
 

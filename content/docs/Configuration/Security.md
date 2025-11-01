@@ -71,7 +71,7 @@ See [appsecurity]({{< ref "appsecurity" >}}) for details about the application l
 
 ## CSRF Protection
 
-CSRF protection is automatically enabled for OpenRun internal APIs and for API calls to apps. This uses the [CrossOriginProtection](https://pkg.go.dev/net/http#CrossOriginProtection) middleware. Use `app_config.security.disable_csrf_protection = true` in `openrun.toml` to disable globally for all apps. CSRF protection can be disabled individually for apps by running `openrun app update-metadata conf --promote 'security.disable_csrf_protection=true' /myapp`
+CSRF protection is automatically enabled for OpenRun internal APIs and for API calls to apps. This uses the [CrossOriginProtection](https://pkg.go.dev/net/http#CrossOriginProtection) middleware. Use `app_config.security.disable_csrf_protection = true` in `openrun.toml` to disable globally for all apps. CSRF protection can be disabled individually for apps by running `openrun app update conf --promote 'security.disable_csrf_protection=true' /myapp`
 
 ## Private Repository Access
 
@@ -115,10 +115,8 @@ default_git_auth = "mykey"
 This git key is used for `apply` and `sync` also. To change the git auth key for an app, run:
 
 ```bash
-openrun app update-settings git-auth newkey /myapp
+openrun app update git-auth --promote newkey /myapp
 ```
-
-The git auth is not a staged changed, it applies immediately for the staging and prod apps and preview apps.
 
 ## GitLab Groups and Subgroups
 

@@ -32,11 +32,11 @@ will create an app at `https://localhost:25223/streamlit_app`. On the first API 
 
 The specs defined currently are:
 
-| Spec Name               | Required Params                                                                                                            | Optional Params                                                                                                                                                         | Supports Path Routing | Notes                                                                 | Example                                                                                                                                                       |
-| :---------------------- | :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------- | :-------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Spec Name               | Required Params                                                                                                            | Optional Params                                                                                                                                                         | Supports Path Routing | Notes                                                                 | Example                                                                                                                                                         |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------- | :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | container               |                                                                                                                            | <ul><li><b>port</b> : The port number within container, optional if EXPOSE directive is present</li></ul>                                                               | Depends on app        | Requires app code to have a Containerfile/Dockerfile                  |
 | image                   | <ul><li><b>image</b>: The image to use for the container</li> <li><b>port</b> : The port number within container</li></ul> |                                                                                                                                                                         | Depends on app        | No source url required when creating app, use - as url                | `openrun app create --spec image --approve --param image=nginx --param port=80 - nginxapp.localhost:/`                                                          |
-| proxy                   | <ul><li><b>url</b>: The url to which requests should be proxied</li> </ul>                                                 |                                                                                                                                                                         | No                    | No source url required when creating app, use - as url                | `openrun app create --spec proxy --approve -param url=https://openrun.dev - proxyapp.localhost:/`                                                                  |
+| proxy                   | <ul><li><b>url</b>: The url to which requests should be proxied</li> </ul>                                                 |                                                                                                                                                                         | No                    | No source url required when creating app, use - as url                | `openrun app create --spec proxy --approve -param url=https://openrun.dev - proxyapp.localhost:/`                                                               |
 | python-wsgi             |                                                                                                                            | <ul><li><b>APP_MODULE</b>: The module:app for the WSGI app. Defaults to app:app, meaning app in app.py</li> </ul>                                                       | Depends on app        | Runs Web Server Gateway Interface (WSGI) apps using gunicorn          |
 | python-asgi             |                                                                                                                            | <ul><li><b>APP_MODULE</b>: The module:app for the ASGI app. Defaults to app:app, meaning app in app.py</li> </ul>                                                       | Depends on app        | Runs Asynchronous Server Gateway Interface (ASGI) apps using uvicorn  |
 | python-flask            |                                                                                                                            | <ul><li><b>port</b> : The port number within container. If EXPOSE directive is present, that is used. Defaults to 5000</li></ul>                                        | Depends on app        | Runs app using flask dev server                                       |
@@ -94,7 +94,7 @@ openrun app create --approve --spec python-fasthtml \
 To update args, run
 
 ```sh
-openrun app update-metadata carg PYTHON_VERSION=3.11.2 fasthtmlapp.localhost:/
+openrun app update carg PYTHON_VERSION=3.11.2 fasthtmlapp.localhost:/
 ```
 
 Like all metadata updates, arg updates are staged. Pass `--promote` to promote immediately or run `app promote` to promote from stage to prod.
@@ -119,7 +119,7 @@ sets the CPU shares for the container to 1000.
 To update container options, run
 
 ```sh
-openrun app update-metadata copt cpu-shares=500 fasthtmlapp.localhost:/
+openrun app update copt cpu-shares=500 fasthtmlapp.localhost:/
 ```
 
 Like all metadata updates, option updates are staged. Pass `--promote` to promote immediately or run `app promote` to promote from stage to prod.
@@ -160,7 +160,7 @@ To define the volume in the app config, add
 To set the volume info in the app metadata, run
 
 ```sh
-openrun app update-metadata cvol --promote "cl_secret:secret.tmpl:/app/secret.ini" /APPPATH
+openrun app update cvol --promote "cl_secret:secret.tmpl:/app/secret.ini" /APPPATH
 ```
 
 multiple values are supported for `cvol`.

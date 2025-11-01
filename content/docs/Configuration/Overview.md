@@ -38,7 +38,7 @@ audit.redact_url = true
 sets the redact property to true for all apps. The property can be further configured individually for one or more apps in the app metadata using
 
 ```sh
-openrun app update-metadata conf --promote 'audit.redact_url=true' /myapp
+openrun app update conf --promote 'audit.redact_url=true' /myapp
 ```
 
 ## Config Access from Code

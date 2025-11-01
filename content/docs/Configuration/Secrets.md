@@ -148,5 +148,5 @@ security.default_secrets_provider = "env"
 The `env` provider is used by default if it is enabled in the config. The default can be changed per app by setting
 
 ```sh
-openrun app update-metadata conf --promote 'security.default_secrets_provider="prop_myfile"' /myapp
+openrun app update conf --promote 'security.default_secrets_provider="prop_myfile"' /myapp
 ```

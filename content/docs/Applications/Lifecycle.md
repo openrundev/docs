@@ -121,6 +121,6 @@ Staging and Preview apps have read only access by default to plugin APIs. This m
 
 For cases where the plugin defines an API as Write, the app permission can overwrite the default type and define the operation to be a READ operation. For example, the disk_usage app runs the `du` command, which is a read operation. The [app config defines](https://github.com/openrundev/openrun/blob/49182d4ca1cacbd8e3463a77c2174a6da1fb66c9/examples/disk_usage/app.star#L45) the run plugin call as `type="READ"`, over-riding the default WRITE type defined in the plugin. If no type is specified in the permission, the type defined in the plugin takes effect.
 
-Staging and Preview apps are allowed only READ calls by default, even if the app permissions allow WRITE operations. To allow stage apps access to WRITE operations, run `openrun app update-settings stage-write-access true all`. Change `all` to the desired app glob pattern.
+Staging and Preview apps are allowed only READ calls by default, even if the app permissions allow WRITE operations. To allow stage apps access to WRITE operations, run `openrun app settings stage-write-access true all`. Change `all` to the desired app glob pattern.
 
-To allow preview apps access to WRITE operation, run `openrun app update-settings preview-write-access true example.com:/`. This changes the existing preview apps and any new preview apps created for example.com:/ to allow write operations, if the permissions have been approved.
+To allow preview apps access to WRITE operation, run `openrun app settings preview-write-access true example.com:/`. This changes the existing preview apps and any new preview apps created for example.com:/ to allow write operations, if the permissions have been approved.

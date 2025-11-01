@@ -39,8 +39,8 @@ COMMANDS:
    approve          Approve app permissions
    reload           Reload the app source code
    promote          Promote the app from staging to production
-   update-settings  Update OpenRun apps settings. Settings changes are NOT staged, they apply immediately to matched stage, prod and preview apps.
-   update-metadata  Update OpenRun app metadata. Metadata updates are staged and have to be promoted to prod. Use "openrun param" to update app parameter metadata.
+   settings  Update OpenRun apps settings. Settings changes are NOT staged, they apply immediately to matched stage, prod and preview apps.
+   update  Update OpenRun app metadata. Metadata updates are staged and have to be promoted to prod. Use "openrun param" to update app parameter metadata.
    help, h          Shows a list of commands or help for one command
 ```
 
@@ -120,12 +120,12 @@ A star, like `PROD*` in the `app list` output indicates that there are staged ch
 
 By default, apps are created with the no authentication type. `system` auth uses `admin` as the username. The password is displayed on the screen during the initial setup of the OpenRun server config.
 
-To change app auth type, add `--auth system` to the `app create` command. After an app is created, the auth type can be changed by running `app update-settings auth system /myapp`. OAuth based authentication is also supported, see [authentication]({{< ref "docs/configuration/authentication" >}}) for details.
+To change app auth type, add `--auth system` to the `app create` command. After an app is created, the auth type can be changed by running `app update auth system /myapp`. OAuth based authentication is also supported, see [authentication]({{< ref "docs/configuration/authentication" >}}) for details.
 
 {{<callout type="warning" >}}
-Changes done to the app settings using the `app update-settings` command are not staged or versioned, they apply immediately to the stage/prod/preview apps. App settings are fundamental properties of the app, like what authentication type to use, what git auth key to use etc.
+Changes done to the app settings using the `app settings` command are **NOT** staged or versioned, they apply immediately to the stage/prod/preview apps.
 
-All other changes done to app metadata using `app update-metadata`, `app reload`, `param update` etc are staged before deployment. Use the `--promote` option on the change to promote the change immediately when applying it on the staging app. Use `app promote` command to promote later. When a promotion is done, **all** currently staged changes for that app are promoted, not just the most recent change. After promote, the prod app is exactly same as staging app.
+All other changes done to app metadata using `app update`, `app reload`, `param update` etc are staged before deployment. Use the `--promote` option on the change to promote the change immediately when applying it on the staging app. Use `app promote` command to promote later. When a promotion is done, **ALL** currently staged changes for that app are promoted, not just the most recent change. After promote, the prod app is exactly same as staging app.
 {{</callout>}}
 
 ## Declarative App Management

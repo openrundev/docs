@@ -32,7 +32,7 @@ The configurable options related to audit events are:
 The app config options can be set globally in the openrun.toml. It can also be set individually for an app by setting the app metadata. For example,
 
 ```sh
-openrun app update-metadata conf --promote 'audit.redact_url=true' /myapp
+openrun app update conf --promote 'audit.redact_url=true' /myapp
 ```
 
 The retention for audit events is configurable globally. The config settings in `openrun.toml` are:

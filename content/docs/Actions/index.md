@@ -177,7 +177,7 @@ fs.file_access = ["$TEMPDIR", "/tmp"]
 To set this at the app level, run
 
 ```
-openrun app update-metadata conf --promote fs.file_access='["/var/tmp", "$TEMPDIR", "/tmp"]' /myapp
+openrun app update conf --promote fs.file_access='["/var/tmp", "$TEMPDIR", "/tmp"]' /myapp
 ```
 
 ## Multiple Actions

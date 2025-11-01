@@ -38,7 +38,7 @@ The `openrun.toml` can be updated to have a different value for any of the prope
 To apply the config at the app level, the app metadata can be updated. For example the command
 
 ```sh
-openrun app update-metadata conf --promote container.idle_shutdown_secs=600 /myapp
+openrun app update conf --promote container.idle_shutdown_secs=600 /myapp
 ```
 
 changes the idle timeout for the `/myapp` app to 600 secs. Without the `--promote` option, the change will be staged and can be verified on the staging app. App metadata level setting take precedence over the defaults in the `openrun.toml`. Using `all` as the app name will apply the change for all current apps (but not for any new apps created later).
