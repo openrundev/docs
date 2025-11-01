@@ -120,7 +120,7 @@ A star, like `PROD*` in the `app list` output indicates that there are staged ch
 
 By default, apps are created with the no authentication type. `system` auth uses `admin` as the username. The password is displayed on the screen during the initial setup of the OpenRun server config.
 
-To change app auth type, add `--auth system` to the `app create` command. After an app is created, the auth type can be changed by running `app update auth system /myapp`. OAuth based authentication is also supported, see [authentication]({{< ref "docs/configuration/authentication" >}}) for details.
+To change app auth type, add `--auth system` to the `app create` command. After an app is created, the auth type can be changed by running `app update auth --promote system /myapp`. OAuth based authentication is also supported, see [authentication]({{< ref "docs/configuration/authentication" >}}) for details.
 
 {{<callout type="warning" >}}
 Changes done to the app settings using the `app settings` command are **NOT** staged or versioned, they apply immediately to the stage/prod/preview apps.
