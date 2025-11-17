@@ -22,7 +22,7 @@
         },
         "repositoryUrl": {
             "url": "https://github.com/openrundev/openrun",
-            "wellKnown": "https://github.com/openrundev/docs/blob/main/.well-known/funding-manifest-urls"
+            "wellKnown": "https://github.com/openrundev/openrun/blob/main/.github/.well-known/funding-manifest-urls"
         },
         "licenses": ["spdx:Apache-2.0"],
         "tags": ["devops", "deployment", "internal-tools", "docker", "kubernetes"]
