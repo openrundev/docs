@@ -50,6 +50,10 @@ displayPoweredBy = false
 default = "system"
 displayToggle = true
 
+[params.banner]
+key = "announcement-usecase"
+message = "📌 Complete configuration for couple of scenarios added, see [use-cases](https://openrun.dev/docs/use-cases/)."
+
 # Docs Navigation
 
 [[menu.main]]
