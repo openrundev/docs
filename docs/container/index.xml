@@ -1,7 +1,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OpenRun - App Deployment Simplified – Containerized Apps</title><link>https://openrun.dev/docs/container/</link><description>Recent content in Containerized Apps on OpenRun - App Deployment Simplified</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://openrun.dev/docs/container/index.xml" rel="self" type="application/rss+xml"/><item><title>Container Overview</title><link>https://openrun.dev/docs/container/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/overview/</guid><description>
 &lt;p>OpenRun builds the image and manages the container lifecycle for containerized apps. OpenRun fetches the source code, creates the image, starts the container, does health checks on the container and stops the container when idle. Appspecs allow existing source code to be used with OpenRun with no code changes required.&lt;/p>
 &lt;h2>App Specs&lt;span class="hx:absolute hx:-mt-20" id="app-specs">&lt;/span>
-&lt;a href="#app-specs" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun app specs are defined at &lt;a href="https://github.com/openrundev/appspecs" target="_blank" rel="noopener">https://github.com/openrundev/appspecs&lt;/a>. Most specs use containers, the &lt;code>proxy&lt;/code> spec is an exception.&lt;/p>
+&lt;a href="#app-specs" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun app specs are defined at &lt;a href="https://github.com/openrundev/appspecs"target="_blank" rel="noopener">https://github.com/openrundev/appspecs&lt;/a>. Most specs use containers, the &lt;code>proxy&lt;/code> spec is an exception.&lt;/p>
 &lt;p>The &lt;code>image&lt;/code> spec specifies the image to use. for example&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">openrun app create --spec image --approve --param &lt;span class="nv">image&lt;/span>&lt;span class="o">=&lt;/span>nginx &lt;span class="se">\
@@ -16,7 +16,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;p>downloads the nginx image, starts it and proxies any request to &lt;code>https://nginxapp.localhost:25223&lt;/code> to the nginx container&amp;rsquo;s port 80. The container is started on the first API call, and it is stopped automatically when there are no API calls for 180 seconds.&lt;/p>
-&lt;p>For all other specs, the &lt;code>Containerfile&lt;/code> is defined in the spec. For example, for the &lt;code>python-streamlit&lt;/code> spec, the Containerfile is &lt;a href="https://github.com/openrundev/appspecs/blob/main/python-streamlit/Containerfile" target="_blank" rel="noopener">here&lt;/a>. Running&lt;/p>
+&lt;p>For all other specs, the &lt;code>Containerfile&lt;/code> is defined in the spec. For example, for the &lt;code>python-streamlit&lt;/code> spec, the Containerfile is &lt;a href="https://github.com/openrundev/appspecs/blob/main/python-streamlit/Containerfile"target="_blank" rel="noopener">here&lt;/a>. Running&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">openrun app create --spec python-streamlit --branch master &lt;span class="se">\
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --approve github.com/streamlit/streamlit-example /streamlit_app&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
@@ -150,7 +150,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>creates a FastHTML based app. The &lt;code>APP_MODULE&lt;/code> env param is passed to the Container and passed to the startup command line in the &lt;a href="https://github.com/openrundev/appspecs/blob/a06a59a91d99520e271c6f3df68b6fb8292dbf50/python-fasthtml/Containerfile#L41" target="_blank" rel="noopener">Containerfile&lt;/a>.&lt;/p>
+&lt;p>creates a FastHTML based app. The &lt;code>APP_MODULE&lt;/code> env param is passed to the Container and passed to the startup command line in the &lt;a href="https://github.com/openrundev/appspecs/blob/a06a59a91d99520e271c6f3df68b6fb8292dbf50/python-fasthtml/Containerfile#L41"target="_blank" rel="noopener">Containerfile&lt;/a>.&lt;/p>
 &lt;p>To update params, run&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">openrun param update APP_MODULE basic_app:app fasthtmlapp.localhost:/&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
@@ -166,13 +166,13 @@ title="Copy code"
 &lt;p>Param updates are staged, they can be promoted after verification. To delete a param, pass &lt;code>-&lt;/code> as the value to the update. Use &lt;code>openrun param list&lt;/code> to view app params.&lt;/p>
 &lt;p>Params can be set to secrets, by setting the value as &lt;code>{{secret &amp;quot;vault_prod&amp;quot; &amp;quot;MY_KEY_NAME&amp;quot;}}&lt;/code>. The secret is resolved when the container is started and the value is passed to the container in its env.&lt;/p>
 &lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200">
-&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;div class="hx:select-none hx:text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">ℹ️&lt;/div>&lt;/div>
+&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
 &lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">&lt;strong>Note:&lt;/strong> Staged param updates are a powerful mechanism to ensure that config changes do not break your apps. For example, if BUCKET_NAME is a param pointing to a S3 bucket, the param change can be staged. The staging app can be tested to ensure that the new bucket is functional and there are no IAM/key related errors. Once the staging app is working, the app can be promoted. Code changes are easy to test, but config changes can cause env specific errors. Configuration related issues are a common cause of outages during deployment. OpenRun enables you to avoid such errors.&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;h2>Container Build Args&lt;span class="hx:absolute hx:-mt-20" id="container-build-args">&lt;/span>
-&lt;a href="#container-build-args" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>If the Containerfile has an argument, the arg can be passed during the app create. Most python specs have the python version as an argument, For example, &lt;a href="https://github.com/openrundev/appspecs/blob/a06a59a91d99520e271c6f3df68b6fb8292dbf50/python-fasthtml/Containerfile#L2" target="_blank" rel="noopener">https://github.com/openrundev/appspecs/blob/a06a59a91d99520e271c6f3df68b6fb8292dbf50/python-fasthtml/Containerfile#L2&lt;/a> sets&lt;/p>
+&lt;a href="#container-build-args" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>If the Containerfile has an argument, the arg can be passed during the app create. Most python specs have the python version as an argument, For example, &lt;a href="https://github.com/openrundev/appspecs/blob/a06a59a91d99520e271c6f3df68b6fb8292dbf50/python-fasthtml/Containerfile#L2"target="_blank" rel="noopener">https://github.com/openrundev/appspecs/blob/a06a59a91d99520e271c6f3df68b6fb8292dbf50/python-fasthtml/Containerfile#L2&lt;/a> sets&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;pre>&lt;code>ARG PYTHON_VERSION=3.12.5-slim&lt;/code>&lt;/pre>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
 &lt;button
@@ -213,7 +213,7 @@ title="Copy code"
 &lt;/div>
 &lt;p>Like all metadata updates, arg updates are staged. Pass &lt;code>--promote&lt;/code> to promote immediately or run &lt;code>app promote&lt;/code> to promote from stage to prod.&lt;/p>
 &lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200">
-&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;div class="hx:select-none hx:text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">ℹ️&lt;/div>&lt;/div>
+&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
 &lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">&lt;strong>Note:&lt;/strong> The slim images are smaller, but they lack some debugging tools. The regular image can be used during development.&lt;/div>
 &lt;/div>
@@ -249,7 +249,7 @@ title="Copy code"
 &lt;/div>
 &lt;p>Like all metadata updates, option updates are staged. Pass &lt;code>--promote&lt;/code> to promote immediately or run &lt;code>app promote&lt;/code> to promote from stage to prod.&lt;/p>
 &lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200">
-&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;div class="hx:select-none hx:text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">ℹ️&lt;/div>&lt;/div>
+&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
 &lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">&lt;strong>Note:&lt;/strong> By default there are no limits set for the containers. That allows for full utilization of system resources. To avoid individual apps from utilizing too much of the system resources, CPU/memory limits can be set.&lt;/div>
 &lt;/div>
@@ -277,7 +277,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>the params are generated in the ini file format. See &lt;a href="https://github.com/openrundev/appspecs/blob/main/python-streamlit/app.star#L10" target="_blank" rel="noopener">streamlit spec&lt;/a> for an example of using this.&lt;/p>
+&lt;p>the params are generated in the ini file format. See &lt;a href="https://github.com/openrundev/appspecs/blob/main/python-streamlit/app.star#L10"target="_blank" rel="noopener">streamlit spec&lt;/a> for an example of using this.&lt;/p>
 &lt;p>To define the volume in the app config, add&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">secret.tmpl&lt;/div>&lt;div>&lt;pre>&lt;code> container=container.config(container.AUTO, port=param.port, volumes=[
@@ -305,7 +305,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;p>multiple values are supported for &lt;code>cvol&lt;/code>.&lt;/p></description></item><item><title>Container Config</title><link>https://openrun.dev/docs/container/config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/config/</guid><description>
-&lt;p>The default configuration for the OpenRun server is defined in &lt;a href="https://github.com/openrundev/openrun/blob/main/internal/system/openrun.default.toml" target="_blank" rel="noopener">openrun.default.toml&lt;/a>. The container related config settings are&lt;/p>
+&lt;p>The default configuration for the OpenRun server is defined in &lt;a href="https://github.com/openrundev/openrun/blob/main/internal/system/openrun.default.toml"target="_blank" rel="noopener">openrun.default.toml&lt;/a>. The container related config settings are&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">app_config&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">

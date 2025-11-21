@@ -1,6 +1,6 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OpenRun - App Deployment Simplified – Hypermedia Apps</title><link>https://openrun.dev/docs/app/</link><description>Recent content in Hypermedia Apps on OpenRun - App Deployment Simplified</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://openrun.dev/docs/app/index.xml" rel="self" type="application/rss+xml"/><item><title>Overview</title><link>https://openrun.dev/docs/app/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/app/overview/</guid><description>
-&lt;p>OpenRun supports deploying any type of app, in any language/framework, using containerized apps. Apps can also be built where the backend API is in the container but the UI is built using OpenRun. OpenRun UI applications implement a &lt;a href="https://hypermedia.systems/hypermedia-reintroduction/" target="_blank" rel="noopener">Hypermedia driven approach&lt;/a> for developing web applications. Applications return HTML fragments as API response using &lt;a href="https://pkg.go.dev/html/template" target="_blank" rel="noopener">Go html templates&lt;/a>. The UI uses HTML enhanced with hypermedia controls using the &lt;a href="https://htmx.org/" target="_blank" rel="noopener">HTMX library&lt;/a> to implement user interactions.&lt;/p>
-&lt;p>The backend API routes and dependencies like CSS library, JavaScript modules etc are configured using &lt;a href="https://github.com/google/starlark-go/blob/master/doc/spec.md" target="_blank" rel="noopener">Starlark&lt;/a> configuration. Any custom API handling required is implemented in handler functions also written in Starlark. Starlark is a subset of python, optimized for application configuration use-cases.&lt;/p>
+&lt;p>OpenRun supports deploying any type of app, in any language/framework, using containerized apps. Apps can also be built where the backend API is in the container but the UI is built using OpenRun. OpenRun UI applications implement a &lt;a href="https://hypermedia.systems/hypermedia-reintroduction/"target="_blank" rel="noopener">Hypermedia driven approach&lt;/a> for developing web applications. Applications return HTML fragments as API response using &lt;a href="https://pkg.go.dev/html/template"target="_blank" rel="noopener">Go html templates&lt;/a>. The UI uses HTML enhanced with hypermedia controls using the &lt;a href="https://htmx.org/"target="_blank" rel="noopener">HTMX library&lt;/a> to implement user interactions.&lt;/p>
+&lt;p>The backend API routes and dependencies like CSS library, JavaScript modules etc are configured using &lt;a href="https://github.com/google/starlark-go/blob/master/doc/spec.md"target="_blank" rel="noopener">Starlark&lt;/a> configuration. Any custom API handling required is implemented in handler functions also written in Starlark. Starlark is a subset of python, optimized for application configuration use-cases.&lt;/p>
 &lt;h2>App Types&lt;span class="hx:absolute hx:-mt-20" id="app-types">&lt;/span>
 &lt;a href="#app-types" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun apps can be of few different types:&lt;/p>
 &lt;ul>
@@ -62,10 +62,10 @@ title="Copy code"
 &lt;!-- prettier-ignore-end -->
 &lt;p>Run &lt;code>openrun app create --auth=none --dev --approve ~/myapp4 /hello4&lt;/code>. After that, the app is available at &lt;code>/hello4&lt;/code>. Note that the &lt;code>--dev&lt;/code> option is required for the &lt;code>openrun_gen_import&lt;/code> file to be generated which is required for live reload.&lt;/p>
 &lt;p>This app uses the &lt;code>exec&lt;/code> plugin to run the ls command. The output of the command is shown when the app is accessed. To allow the app to run the plugin command, use the &lt;code>openrun app approve&lt;/code> command.&lt;/p>
-&lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-yellow-100 hx:bg-yellow-50 hx:text-yellow-900 hx:dark:border-yellow-200/30 hx:dark:bg-yellow-700/30 hx:dark:text-yellow-200">
-&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;div class="hx:select-none hx:text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">⚠️&lt;/div>&lt;/div>
+&lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200">
+&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
-&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">&lt;strong>Note:&lt;/strong> If running on Windows, change &lt;code>ls&lt;/code> to &lt;code>dir&lt;/code>. Else, use the &lt;code>fs&lt;/code> plugin to make this platform independent. See &lt;a href="https://github.com/openrundev/apps/blob/main/system/disk_usage/app.star" target="_blank" rel="noopener">https://github.com/openrundev/apps/blob/main/system/disk_usage/app.star&lt;/a>.&lt;/div>
+&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">&lt;strong>Note:&lt;/strong> If running on Windows, change &lt;code>ls&lt;/code> to &lt;code>dir&lt;/code>. Else, use the &lt;code>fs&lt;/code> plugin to make this platform independent. See &lt;a href="https://github.com/openrundev/apps/blob/main/system/disk_usage/app.star"target="_blank" rel="noopener">https://github.com/openrundev/apps/blob/main/system/disk_usage/app.star&lt;/a>.&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;h3>Custom Layout HTML App&lt;span class="hx:absolute hx:-mt-20" id="custom-layout-html-app">&lt;/span>
@@ -159,7 +159,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;h2>Automatic Error Handling&lt;span class="hx:absolute hx:-mt-20" id="automatic-error-handling">&lt;/span>
-&lt;a href="#automatic-error-handling" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To enable &lt;a href="https://openrun.dev/docs/plugins/overview/#automatic-error-handling" >automatic error handling&lt;/a> (recommended), add an &lt;code>error_handler&lt;/code> function like:&lt;/p>
+&lt;a href="#automatic-error-handling" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To enable &lt;a href="https://openrun.dev/docs/plugins/overview/#automatic-error-handling">automatic error handling&lt;/a> (recommended), add an &lt;code>error_handler&lt;/code> function like:&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">error_handler&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ret&lt;/span>&lt;span class="p">):&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">IsPartial&lt;/span>&lt;span class="p">:&lt;/span>
@@ -175,7 +175,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div></description></item><item><title>Routing</title><link>https://openrun.dev/docs/app/routing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/app/routing/</guid><description>
-&lt;p>The request routing layer in OpenRun is built on top of the &lt;a href="https://github.com/go-chi/chi" target="_blank" rel="noopener">chi&lt;/a> routing library. API requests (JSON or text), HTML requests and proxied requests are supported. For HTML requests, the routing is built for hypermedia exchange, so all routes are defined in terms of pages and fragments within the pages. This grouping of requests helps make it clear which API does what and provide an easy mechanism to deal with partial HTMX driven requests and full page refreshes. Simpler application might have one page with some interactions within that. Larger applications can be composed of multiple pages, each page having some interactive fragments.&lt;/p>
+&lt;p>The request routing layer in OpenRun is built on top of the &lt;a href="https://github.com/go-chi/chi"target="_blank" rel="noopener">chi&lt;/a> routing library. API requests (JSON or text), HTML requests and proxied requests are supported. For HTML requests, the routing is built for hypermedia exchange, so all routes are defined in terms of pages and fragments within the pages. This grouping of requests helps make it clear which API does what and provide an easy mechanism to deal with partial HTMX driven requests and full page refreshes. Simpler application might have one page with some interactions within that. Larger applications can be composed of multiple pages, each page having some interactive fragments.&lt;/p>
 &lt;h2>Routes&lt;span class="hx:absolute hx:-mt-20" id="routes">&lt;/span>
 &lt;a href="#routes" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The app contains an &lt;code>routes&lt;/code> array, which defines all the routes for the app. For example, the app definition&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
@@ -298,7 +298,7 @@ title="Copy code"
 &lt;/tbody>
 &lt;/table>
 &lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200">
-&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;div class="hx:select-none hx:text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">ℹ️&lt;/div>&lt;/div>
+&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
 &lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">&lt;code>partial&lt;/code> and &lt;code>handler&lt;/code> are inherited from the page level, unless overridden for the fragment.&lt;/div>
 &lt;/div>
@@ -479,9 +479,9 @@ title="Copy code"
 &lt;/div>
 &lt;p>The plugin is authorized to allow proxying to &lt;code>https://www.google.com&lt;/code>. Any request to the app will be forwarded after stripping the app path. So if app is installed at &lt;code>/test&lt;/code>, a request to &lt;code>/test/abc/def&lt;/code> will be forwarded to &lt;code>/abc/def&lt;/code>. In addition, if the proxy is configured with &lt;code>strip_path=&amp;quot;/abc&amp;quot;&lt;/code>, then the request will be sent to &lt;code>/def&lt;/code>.&lt;/p>
 &lt;p>If proxying is enabled for &lt;code>/&lt;/code> route, then &lt;code>/static&lt;/code> file serving is disabled for the app since requests to static path are also forwarded to the upstream service. &lt;code>/static_root&lt;/code> serving is available and overrides the proxy config.&lt;/p>
-&lt;p>See &lt;a href="https://openrun.dev/docs/plugins/proxy/" >proxy plugin&lt;/a> for details about the proxy config.&lt;/p>
-&lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-yellow-100 hx:bg-yellow-50 hx:text-yellow-900 hx:dark:border-yellow-200/30 hx:dark:bg-yellow-700/30 hx:dark:text-yellow-200">
-&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;div class="hx:select-none hx:text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">⚠️&lt;/div>&lt;/div>
+&lt;p>See &lt;a href="https://openrun.dev/docs/plugins/proxy/">proxy plugin&lt;/a> for details about the proxy config.&lt;/p>
+&lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200">
+&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
 &lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">&lt;strong>Note:&lt;/strong> If the upstream service service uses relative paths, then all requests are automatically proxied. If the service uses absolute paths, then it better that the app is installed at the root path, like &lt;code>example.com:&lt;/code> instead of &lt;code>example.com:/test&lt;/code>. If the service uses absolute path including the domain name, then the client will see the absolute path and those requests will not come through the proxy. The HTML body is not rewritten by OpenRun to rewrite path references. The upstream service needs to use relative paths to ensure that all requests come through OpenRun.&lt;/div>
 &lt;/div>
@@ -494,13 +494,13 @@ title="Copy code"
 &lt;li>If there is a handler defined for the matched route, the handler function is called with the request as argument&lt;/li>
 &lt;li>The response template is invoked, with an input map containing a &lt;code>Data&lt;/code> property as returned by the handler function&lt;/li>
 &lt;li>If the API type is set to json, the handler response is directly returned, with no template being used&lt;/li>
-&lt;li>If &lt;a href="https://openrun.dev/docs/plugins/overview/#automatic-error-handling" >automatic error handling&lt;/a> is enabled (&lt;code>error_handler&lt;/code> is defined), then the error handler function is called if there is a error during the handler invocation. The error handler does the response processing, the templates defined in the route are not used.&lt;/li>
+&lt;li>If &lt;a href="https://openrun.dev/docs/plugins/overview/#automatic-error-handling">automatic error handling&lt;/a> is enabled (&lt;code>error_handler&lt;/code> is defined), then the error handler function is called if there is a error during the handler invocation. The error handler does the response processing, the templates defined in the route are not used.&lt;/li>
 &lt;/ul>
 &lt;h2>Notes&lt;span class="hx:absolute hx:-mt-20" id="notes">&lt;/span>
 &lt;a href="#notes" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;ul>
 &lt;li>For HTMX requests, the &lt;code>partial&lt;/code> template is used. For regular requests, the page level &lt;code>full&lt;/code> template is used&lt;/li>
 &lt;li>If there is a function called &lt;code>handler&lt;/code> defined, that is the default handler function for all API&amp;rsquo;s&lt;/li>
-&lt;li>For non-HTMX update requests (POST/PUT/DELETE), the &lt;a href="https://en.wikipedia.org/wiki/Post/Redirect/Get" target="_blank" rel="noopener">Post-Redirect-Get&lt;/a> pattern is automatically implemented by redirecting to the location pointed to by the &lt;code>Referer&lt;/code> header.&lt;/li>
+&lt;li>For non-HTMX update requests (POST/PUT/DELETE), the &lt;a href="https://en.wikipedia.org/wiki/Post/Redirect/Get"target="_blank" rel="noopener">Post-Redirect-Get&lt;/a> pattern is automatically implemented by redirecting to the location pointed to by the &lt;code>Referer&lt;/code> header.&lt;/li>
 &lt;/ul></description></item><item><title>Request</title><link>https://openrun.dev/docs/app/request/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/app/request/</guid><description>
 &lt;h2>Request Structure&lt;span class="hx:absolute hx:-mt-20" id="request-structure">&lt;/span>
 &lt;a href="#request-structure" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The handler function is passed one argument which has the details about the API call. The fields in this structure are:&lt;/p>
@@ -612,7 +612,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>&lt;a href="https://go-chi.io/#/pages/routing?id=routing-patterns-amp-url-parameters" target="_blank" rel="noopener">Wildcard parameters&lt;/a> are allowed at the end of the route. These are defined as&lt;/p>
+&lt;p>&lt;a href="https://go-chi.io/#/pages/routing?id=routing-patterns-amp-url-parameters"target="_blank" rel="noopener">Wildcard parameters&lt;/a> are allowed at the end of the route. These are defined as&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">html&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/path/*&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;index.go.html&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
 &lt;button
@@ -637,7 +637,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>&lt;a href="https://github.com/google/re2/wiki/Syntax" target="_blank" rel="noopener">Regexes&lt;/a> are also allowed in the path, these are defined as &lt;code>ace.html(&amp;quot;/articles/{aid:^[0-9]{5,6}}&amp;quot;)&lt;/code> and accessed as &lt;code>req.UrlParams[&amp;quot;{aid}&amp;quot;]&lt;/code>. The route will match only if the regex matches.&lt;/p>
+&lt;p>&lt;a href="https://github.com/google/re2/wiki/Syntax"target="_blank" rel="noopener">Regexes&lt;/a> are also allowed in the path, these are defined as &lt;code>ace.html(&amp;quot;/articles/{aid:^[0-9]{5,6}}&amp;quot;)&lt;/code> and accessed as &lt;code>req.UrlParams[&amp;quot;{aid}&amp;quot;]&lt;/code>. The route will match only if the regex matches.&lt;/p>
 &lt;h3>Query String Parameters&lt;span class="hx:absolute hx:-mt-20" id="query-string-parameters">&lt;/span>
 &lt;a href="#query-string-parameters" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h3>&lt;p>Query string parameters can be accessed as&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
@@ -671,7 +671,7 @@ title="Copy code"
 &lt;/div>
 &lt;p>The value for Form is an string array, since there can be multiple form parameters with the same name.&lt;/p></description></item><item><title>Response</title><link>https://openrun.dev/docs/app/response/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/app/response/</guid><description>
 &lt;h2>Response Data&lt;span class="hx:absolute hx:-mt-20" id="response-data">&lt;/span>
-&lt;a href="#response-data" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The Response from the handler function is passed to the template to be converted to HTML. The handler response is accessible through &lt;code>.Data&lt;/code>, or &lt;code>$Data&lt;/code> if in &lt;a href="https://pkg.go.dev/text/template#:~:text=When%20execution%20begins%2C%20%24%20is%20set%20to%20the%20data%20argument%20passed%20to%20Execute%2C%20that%20is%2C%20to%20the%20starting%20value%20of%20dot." target="_blank" rel="noopener">another scope&lt;/a>. Any python object can be used as the return value. Using a dictionary is recommended, so that error handling is easier. Adding a &lt;code>Error&lt;/code> key in the response dict can indicate to the template that an error condition needs to be handled.&lt;/p>
+&lt;a href="#response-data" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The Response from the handler function is passed to the template to be converted to HTML. The handler response is accessible through &lt;code>.Data&lt;/code>, or &lt;code>$Data&lt;/code> if in &lt;a href="https://pkg.go.dev/text/template#:~:text=When%20execution%20begins%2C%20%24%20is%20set%20to%20the%20data%20argument%20passed%20to%20Execute%2C%20that%20is%2C%20to%20the%20starting%20value%20of%20dot."target="_blank" rel="noopener">another scope&lt;/a>. Any python object can be used as the return value. Using a dictionary is recommended, so that error handling is easier. Adding a &lt;code>Error&lt;/code> key in the response dict can indicate to the template that an error condition needs to be handled.&lt;/p>
 &lt;p>For example, a handler like&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">handler&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">):&lt;/span>
@@ -741,7 +741,7 @@ title="Copy code"
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>For example, this code does a 303 redirect after a POST API, which provides &lt;a href="https://en.wikipedia.org/wiki/Post/Redirect/Get" target="_blank" rel="noopener">handling&lt;/a> for update requests.&lt;/p>
+&lt;p>For example, this code does a 303 redirect after a POST API, which provides &lt;a href="https://en.wikipedia.org/wiki/Post/Redirect/Get"target="_blank" rel="noopener">handling&lt;/a> for update requests.&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">create_game&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">):&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">level&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">req&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Form&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;level&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
@@ -802,14 +802,14 @@ title="Copy code"
 &lt;td style="text-align: center">true&lt;/td>
 &lt;td style="text-align: center">string&lt;/td>
 &lt;td style="text-align: center">&lt;/td>
-&lt;td style="text-align: center">&lt;a href="https://htmx.org/reference/#:~:text=for%20possible%20values-,HX%2DRetarget,-a%20CSS%20selector" target="_blank" rel="noopener">HX-Retarget&lt;/a> header value, CSS selector to target, like &amp;ldquo;#error_id&amp;rdquo;&lt;/td>
+&lt;td style="text-align: center">&lt;a href="https://htmx.org/reference/#:~:text=for%20possible%20values-,HX%2DRetarget,-a%20CSS%20selector"target="_blank" rel="noopener">HX-Retarget&lt;/a> header value, CSS selector to target, like &amp;ldquo;#error_id&amp;rdquo;&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td style="text-align: center">reswap&lt;/td>
 &lt;td style="text-align: center">true&lt;/td>
 &lt;td style="text-align: center">string&lt;/td>
 &lt;td style="text-align: center">&lt;/td>
-&lt;td style="text-align: center">&lt;a href="https://htmx.org/reference/#:~:text=the%20location%20bar-,HX%2DReswap,-allows%20you%20to" target="_blank" rel="noopener">HX-Reswap&lt;/a>, like &amp;ldquo;outerHTML&amp;rdquo;&lt;/td>
+&lt;td style="text-align: center">&lt;a href="https://htmx.org/reference/#:~:text=the%20location%20bar-,HX%2DReswap,-allows%20you%20to"target="_blank" rel="noopener">HX-Reswap&lt;/a>, like &amp;ldquo;outerHTML&amp;rdquo;&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -842,7 +842,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;h2>JSON Response&lt;span class="hx:absolute hx:-mt-20" id="json-response">&lt;/span>
-&lt;a href="#json-response" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>All responses are HTML by default, as required for building a proper Hypermedia client. There are some cases where data needs to be returned to the client in JSON format. The type property can be used for those cases. For example, &lt;a href="https://github.com/openrundev/apps/blob/dbec99126329adbcff30824b050ff1d559922bdd/system/memory_usage/app.star#L98" target="_blank" rel="noopener">this API&lt;/a> returns JSON&lt;/p>
+&lt;a href="#json-response" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>All responses are HTML by default, as required for building a proper Hypermedia client. There are some cases where data needs to be returned to the client in JSON format. The type property can be used for those cases. For example, &lt;a href="https://github.com/openrundev/apps/blob/dbec99126329adbcff30824b050ff1d559922bdd/system/memory_usage/app.star#L98"target="_blank" rel="noopener">this API&lt;/a> returns JSON&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">api&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/memory&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">handler&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">memory_handler&lt;/span>&lt;span class="p">),&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
 &lt;button
