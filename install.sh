@@ -22,6 +22,9 @@ main() {
     target="openrun-${version}-${os}-${arch}"
     openrun_uri="https://github.com/openrundev/openrun/releases/download/$version/${target}.tar.gz"
     openrun_install="${OPENRUN_HOME:-$HOME/openrun}"
+    if test -z "${OPENRUN_HOME:-}" && test -d "/var/lib/openrun"; then
+       openrun_install="/var/lib/openrun"
+    fi
 
     bin_dir="$openrun_install/bin"
     tmp_dir="$openrun_install/tmp"
@@ -36,6 +39,10 @@ main() {
     chmod +x "$tmp_dir/${target}/openrun"
     mv -f "$tmp_dir/${target}/openrun" "$exe"
     rm -f "$tmp_dir/openrun.tar.gz"
+
+    if test $openrun_install = "/var/lib/openrun"; then
+       ln -sf $exe /usr/bin/openrun
+    fi
 
     if test ! -s $openrun_install/openrun.toml; then
         echo ""
