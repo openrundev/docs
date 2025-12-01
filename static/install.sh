@@ -41,7 +41,8 @@ main() {
     rm -f "$tmp_dir/openrun.tar.gz"
 
     if test $openrun_install = "/var/lib/openrun"; then
-       ln -sf $exe /usr/bin/openrun
+       echo "Creating /usr/bin/openrun symlink"
+       sudo ln -sf $exe /usr/bin/openrun
     fi
 
     if test ! -s $openrun_install/openrun.toml; then
