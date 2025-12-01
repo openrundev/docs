@@ -40,11 +40,6 @@ main() {
     mv -f "$tmp_dir/${target}/openrun" "$exe"
     rm -f "$tmp_dir/openrun.tar.gz"
 
-    if test $openrun_install = "/var/lib/openrun"; then
-       echo "Creating /usr/bin/openrun symlink"
-       sudo ln -sf $exe /usr/bin/openrun
-    fi
-
     if test ! -s $openrun_install/openrun.toml; then
         echo ""
         echo "********** Initializing \"admin\" user **********"
