@@ -52,7 +52,7 @@ displayToggle = true
 
 [params.banner]
 key = "announcement-usecase"
-message = "📌 Complete configuration for couple of scenarios added, see [use-cases](https://openrun.dev/docs/use-cases/)."
+message = "📌 Explore end-to-end configuration examples in the [use-cases](https://openrun.dev/docs/use-cases/) section."
 
 # Docs Navigation
 
