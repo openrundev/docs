@@ -392,11 +392,7 @@ title="Copy code"
 &lt;p>Sync can be run more frequently, making sure rate limits are respected. If a &lt;a href="https://openrun.dev/docs/configuration/security/#private-repository-access">default git auth&lt;/a> entry is added, that will be used for all list API calls. The rate limits are higher for authenticated requests.&lt;/p></description></item><item><title>Quick Start</title><link>https://openrun.dev/docs/quickstart/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/quickstart/</guid><description>
 &lt;p>OpenRun is an Apache-2.0 licensed project building a web app development and deployment platform for internal tools. OpenRun is built in Go and runs on Linux, macOS and Windows.&lt;/p>
 &lt;h2>Installation&lt;span class="hx:absolute hx:-mt-20" id="installation">&lt;/span>
-&lt;a href="#installation" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;h3>Certs and Default password&lt;span class="hx:absolute hx:-mt-20" id="certs-and-default-password">&lt;/span>
-&lt;a href="#certs-and-default-password" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h3>&lt;p>OpenRun manages TLS cert using LetsEncrypt for prod environments. For dev environment, it is recommended to install &lt;a href="https://github.com/FiloSottile/mkcert"target="_blank" rel="noopener">mkcert&lt;/a>. OpenRun will automatically create local certs using mkcert if it is present. Install mkcert and run &lt;code>mkcert -install&lt;/code> before starting OpenRun server. Installing OpenRun using brew will automatically install mkcert.&lt;/p>
-&lt;p>For container based apps, Docker or Podman or Orbstack should be installed and running on the machine. OpenRun automatically detects the container manager to use.&lt;/p>
-&lt;p>OpenRun uses an &lt;code>admin&lt;/code> user account as the default authentication for accessing apps. A random password is generated for this account during initial OpenRun server installation. Note down this password for accessing apps.&lt;/p>
-&lt;h3>Install OpenRun On OSX/Linux&lt;span class="hx:absolute hx:-mt-20" id="install-openrun-on-osxlinux">&lt;/span>
+&lt;a href="#installation" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;h3>Install OpenRun On OSX/Linux&lt;span class="hx:absolute hx:-mt-20" id="install-openrun-on-osxlinux">&lt;/span>
 &lt;a href="#install-openrun-on-osxlinux" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h3>&lt;p>To install on OSX/Linux, run&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">curl -sSL https://openrun.dev/install.sh &lt;span class="p">|&lt;/span> sh&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
@@ -683,7 +679,7 @@ title="Copy code"
 &lt;li>The staging app is available at &lt;code>https://localhost:25223/myapp_cl_stage&lt;/code> for verification.&lt;/li>
 &lt;li>To promote the code to prod, run &lt;code>openrun app promote /myapp&lt;/code>. The staged code is promoted to prod, live at &lt;code>https://localhost:25223/myapp&lt;/code>.&lt;/li>
 &lt;/ul>
-&lt;p>Having a staging environment helps catch issues related to account setup (which endpoint is pointed to etc) and other config issues before the changes are live on prod. OpenRun implements versioning for prod apps, even when source is not from git.&lt;/p>
+&lt;p>Having a staging environment helps catch code and config issues before the changes are live on prod. OpenRun implements versioning for prod apps, even when source is not from git.&lt;/p>
 &lt;h2>Lifecycle With Git&lt;span class="hx:absolute hx:-mt-20" id="lifecycle-with-git">&lt;/span>
 &lt;a href="#lifecycle-with-git" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>If using git, a workflow would be:&lt;/p>
 &lt;ul>
@@ -732,8 +728,8 @@ title="Copy code"
 &lt;/div>
 &lt;p>In the above listing, the staging app is on version 4, prod app on version 3. The &lt;code>*&lt;/code> in the &lt;code>app list&lt;/code> output indicates that the prod app has staged changes waiting to be promoted. Running &lt;code>openrun app promote /dugit&lt;/code> will update prod with the staged changes. &lt;code>version revert&lt;/code> reverts to previous version. &lt;code>version switch&lt;/code> can be used to switch to particular version, &lt;code>next&lt;/code> and &lt;code>previous&lt;/code> are shortcuts for version numbers. Version commands run against the specific app, so revert can be done on the staging app or the main app independently.&lt;/p>
 &lt;h2>Developing Apps&lt;span class="hx:absolute hx:-mt-20" id="developing-apps">&lt;/span>
-&lt;a href="#developing-apps" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun app backend can be written in any language, running in a container. Some apps can be written in &lt;a href="https://github.com/google/starlark-go"target="_blank" rel="noopener">Starlark&lt;/a> and &lt;a href="https://pkg.go.dev/text/template"target="_blank" rel="noopener">Go HTML templates&lt;/a>, in which case no containers are required.&lt;/p>
-&lt;p>See &lt;a href="https://openrun.dev/docs/app/overview/">dev overview&lt;/a> for a quick start overview on developing OpenRun applications.&lt;/p></description></item><item><title>Application Routing</title><link>https://openrun.dev/docs/applications/routing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/applications/routing/</guid><description>
+&lt;a href="#developing-apps" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun app backend can be written in any language, running in a container. Action and Hypermedia based apps can be written in &lt;a href="https://github.com/google/starlark-go"target="_blank" rel="noopener">Starlark&lt;/a> and &lt;a href="https://pkg.go.dev/text/template"target="_blank" rel="noopener">Go HTML templates&lt;/a>, in which case no containers are required.&lt;/p>
+&lt;p>See &lt;a href="https://openrun.dev/docs/develop/">develop&lt;/a> for a quick start overview on developing OpenRun applications.&lt;/p></description></item><item><title>Application Routing</title><link>https://openrun.dev/docs/applications/routing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/applications/routing/</guid><description>
 &lt;h2>Request Routing&lt;span class="hx:absolute hx:-mt-20" id="request-routing">&lt;/span>
 &lt;a href="#request-routing" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The OpenRun server can host multiple applications simultaneously. Each application gets a dedicated path, the application can use all sub-paths within that without conflicts with other applications.&lt;/p>
 &lt;p>When an application is created, a path needs to be specified and a domain can be optionally specified. Routing for application requests is done based on domain and path. The domain is the namespace within which the paths are resolved. If no domain is specified for the app, it is installed for the default domain. &lt;a href="https://openrun.dev/docs/configuration/networking/#default-domain">Default domain&lt;/a> can be set using the &lt;code>system.default_domain&lt;/code> config property (default value is &lt;code>localhost&lt;/code>).&lt;/p>
@@ -885,141 +881,8 @@ title="Copy code"
 &lt;/div>
 &lt;p>&lt;a href="https://openrun.dev/docs/configuration/rbac/">RBAC&lt;/a> has more details about using the dynamic config.&lt;/p>
 &lt;p>Making a config update will automatically update the &lt;code>$OPENRUN_HOME/config/dynamic_config.json&lt;/code> file on all instances. The &lt;code>show-config&lt;/code> command can also show the latest config. The version id is auto-generated with a unique value. Subsequent updates need to pass the current version id, the &lt;code>update-config&lt;/code> will fail if a stale id is passed in. The &lt;code>--force&lt;/code> option can be used to overwrite the config.&lt;/p></description></item><item><title>Container Overview</title><link>https://openrun.dev/docs/container/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/overview/</guid><description>
-&lt;p>OpenRun builds the image and manages the container lifecycle for containerized apps. OpenRun fetches the source code, creates the image, starts the container, does health checks on the container and stops the container when idle. Appspecs allow existing source code to be used with OpenRun with no code changes required.&lt;/p>
-&lt;h2>App Specs&lt;span class="hx:absolute hx:-mt-20" id="app-specs">&lt;/span>
-&lt;a href="#app-specs" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun app specs are defined at &lt;a href="https://github.com/openrundev/appspecs"target="_blank" rel="noopener">https://github.com/openrundev/appspecs&lt;/a>. Most specs use containers, the &lt;code>proxy&lt;/code> spec is an exception.&lt;/p>
-&lt;p>The &lt;code>image&lt;/code> spec specifies the image to use. for example&lt;/p>
-&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
-&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">openrun app create --spec image --approve --param &lt;span class="nv">image&lt;/span>&lt;span class="o">=&lt;/span>nginx &lt;span class="se">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --param &lt;span class="nv">port&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">80&lt;/span> - nginxapp.localhost:/&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
-&lt;button
-class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
-title="Copy code"
->
-&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
-&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
-&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;p>downloads the nginx image, starts it and proxies any request to &lt;code>https://nginxapp.localhost:25223&lt;/code> to the nginx container&amp;rsquo;s port 80. The container is started on the first API call, and it is stopped automatically when there are no API calls for 180 seconds.&lt;/p>
-&lt;p>For all other specs, the &lt;code>Containerfile&lt;/code> is defined in the spec. For example, for the &lt;code>python-streamlit&lt;/code> spec, the Containerfile is &lt;a href="https://github.com/openrundev/appspecs/blob/main/python-streamlit/Containerfile"target="_blank" rel="noopener">here&lt;/a>. Running&lt;/p>
-&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
-&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">openrun app create --spec python-streamlit --branch master &lt;span class="se">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --approve github.com/streamlit/streamlit-example /streamlit_app&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
-&lt;button
-class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
-title="Copy code"
->
-&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
-&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
-&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;p>will create an app at &lt;code>https://localhost:25223/streamlit_app&lt;/code>. On the first API call to the app, the image is built from the defined spec and the container is started. The &lt;code>python-gradio&lt;/code> spec does the same for gradio apps.&lt;/p>
-&lt;h2>App Specs Listing&lt;span class="hx:absolute hx:-mt-20" id="app-specs-listing">&lt;/span>
-&lt;a href="#app-specs-listing" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The specs defined currently are:&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th style="text-align: left">Spec Name&lt;/th>
-&lt;th style="text-align: left">Required Params&lt;/th>
-&lt;th style="text-align: left">Optional Params&lt;/th>
-&lt;th style="text-align: left">Supports Path Routing&lt;/th>
-&lt;th style="text-align: left">Notes&lt;/th>
-&lt;th style="text-align: left">Example&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td style="text-align: left">container&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>port&lt;/b> : The port number within container, optional if EXPOSE directive is present&lt;/li>&lt;/ul>&lt;/td>
-&lt;td style="text-align: left">Depends on app&lt;/td>
-&lt;td style="text-align: left">Requires app code to have a Containerfile/Dockerfile&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">image&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>image&lt;/b>: The image to use for the container&lt;/li> &lt;li>&lt;b>port&lt;/b> : The port number within container&lt;/li>&lt;/ul>&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">Depends on app&lt;/td>
-&lt;td style="text-align: left">No source url required when creating app, use - as url&lt;/td>
-&lt;td style="text-align: left">&lt;code>openrun app create --spec image --approve --param image=nginx --param port=80 - nginxapp.localhost:/&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">proxy&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>url&lt;/b>: The url to which requests should be proxied&lt;/li> &lt;/ul>&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">No&lt;/td>
-&lt;td style="text-align: left">No source url required when creating app, use - as url&lt;/td>
-&lt;td style="text-align: left">&lt;code>openrun app create --spec proxy --approve -param url=https://openrun.dev - proxyapp.localhost:/&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">python-wsgi&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>APP_MODULE&lt;/b>: The module:app for the WSGI app. Defaults to app:app, meaning app in app.py&lt;/li> &lt;/ul>&lt;/td>
-&lt;td style="text-align: left">Depends on app&lt;/td>
-&lt;td style="text-align: left">Runs Web Server Gateway Interface (WSGI) apps using gunicorn&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">python-asgi&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>APP_MODULE&lt;/b>: The module:app for the ASGI app. Defaults to app:app, meaning app in app.py&lt;/li> &lt;/ul>&lt;/td>
-&lt;td style="text-align: left">Depends on app&lt;/td>
-&lt;td style="text-align: left">Runs Asynchronous Server Gateway Interface (ASGI) apps using uvicorn&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">python-flask&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>port&lt;/b> : The port number within container. If EXPOSE directive is present, that is used. Defaults to 5000&lt;/li>&lt;/ul>&lt;/td>
-&lt;td style="text-align: left">Depends on app&lt;/td>
-&lt;td style="text-align: left">Runs app using flask dev server&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">python-streamlit&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>app_file&lt;/b> : The file name of the streamlit app to run. Default streamlit_app.py&lt;/li>&lt;/ul>&lt;/td>
-&lt;td style="text-align: left">Yes&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">&lt;code>openrun app create --spec python-streamlit --branch master --approve github.com/streamlit/streamlit-example /streamlit_app&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">python-streamlit-poetry&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>app_file&lt;/b> : The file name of the streamlit app to run. Default streamlit_app.py&lt;/li>&lt;/ul>&lt;/td>
-&lt;td style="text-align: left">Yes&lt;/td>
-&lt;td style="text-align: left">Installs packages using poetry&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">python-fasthtml&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>APP_MODULE&lt;/b>: The module:app for the ASGI app. Defaults to app:app, meaning app in app.py&lt;/li> &lt;/ul>&lt;/td>
-&lt;td style="text-align: left">Depends on app&lt;/td>
-&lt;td style="text-align: left">Runs app using uvicorn&lt;/td>
-&lt;td style="text-align: left">&lt;code>openrun app create --approve --spec python-fasthtml --param APP_MODULE=basic_ws:app https://github.com/AnswerDotAI/fasthtml/examples fasthtmlapp.localhost:/&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">python-gradio&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>app_file&lt;/b> : The file name of the gradio app to run. Default run.py&lt;/li>&lt;/ul>&lt;/td>
-&lt;td style="text-align: left">Yes&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;td style="text-align: left">&lt;code>openrun app create --spec python-gradio --approve github.com/gradio-app/gradio/demo/blocks_flag /gradio_app&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">go&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>port&lt;/b> : The port number within container&lt;/li>&lt;/ul>&lt;/td>
-&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>MAIN_PACKAGE&lt;/b> : The go module to build, default &amp;ldquo;.&amp;rdquo;. Pass as a &lt;code>--carg&lt;/code> instead of &lt;code>--param&lt;/code>.&lt;/li>&lt;li>&lt;b>APP_ARGS&lt;/b> : Args to pass to the app&lt;/li>&lt;/ul>&lt;/td>
-&lt;td style="text-align: left">Depends on app&lt;/td>
-&lt;td style="text-align: left">CGO is disabled; go.mod has to be present; app should bind to 0.0.0.0&lt;/td>
-&lt;td style="text-align: left">&lt;code>openrun app create --approve --spec go --param port=8080 --param APP_ARGS=&amp;quot;-addr 0.0.0.0:8080&amp;quot; --branch master github.com/golang/example/helloserver /goapp&lt;/code>&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
+&lt;p>OpenRun builds the image and manages the container lifecycle for containerized apps. OpenRun fetches the source code, creates the image, starts the container, proxies the API calls, does health checks on the container and stops the container when idle. Appspecs allow existing source code to be used with OpenRun with no code changes required. OpenRun supports both &lt;code>Dockerfile&lt;/code> and &lt;code>Containerfile&lt;/code> as the file name for the container specification file.&lt;/p>
+&lt;p>For single node installations, OpenRun works with a local container manager (Docker/Podman/Orbstack etc). For multi-node installation on Kubernetes, OpenRun uses Kubernetes deployments to run each app.&lt;/p>
 &lt;h2>App Environment Params&lt;span class="hx:absolute hx:-mt-20" id="app-environment-params">&lt;/span>
 &lt;a href="#app-environment-params" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>For containerized apps, all params specified for the app (including ones specified in &lt;code>params.star&lt;/code> spec) are passed to the container at runtime as environment parameters. &lt;code>CL_APP_PATH&lt;/code> is a special param passed to the container with the app installation path (without the domain name). &lt;code>PORT&lt;/code> is also set with the value of the port number the app is expected to bind to within the container.&lt;/p>
 &lt;p>For example, the command&lt;/p>
@@ -1109,7 +972,7 @@ title="Copy code"
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">openrun app create --approve --spec python-fasthtml &lt;span class="se">\
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --param &lt;span class="nv">APP_MODULE&lt;/span>&lt;span class="o">=&lt;/span>basic_ws:app &lt;span class="se">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --copt cpu-shares&lt;span class="o">=&lt;/span>&lt;span class="m">1000&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --copt &lt;span class="nv">cpu&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">2&lt;/span> &lt;span class="se">\
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> https://github.com/AnswerDotAI/fasthtml/examples fasthtmlapp.localhost:/&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
 &lt;button
 class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
@@ -1120,10 +983,10 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>sets the CPU shares for the container to 1000.&lt;/p>
+&lt;p>sets the CPU request for the container to 2.&lt;/p>
 &lt;p>To update container options, run&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
-&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">openrun app update copt cpu-shares&lt;span class="o">=&lt;/span>&lt;span class="m">500&lt;/span> fasthtmlapp.localhost:/&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">openrun app update copt &lt;span class="nv">cpu&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">3&lt;/span> fasthtmlapp.localhost:/&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
 &lt;button
 class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
 title="Copy code"
@@ -1488,6 +1351,10 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
+&lt;h2>Certs and Default password&lt;span class="hx:absolute hx:-mt-20" id="certs-and-default-password">&lt;/span>
+&lt;a href="#certs-and-default-password" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun manages TLS cert using LetsEncrypt for prod environments. For dev environment, it is recommended to install &lt;a href="https://github.com/FiloSottile/mkcert"target="_blank" rel="noopener">mkcert&lt;/a>. OpenRun will automatically create local certs using mkcert if it is present. Install mkcert and run &lt;code>mkcert -install&lt;/code> before starting OpenRun server. Installing OpenRun using brew will automatically install mkcert.&lt;/p>
+&lt;p>For container based apps, Docker or Podman or Orbstack should be installed and running on the machine. OpenRun automatically detects the container manager to use.&lt;/p>
+&lt;p>OpenRun uses an &lt;code>admin&lt;/code> user account as the default authentication for accessing apps. A random password is generated for this account during initial OpenRun server installation. Note down this password for accessing apps if using &lt;code>system&lt;/code> auth.&lt;/p>
 &lt;h2>Initial Configuration&lt;span class="hx:absolute hx:-mt-20" id="initial-configuration">&lt;/span>
 &lt;a href="#initial-configuration" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To use the openrun service, you need an initial config file with the service password and a work directory. Create the openrun.toml file, and create a randomly generate password for the &lt;strong>admin&lt;/strong> user account&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
@@ -2177,7 +2044,7 @@ title="Copy code"
 &lt;p>To allow preview apps access to WRITE operation, run &lt;code>openrun app settings preview-write-access true example.com:/&lt;/code>. This changes the existing preview apps and any new preview apps created for example.com:/ to allow write operations, if the permissions have been approved.&lt;/p></description></item><item><title>Container Config</title><link>https://openrun.dev/docs/container/config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/config/</guid><description>
 &lt;p>The default configuration for the OpenRun server is defined in &lt;a href="https://github.com/openrundev/openrun/blob/main/internal/system/openrun.default.toml"target="_blank" rel="noopener">openrun.default.toml&lt;/a>. The container related config settings are&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
-&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">app_config&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">app_config&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># Health check Config&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">health_url&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;/&amp;#34;&lt;/span>
@@ -2191,8 +2058,17 @@ title="Copy code"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c"># (1500 bytes sent and recv over 180 seconds)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># Status check Config&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status_check_interval_secs&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">5&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status_health_attempts&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">3&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status_check_interval_secs&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">20&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">status_health_attempts&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># Show logs for container startup failures in prod mode (dev is always true)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log_lines_to_show&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">1000&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">show_logs_for_failure&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># Kubernetes related settings&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">kubernetes&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">default_volume_size&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;10Gi&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">kubernetes&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">strict_version_check&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">kubernetes&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">scaling_threshold_cpu&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">80&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
 &lt;button
 class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
 title="Copy code"
@@ -2220,8 +2096,8 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;p>changes the idle timeout for the &lt;code>/myapp&lt;/code> app to 600 secs. Without the &lt;code>--promote&lt;/code> option, the change will be staged and can be verified on the staging app. App metadata level setting take precedence over the defaults in the &lt;code>openrun.toml&lt;/code>. Using &lt;code>all&lt;/code> as the app name will apply the change for all current apps (but not for any new apps created later).&lt;/p>
-&lt;h2>Docker/Podman&lt;span class="hx:absolute hx:-mt-20" id="dockerpodman">&lt;/span>
-&lt;a href="#dockerpodman" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The default for the container command to use is&lt;/p>
+&lt;h2>Configuring the Container manager&lt;span class="hx:absolute hx:-mt-20" id="configuring-the-container-manager">&lt;/span>
+&lt;a href="#configuring-the-container-manager" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The default for the container command to use is&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">system&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container_command&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;auto&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
@@ -2234,8 +2110,8 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>&lt;code>auto&lt;/code> means that OpenRun will look for &lt;code>podman&lt;/code> in the path. If found, it will use that. Else it will use &lt;code>docker&lt;/code> as the container manager command. If the value for &lt;code>container_command&lt;/code> is set to any other value, that will be used as the command to use.&lt;/p>
-&lt;p>Orbstack implements the Docker CLI interface, so Orbstack also works fine with OpenRun.&lt;/p></description></item><item><title>Internal Tools for Teams</title><link>https://openrun.dev/docs/use-cases/team/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/use-cases/team/</guid><description>
+&lt;p>&lt;code>auto&lt;/code> means that OpenRun will look for &lt;code>podman&lt;/code> executable in the path. If found, it will use that. Else it will use &lt;code>docker&lt;/code> as the container manager command. If the value for &lt;code>container_command&lt;/code> is set to any other value (except &lt;code>kubernetes&lt;/code>), that will be used as the command to use. Orbstack implements the Docker CLI interface, so Orbstack also works fine with OpenRun.&lt;/p>
+&lt;p>Setting &lt;code>container_command = &amp;quot;kubernetes&amp;quot;&lt;/code> enables Kubernetes mode. In Kubernetes mode, the Kubernetes APIs are used to manage the container lifecycle. No CLI commands are used in Kubernetes mode.&lt;/p></description></item><item><title>Internal Tools for Teams</title><link>https://openrun.dev/docs/use-cases/team/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/use-cases/team/</guid><description>
 &lt;h2>Scenario&lt;span class="hx:absolute hx:-mt-20" id="scenario">&lt;/span>
 &lt;a href="#scenario" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>This use-case documents the scenario where you want to:&lt;/p>
 &lt;ul>
@@ -3278,7 +3154,47 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>The app cannot be run until either the code change is reverted or the admin approves the new call to rm.&lt;/p></description></item><item><title>Request</title><link>https://openrun.dev/docs/app/request/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/app/request/</guid><description>
+&lt;p>The app cannot be run until either the code change is reverted or the admin approves the new call to rm.&lt;/p></description></item><item><title>Kubernetes Deployment</title><link>https://openrun.dev/docs/container/kubernetes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/kubernetes/</guid><description>
+&lt;h2>Installation&lt;span class="hx:absolute hx:-mt-20" id="installation">&lt;/span>
+&lt;a href="#installation" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun can be installed on a Kubernetes cluster using the Helm chart. Running the Helm chart creates:&lt;/p>
+&lt;ul>
+&lt;li>An service which run the OpenRun API server&lt;/li>
+&lt;li>Optionally, a Postgres database for metadata. An external Postgres database can be used instead.&lt;/li>
+&lt;li>Optionally, a container registry is installed. An external registry can be used instead.&lt;/li>
+&lt;/ul>
+&lt;p>SQLite based metadata is not supported when using Kubernetes. The Postgres metadata needs to be managed properly, with backups and scheduled upgrades. An externally managed Postgres installation is recommended for production Kubernetes OpenRun installations.&lt;/p>
+&lt;p>A container registry is required for Kubernetes based OpenRun install. The registry can be installed through the Helm chart or an external registry can be used.&lt;/p>
+&lt;h2>Configuration&lt;span class="hx:absolute hx:-mt-20" id="configuration">&lt;/span>
+&lt;a href="#configuration" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">system&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container_command&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;kubernetes&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>is the main config which enables Kubernetes mode. By default. Kaniko based builds are used. Delegated builds can be configured instead, see &lt;a href="https://openrun.dev/docs/container/build/#delegated-build-mode">delegated builds&lt;/a>. See &lt;a href="https://openrun.dev/docs/container/build/#config">registry&lt;/a> for registry config.&lt;/p>
+&lt;h2>Architecture&lt;span class="hx:absolute hx:-mt-20" id="architecture">&lt;/span>
+&lt;a href="#architecture" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun is installed as a Kubernetes Deployment, with a Service for routing API calls. For each containerized app installed on OpenRun, a Deployment is created with a Service of type ClusterIP. API calls to the OpenRun API Server are routed to the app specific Service using its cluster IP.&lt;/p>
+&lt;p>All Kubernetes resources are created lazily, on the first API call to the app. If app is running version 1, and a code/config change is done which updates it to version 2, the deployment update will happen on the next API call to the app. The API call is blocked, the container image is rebuild if required and the deployment is updated using Server Side Apply API calls.&lt;/p>
+&lt;p>By default, OpenRun will wait to ensure that the app is running pods with only the new version, before processing further API calls. This behavior can be relaxed by setting&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">app_config&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">kubernetes&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">strict_version_check&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">false&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>in which case OpenRun just makes sure that the new version started successfully,&lt;/p></description></item><item><title>Request</title><link>https://openrun.dev/docs/app/request/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/app/request/</guid><description>
 &lt;h2>Request Structure&lt;span class="hx:absolute hx:-mt-20" id="request-structure">&lt;/span>
 &lt;a href="#request-structure" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The handler function is passed one argument which has the details about the API call. The fields in this structure are:&lt;/p>
 &lt;table>
@@ -3870,7 +3786,313 @@ title="Copy code"
 &lt;td style="text-align: center">Value has to be passed with % added, &lt;br> it is not added automatically. For example &lt;code>&amp;quot;%test%&amp;quot;&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
-&lt;/table></description></item><item><title>Action Apps</title><link>https://openrun.dev/docs/actions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/actions/</guid><description>
+&lt;/table></description></item><item><title>Developing Apps</title><link>https://openrun.dev/docs/develop/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/develop/</guid><description>
+&lt;h2>Structure&lt;span class="hx:absolute hx:-mt-20" id="structure">&lt;/span>
+&lt;a href="#structure" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The structure of a OpenRun application is:&lt;/p>
+&lt;ul>
+&lt;li>One OpenRun application per folder, &lt;code>static&lt;/code> sub-folder contain static assets&lt;/li>
+&lt;li>An &lt;code>app.star&lt;/code> Starlark file, defining the application configuration&lt;/li>
+&lt;li>Predefined builtins, accessed through the &lt;code>ace&lt;/code> namespace&lt;/li>
+&lt;li>A global called &lt;code>app&lt;/code>, created using &lt;code>app = ace.app()&lt;/code> call&lt;/li>
+&lt;li>An optional default handler function called &lt;code>handler&lt;/code>. Other handlers are referenced in the route config&lt;/li>
+&lt;li>An optional error handler function called &lt;code>error_handler&lt;/code>. Defining the &lt;code>error_handler&lt;/code> enables &lt;a href="https://openrun.dev/docs/plugins/overview/#automatic-error-handling">automatic error handling&lt;/a>&lt;/li>
+&lt;li>An html template file called &lt;code>index.go.html&lt;/code> if using custom layout&lt;/li>
+&lt;li>If not using custom layout, an html template block called &lt;code>openrun_body&lt;/code> defined in any &lt;code>*.go.html&lt;/code> file, for example &lt;code>app.go.html&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2>Sharing Files Across Apps&lt;span class="hx:absolute hx:-mt-20" id="sharing-files-across-apps">&lt;/span>
+&lt;a href="#sharing-files-across-apps" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The app config property &lt;code>star_base&lt;/code> can be use to set the base directory for Starlark files. This is useful when multiple apps need to share common files, like templates, static files, container spec etc. For example, if dir /mydir/ is the base directory with /mydir/app1 and /mydir/app2 as subdirectories containing two apps, creating apps using&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;pre>&lt;code>openrun app create --approve --conf-str star_base=/app1 /mydir /test1
+openrun app create --approve --conf-str star_base=/app2 /mydir /test2&lt;/code>&lt;/pre>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>will create two apps. &lt;code>/mydir/app1/app.star&lt;/code> will be used as the app definition for test1 app, static and static_root and template files will be read from /mydir and&lt;/p>
+&lt;h2>App Lifecycle&lt;span class="hx:absolute hx:-mt-20" id="app-lifecycle">&lt;/span>
+&lt;a href="#app-lifecycle" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The OpenRun app development lifecycle is:&lt;/p>
+&lt;ul>
+&lt;li>Create a folder for the app, with the app.star file and templates.&lt;/li>
+&lt;li>Start the OpenRun server. Create an app using &lt;code>openrun app create --dev&lt;/code>. This runs the app in dev mode.&lt;/li>
+&lt;li>In dev mode, some additional files are generated, with &lt;code>_gen&lt;/code> in the file name. CSS dependencies and JavaScript modules are downloaded into the &lt;code>static&lt;/code> folder.&lt;/li>
+&lt;li>After the app development is done, the whole app folder can be checked into source control. There is no build step.&lt;/li>
+&lt;li>Create a production app, &lt;code>openrun app create&lt;/code>, without the &lt;code>--dev&lt;/code>. The app is now live. The OpenRun server can host multiple applications, each application has a dedicated path and optionally a dedicated domain.&lt;/li>
+&lt;/ul>
+&lt;h2>Simple Text App&lt;span class="hx:absolute hx:-mt-20" id="simple-text-app">&lt;/span>
+&lt;a href="#simple-text-app" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The hello world app for OpenRun is an &lt;code>~/myapp/app.star&lt;/code> file containing:&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">handler&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">req&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="s2">&amp;#34;hello world&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;hello&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">routes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">api&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">TEXT&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>Run &lt;code>openrun app create --auth=none ~/myapp /hello&lt;/code>. After that, the app is available at &lt;code>/hello&lt;/code>&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">$ curl localhost:25222/hello
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hello world&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>The default response type is &lt;code>ace.HTML&lt;/code>. &lt;code>ace.TEXT&lt;/code> and &lt;code>ace.JSON&lt;/code> are the other options. The data returned by the handler function is converted to the type format specified in the API.&lt;/p>
+&lt;h2>Building Apps from Spec&lt;span class="hx:absolute hx:-mt-20" id="building-apps-from-spec">&lt;/span>
+&lt;a href="#building-apps-from-spec" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>A spec (specification) can be set for an app. This makes OpenRun use the spec as a template to specify the app configuration. Use &lt;code>app create --spec python-flask&lt;/code> while creating an app or change the spec using &lt;code>app update spec python-flask /myapp&lt;/code>. The spec brings in a set of predefined files. If a file with the same name is already present in the app code, then the spec file is ignored. So if the app code and spec both define a &lt;code>Containerfile&lt;/code>, the file from the app code takes precedence. If the app folder contains just &lt;code>app.py&lt;/code>&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">flaskapp/app.py&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">flask&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">Flask&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Flask&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="vm">__name__&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nd">@app.route&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">hello_world&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="s2">&amp;#34;&amp;lt;p&amp;gt;Hello, World!&amp;lt;/p&amp;gt;&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>Creating an app like &lt;code>openrun app create --approve --spec python-flask ./flaskapp /myapp &lt;/code> will do everything required to fully define the OpenRun app. If the app has additional python dependencies, add a &lt;code>requirements.txt&lt;/code> file in the app source code. By &lt;a href="https://github.com/openrundev/appspecs/blob/main/python-flask/requirements.txt"target="_blank" rel="noopener">default&lt;/a>, only the flask package is installed. The file in the app source takes precedence.&lt;/p>
+&lt;p>See &lt;a href="https://github.com/openrundev/appspecs"target="_blank" rel="noopener">https://github.com/openrundev/appspecs&lt;/a> for the list of specs. The OpenRun server build includes these spec by default. Additional specs can de defined by creating a folder &lt;code>$OPENRUN_HOME/config/appspecs&lt;/code>. Any directory within that is treated as a spec. If the name matches with the predefined ones the spec in the config folder takes precedence. No server restart is required after spec changes. Setting up the server by doing&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> &lt;span class="nv">$OPENRUN_HOME&lt;/span>/config
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://github.com/openrundev/appspecs.git&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>ensures that the specs are updated to the latest version. Periodically doing a git pull on this folder refreshes the specs. Instead of cloning the main spec repo, a custom spec repo can also be used similarly. If no custom specs are defined, the specs as bundled in the OpenRun server build are available.&lt;/p>
+&lt;h2>App Parameters&lt;span class="hx:absolute hx:-mt-20" id="app-parameters">&lt;/span>
+&lt;a href="#app-parameters" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Having a file &lt;code>params.star&lt;/code> in the app source code causes OpenRun to load the parameters definitions from that file. Parameters are environment values which can be specified during app creation. A sample param definition is&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">params.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">param&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;port&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">INT&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">description&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;The port the flask app is listening on (inside the container)&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">default&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">5000&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">param&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;app_name&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">description&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;The name for the app&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">default&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Flask App&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">param&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;preserve_host&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">BOOLEAN&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">description&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Whether to preserve the original Host header&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">default&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">False&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>This is defining three parameters. The type can be one of &lt;code>STRING&lt;/code>(default), &lt;code>INT&lt;/code>, &lt;code>BOOLEAN&lt;/code>, &lt;code>LIST&lt;/code> and &lt;code>DICT&lt;/code>. The param structure definition is&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: center">Property&lt;/th>
+&lt;th style="text-align: center">Optional&lt;/th>
+&lt;th style="text-align: center">Type&lt;/th>
+&lt;th style="text-align: center">Default&lt;/th>
+&lt;th style="text-align: center">Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: center">name&lt;/td>
+&lt;td style="text-align: center">False&lt;/td>
+&lt;td style="text-align: center">string&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">Has to be be a valid starlark keyword&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">type&lt;/td>
+&lt;td style="text-align: center">True&lt;/td>
+&lt;td style="text-align: center">&lt;code>STRING&lt;/code>, &lt;code>INT&lt;/code>, &lt;code>BOOLEAN&lt;/code>, &lt;code>LIST&lt;/code>or&lt;code>DICT&lt;/code>&lt;/td>
+&lt;td style="text-align: center">&lt;code>STRING&lt;/code>&lt;/td>
+&lt;td style="text-align: center">The data type&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">default&lt;/td>
+&lt;td style="text-align: center">True&lt;/td>
+&lt;td style="text-align: center">Type as set for &lt;code>type&lt;/code>&lt;/td>
+&lt;td style="text-align: center">Zero value for the type&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">description&lt;/td>
+&lt;td style="text-align: center">True&lt;/td>
+&lt;td style="text-align: center">string&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">The description for the param&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">required&lt;/td>
+&lt;td style="text-align: center">True&lt;/td>
+&lt;td style="text-align: center">bool&lt;/td>
+&lt;td style="text-align: center">True&lt;/td>
+&lt;td style="text-align: center">If required is True and default value is not specified, then validation fails&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">display_type&lt;/td>
+&lt;td style="text-align: center">True&lt;/td>
+&lt;td style="text-align: center">string&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">How ths param should be displayed in the UI. Options are &lt;code>FILE&lt;/code>, &lt;code>PASSWORD&lt;/code> and &lt;code>TEXTAREA&lt;/code>, default is text input.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>The parameters are available in the app Starlark code, through the &lt;code>param&lt;/code> namespace. For example, &lt;code>param.port&lt;/code>, &lt;code>param.app_name&lt;/code> etc. See &lt;a href="https://github.com/openrundev/appspecs/blob/main/python-flask/app.star"target="_blank" rel="noopener">https://github.com/openrundev/appspecs/blob/main/python-flask/app.star&lt;/a> for an example of how this can be used.&lt;/p>
+&lt;p>Params are set, during app creation using &lt;code>app create --param port=9000&lt;/code> or using &lt;code>param update port 9000 /myapp&lt;/code>. Set value to &lt;code>-&lt;/code> to delete the param. Use &lt;code>param list /myapp&lt;/code> to list the params.&lt;/p>
+&lt;p>For containerized apps, all params specified for the app (including ones not specified in &lt;code>params.star&lt;/code> spec) are passed to the container at runtime as environment parameters. &lt;code>CL_APP_PATH&lt;/code> is a special param passed to the container with the app installation path (without the domain name). &lt;code>PORT&lt;/code> is also set with the value of the port number the app is expected to bind to within the container.&lt;/p>
+&lt;h2>Action Apps&lt;span class="hx:absolute hx:-mt-20" id="action-apps">&lt;/span>
+&lt;a href="#action-apps" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>For use cases where an existing CLI application or API needs to be exposed as a web app, actions provide an easy solution. First, define the parameters to be exposed in the form UI. Create a &lt;code>params.star&lt;/code> file with the params. For example,&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">params.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">param&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;dir&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">description&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;The directory to list files from&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">default&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;/tmp&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>The app defines a run handler which runs &lt;code>ls&lt;/code> on the specified directory. The output text is returned.&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">load&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;exec.in&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;exec&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">dry_run&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">args&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">out&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">exec&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;ls&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;-Lla&amp;#34;&lt;/span>&lt;span class="p">])&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">value&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">result&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;File listing for &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">args&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dir&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">out&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;List Files&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">actions&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">action&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;List Files&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">run&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">description&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Show the ls -a output for specified directory&amp;#34;&lt;/span>&lt;span class="p">)],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">permissions&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">permission&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;exec.in&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;run&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;ls&amp;#34;&lt;/span>&lt;span class="p">]),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>The app, when accessed will look as shown below, with the &lt;code>ls&lt;/code> command output displayed:&lt;/p>
+&lt;picture class="responsive-picture" style="display: block; margin-left: auto; margin-right: auto;">
+&lt;source media="(prefers-color-scheme: dark)" srcset="https://openrun.dev/images/list_files_dark.png">
+&lt;source media="(prefers-color-scheme: light)" srcset="https://openrun.dev/images/list_files_light.png">
+&lt;img alt="List files app" src="https://openrun.dev/images/list_files_light.png">
+&lt;/picture>
+&lt;p>See list files &lt;a href="https://github.com/openrundev/apps/tree/main/system/list_files"target="_blank" rel="noopener">code&lt;/a>:&lt;a href="https://utils.demo.clace.io/list_files"target="_blank" rel="noopener">demo&lt;/a> for the above app. See dictionary &lt;a href="https://github.com/openrundev/apps/tree/main/misc/dictionary"target="_blank" rel="noopener">code&lt;/a>:&lt;a href="https://utils.demo.clace.io/dict"target="_blank" rel="noopener">demo&lt;/a> for another actions example app which shows different type of reports. &lt;a href="https://openrun.dev/docs/actions/">Actions&lt;/a> has more details on building app actions.&lt;/p>
+&lt;h2>Containerized App&lt;span class="hx:absolute hx:-mt-20" id="containerized-app">&lt;/span>
+&lt;a href="#containerized-app" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>A containerized apps needs to have a &lt;code>Containerfile&lt;/code> (or &lt;code>Dockerfile&lt;/code>) to define how the image is built. The app definition can have&lt;/p>
+&lt;!-- prettier-ignore -->
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">load&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;proxy.in&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;proxy&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">load&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;container.in&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;container&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">app&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">app&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;My App&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">routes&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">proxy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">proxy&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">config&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">URL&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">container&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">config&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AUTO&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">permissions&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">permission&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;proxy.in&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;config&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">URL&lt;/span>&lt;span class="p">]),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">permission&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;container.in&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;config&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">container&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">AUTO&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)&lt;/span> &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;!-- prettier-ignore-end -->
+&lt;p>which completely specifies the app. This is saying that the app is using the container plugin to configure the container and the proxy plugin to proxy all API calls (&lt;code>/&lt;/code> route) to the container url. On the first API call to the app, OpenRun will build the image, start the container and proxy the API traffic to the appropriate port. No other configuration is required in Starlark. If the container spec does not define the port being exposed, then the container config needs to specify the port number to use. The port number can be parameterized.&lt;/p>
+&lt;p>&lt;a href="https://openrun.dev/docs/container/">Containerized Apps&lt;/a> has more details on building containerized apps.&lt;/p>
+&lt;h2>App Permissions&lt;span class="hx:absolute hx:-mt-20" id="app-permissions">&lt;/span>
+&lt;a href="#app-permissions" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>For plugin calls made by the app, the plugin permissions have to be specified in the app permissions and approved in the app metadata. The &lt;code>ace.permission&lt;/code> struct definition is&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: center">Property&lt;/th>
+&lt;th style="text-align: center">Optional&lt;/th>
+&lt;th style="text-align: center">Type&lt;/th>
+&lt;th style="text-align: center">Default&lt;/th>
+&lt;th style="text-align: center">Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: center">plugin&lt;/td>
+&lt;td style="text-align: center">False&lt;/td>
+&lt;td style="text-align: center">string&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">The plugin name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">method&lt;/td>
+&lt;td style="text-align: center">False&lt;/td>
+&lt;td style="text-align: center">string&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">The method name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">arguments&lt;/td>
+&lt;td style="text-align: center">True&lt;/td>
+&lt;td style="text-align: center">list string&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">The arguments allowed for the call&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">type&lt;/td>
+&lt;td style="text-align: center">True&lt;/td>
+&lt;td style="text-align: center">string&lt;/td>
+&lt;td style="text-align: center">ace.WRITE&lt;/td>
+&lt;td style="text-align: center">The call type, &lt;code>ace.READ&lt;/code> or &lt;code>ace.WRITE&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: center">secrets&lt;/td>
+&lt;td style="text-align: center">True&lt;/td>
+&lt;td style="text-align: center">list of list of string&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">The secrets the plugin call can access&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>For example &lt;code>ace.permission(&amp;quot;proxy.in&amp;quot;, &amp;quot;config&amp;quot;, [container.URL])&lt;/code> is a plugin call to &lt;code>config&lt;/code> method in &lt;code>proxy.in&lt;/code> plugin. The first argument has to be &lt;code>container.URL&lt;/code>. Additional arguments are allowed. If no arguments are specified in the permission, then there is no restriction on arguments passed at runtime. If the value specified starts with &lt;code>regex:&lt;/code>, then the value passed is checked against the specified regex at runtime.&lt;/p>
+&lt;p>See &lt;a href="https://openrun.dev/docs/configuration/secrets/#plugin-access-to-secrets">secrets&lt;/a> for details on specifying the secrets which can be accessed by the plugin call.&lt;/p>
+&lt;h2>More examples&lt;span class="hx:absolute hx:-mt-20" id="more-examples">&lt;/span>
+&lt;a href="#more-examples" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>There is a disk_usage example &lt;a href="https://github.com/openrundev/openrun/tree/main/examples"target="_blank" rel="noopener">here&lt;/a> and many in the &lt;a href="https://github.com/openrundev/apps"target="_blank" rel="noopener">apps repo&lt;/a>. The disk_usage example shows a basic hypermedia flow. The cowbull game has multiple &lt;a href="https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/misc/cowbull/app.star#L107"target="_blank" rel="noopener">pages&lt;/a>, each page with some dynamic behavior. For styling, it uses the &lt;a href="https://daisyui.com/"target="_blank" rel="noopener">DaisyUI&lt;/a> component library with Tailwind CSS. These two examples work fine with Javascript disabled in the browser, falling back to basic HTML without any HTMX extensions.&lt;/p>
+&lt;p>The memory_usage example uses the &lt;a href="https://d3js.org/"target="_blank" rel="noopener">d3&lt;/a> library to show a interactive display of the memory usage for processes on the machine. The plot library is &lt;a href="https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/system/memory_usage/app.star#L103"target="_blank" rel="noopener">automatically imported&lt;/a> as a ECMAScript module and the custom &lt;a href="https://github.com/openrundev/apps/blob/main/system/memory_usage/static/js/app.js"target="_blank" rel="noopener">javascript code&lt;/a> works with a &lt;a href="https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/system/memory_usage/app.star#L98"target="_blank" rel="noopener">JSON api&lt;/a> on the backend. The default in OpenRun is hypermedia exchange, JSON can be used for data API&amp;rsquo;s.&lt;/p></description></item><item><title>Action Apps</title><link>https://openrun.dev/docs/actions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/actions/</guid><description>
 &lt;p>Actions allow apps to expose an autogenerated UI for simple backend actions. For use cases where an existing CLI application or API needs to be exposed as a web app, actions provide an easy solution. An app can have one or more actions defined. Each action has to be given a unique path, which does not conflict with any other route defined for the app. See weather app &lt;a href="https://github.com/openrundev/apps/blob/main/misc/weather/app.star"target="_blank" rel="noopener">code&lt;/a>:&lt;a href="https://utils.demo.clace.io/weather"target="_blank" rel="noopener">demo&lt;/a> for an example of using Actions.&lt;/p>
 &lt;h2>Sample Action&lt;span class="hx:absolute hx:-mt-20" id="sample-action">&lt;/span>
 &lt;a href="#sample-action" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>First, define the parameters to be exposed in the form UI. Create a &lt;code>params.star&lt;/code> file with the &lt;a href="https://openrun.dev/docs/develop/#app-parameters">params&lt;/a>. For example,&lt;/p>
@@ -4096,8 +4318,8 @@ title="Copy code"
 &lt;/ul>
 &lt;p>For TABLE report, the fields from the first row are used as columns. Extra fields in subsequent rows are ignored. For JSON report, a JSON tree representation of each row is shown. The report type can be set to specific type instead of using AUTO.&lt;/p>
 &lt;h2>Custom Templates&lt;span class="hx:absolute hx:-mt-20" id="custom-templates">&lt;/span>
-&lt;a href="#custom-templates" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>If the &lt;code>report&lt;/code> type is set to any value other than &lt;code>ace.AUTO/TEXT/JSON/TABLE&lt;/code>, that is treated as a custom template to use. The template should be defined in a &lt;code>*.go.html&lt;/code> file. Either the file name can be used or a template/block name can be used. See &lt;a href="https://openrun.dev/docs/develop/templates/#template-file-location">template&lt;/a> for details.&lt;/p>
-&lt;p>For styling, OpenRun uses DaisyUI by default, so default styles are reset. The custom template can use inline styles or it can use TailwindCSS/DaisyUI. For DaisyUI, the app has to be run in dev mode first for the style.css to be generated. See &lt;a href="https://openrun.dev/docs/develop/styling/#tailwindcss">styling&lt;/a> for details.&lt;/p>
+&lt;a href="#custom-templates" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>If the &lt;code>report&lt;/code> type is set to any value other than &lt;code>ace.AUTO/TEXT/JSON/TABLE&lt;/code>, that is treated as a custom template to use. The template should be defined in a &lt;code>*.go.html&lt;/code> file. Either the file name can be used or a template/block name can be used. See &lt;a href="https://openrun.dev/docs/app/templates/#template-file-location">template&lt;/a> for details.&lt;/p>
+&lt;p>For styling, OpenRun uses DaisyUI by default, so default styles are reset. The custom template can use inline styles or it can use TailwindCSS/DaisyUI. For DaisyUI, the app has to be run in dev mode first for the style.css to be generated. See &lt;a href="https://openrun.dev/docs/app/styling/#tailwindcss">styling&lt;/a> for details.&lt;/p>
 &lt;p>See dictionary &lt;a href="https://github.com/openrundev/apps/tree/main/misc/dictionary"target="_blank" rel="noopener">code&lt;/a>:&lt;a href="https://utils.demo.clace.io/dict"target="_blank" rel="noopener">demo&lt;/a> for an actions example app which shows different type of reports.&lt;/p>
 &lt;h2>Param Value Selector&lt;span class="hx:absolute hx:-mt-20" id="param-value-selector">&lt;/span>
 &lt;a href="#param-value-selector" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>For some params, it is useful to be able to provide a list of values from which the user can choose. The way this is supported is by using an options param. If &lt;code>param1&lt;/code> is a param which should show up as a selector, then define another param with the name &lt;code>options-param1&lt;/code>, of type &lt;code>LIST&lt;/code>. Set a default value for &lt;code>options-param1&lt;/code> with the values to show in the selector dropdown. For example&lt;/p>
@@ -4447,7 +4669,87 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>The event viewer shows events for all apps. This app can be installed with access by admins only.&lt;/p></description></item><item><title>Container Plugin</title><link>https://openrun.dev/docs/plugins/container/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/plugins/container/</guid><description>
+&lt;p>The event viewer shows events for all apps. This app can be installed with access by admins only.&lt;/p></description></item><item><title>Container Builds</title><link>https://openrun.dev/docs/container/build/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/build/</guid><description>
+&lt;p>OpenRun checks out the source code and builds the app container images. On single node install, builds are done locally and images are maintained on the machine. For Kubernetes installation, builds are done on the Kubernetes cluster using Kaniko, a shared registry is required. For both single-node and Kubernetes installations, delegated builds are supported where the container build is delegated to a dedicated build machine running OpenRun in a builder mode.&lt;/p>
+&lt;h2>Config&lt;span class="hx:absolute hx:-mt-20" id="config">&lt;/span>
+&lt;a href="#config" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The configuration for the container builder is&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">builder&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">mode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;auto&amp;#34;&lt;/span> &lt;span class="c"># &amp;#34;auto&amp;#34; or &amp;#34;kaniko&amp;#34; or &amp;#34;command&amp;#34; or &amp;#34;delegate:&amp;lt;url&amp;gt;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">kaniko_image&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;ghcr.io/kaniko-build/dist/chainguard-dev-kaniko/executor:v1.25.3-slim&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>By default, &lt;code>auto&lt;/code> mode is used, which implies local build for single node and kaniko build for Kubernetes.&lt;/p>
+&lt;p>The registry config is empty by default. The possible settings are&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">registry&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">url&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;myregistry.example.com:5000&amp;#34;&lt;/span> &lt;span class="c"># registry location, without the protocol prefix&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">project&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span> &lt;span class="c"># project within the registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">insecure&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">false&lt;/span> &lt;span class="c"># use true if using http:// instead of https://&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;h2>Single-Node Installations&lt;span class="hx:absolute hx:-mt-20" id="single-node-installations">&lt;/span>
+&lt;a href="#single-node-installations" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>For single node installation, OpenRun checks if the required container image is available locally. If not, the source code is checked out and the container manager command CLI is used to build the image.&lt;/p>
+&lt;h2>Kubernetes Installation&lt;span class="hx:absolute hx:-mt-20" id="kubernetes-installation">&lt;/span>
+&lt;a href="#kubernetes-installation" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>For Kubernetes installation, a container registry is required. OpenRun checks if the required container image is available in the registry. If not, the source code is checked out and shipped to a Kaniko based container which does the image build and pushes the image to the registry.&lt;/p>
+&lt;h2>Delegated Build Mode&lt;span class="hx:absolute hx:-mt-20" id="delegated-build-mode">&lt;/span>
+&lt;a href="#delegated-build-mode" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>For single-node install, doing the image build can cause heavy load on the system (CPU and disk). This can impact the performance for API calls to other apps. For Kubernetes based install, doing the Kaniko based install can be slow, since the build runs on a fresh machine which does not have any images cached.&lt;/p>
+&lt;p>For both single-node and Kubernetes installation, delegated builds are supported. One or more machines need to be dedicated for doing the container builds. The main OpenRun installation should used the delegated build option.&lt;/p>
+&lt;p>To setup delegated builds, on the builder machine(s) (for example, mybuilder.example.com), enable the builder by installing OpenRun and setting the minimal config to&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">host&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;0.0.0.0&amp;#34;&lt;/span> &lt;span class="c"># bind to all interfaces&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">redirect_to_https&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">system&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">container_command&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;docker&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">security&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">admin_over_tcp&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>Starting the OpenRun server enables the HTTP port (default 25222) to receive delegated builds requests. The container manager (Docker/Podman) should be running on the builder machine.&lt;/p>
+&lt;p>On the actual OpenRun installation, add in the config:&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">builder&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">mode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;delegate:http://mybuilder.example.com:25222&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>Config like registry settings, git credentials etc are not required in the builder machine. Those are passed from the main install to the builder. The main OpenRun install and the builder nodes do not have to point to the same metadata database. The metadata on the builder machines is not used, so it can default to the local SQLite based metadata, even if multiple builder nodes are used.&lt;/p>
+&lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200">
+&lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>&lt;/svg>&lt;/div>
+&lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
+&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">The builder machine should not be exposed over the public internet. It should be accessible from the actual OpenRun node/cluster only. Multiple builder nodes can also be provisioned. In that case, a load-balancer would have to be setup and the delegate url should use the load-balancer url.&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Container Plugin</title><link>https://openrun.dev/docs/plugins/container/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/plugins/container/</guid><description>
 &lt;p>The &lt;code>container.in&lt;/code> plugin provides the &lt;code>config&lt;/code> API to allow configuring the container backend.&lt;/p>
 &lt;h2>Introduction&lt;span class="hx:absolute hx:-mt-20" id="introduction">&lt;/span>
 &lt;a href="#introduction" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun can build and manage containers for implementing the app backend APIs. The &lt;code>config&lt;/code> API is used to configure at the app level what configuration is used for the container.&lt;/p>
@@ -4719,7 +5021,142 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>Here, the response from the handler function is returned as JSON, no template is used. Also, in this handler, if there is a call to &lt;code>ace.Response&lt;/code>, the type will default to JSON since that is the type specified at the route level. Mime type detection based on the &lt;code>Accept&lt;/code> header is planned, it is not currently supported.&lt;/p></description></item><item><title>Proxy Plugin</title><link>https://openrun.dev/docs/plugins/proxy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/plugins/proxy/</guid><description>
+&lt;p>Here, the response from the handler function is returned as JSON, no template is used. Also, in this handler, if there is a call to &lt;code>ace.Response&lt;/code>, the type will default to JSON since that is the type specified at the route level. Mime type detection based on the &lt;code>Accept&lt;/code> header is planned, it is not currently supported.&lt;/p></description></item><item><title>App Specs</title><link>https://openrun.dev/docs/container/appspecs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/appspecs/</guid><description>
+&lt;h2>App Specs&lt;span class="hx:absolute hx:-mt-20" id="app-specs">&lt;/span>
+&lt;a href="#app-specs" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun app specs are defined at &lt;a href="https://github.com/openrundev/appspecs"target="_blank" rel="noopener">https://github.com/openrundev/appspecs&lt;/a>.&lt;/p>
+&lt;p>The &lt;code>image&lt;/code> spec specifies the image to use. for example&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">openrun app create --spec image --approve --param &lt;span class="nv">image&lt;/span>&lt;span class="o">=&lt;/span>nginx &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --param &lt;span class="nv">port&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">80&lt;/span> - nginxapp.localhost:/&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>downloads the nginx image, starts it and proxies any request to &lt;code>https://nginxapp.localhost:25223&lt;/code> to the nginx container&amp;rsquo;s port 80. The container is started on the first API call, and it is stopped automatically when there are no API calls for 180 seconds.&lt;/p>
+&lt;p>For most other specs, the &lt;code>Containerfile&lt;/code> is defined in the spec. For example, for the &lt;code>python-streamlit&lt;/code> spec, the Containerfile is &lt;a href="https://github.com/openrundev/appspecs/blob/main/python-streamlit/Containerfile"target="_blank" rel="noopener">here&lt;/a>. Running&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">openrun app create --spec python-streamlit --branch master &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --approve github.com/streamlit/streamlit-example /streamlit_app&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>will create an app at &lt;code>https://localhost:25223/streamlit_app&lt;/code>. On the first API call to the app, the image is built from the defined spec and the container is started. The &lt;code>python-gradio&lt;/code> spec does the same for gradio apps.&lt;/p>
+&lt;p>The &lt;code>container&lt;/code> spec is a generic spec which can be used when there is a &lt;code>Dockerfile&lt;/code> defined in tha app source code.&lt;/p>
+&lt;h2>App Specs Listing&lt;span class="hx:absolute hx:-mt-20" id="app-specs-listing">&lt;/span>
+&lt;a href="#app-specs-listing" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The specs defined currently are:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: left">Spec Name&lt;/th>
+&lt;th style="text-align: left">Required Params&lt;/th>
+&lt;th style="text-align: left">Optional Params&lt;/th>
+&lt;th style="text-align: left">Supports Path Routing&lt;/th>
+&lt;th style="text-align: left">Notes&lt;/th>
+&lt;th style="text-align: left">Example&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: left">container&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>port&lt;/b> : The port number within container, optional if EXPOSE directive is present&lt;/li>&lt;/ul>&lt;/td>
+&lt;td style="text-align: left">Depends on app&lt;/td>
+&lt;td style="text-align: left">Requires app code to have a Containerfile/Dockerfile&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">image&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>image&lt;/b>: The image to use for the container&lt;/li> &lt;li>&lt;b>port&lt;/b> : The port number within container&lt;/li>&lt;/ul>&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">Depends on app&lt;/td>
+&lt;td style="text-align: left">No source url required when creating app, use - as url&lt;/td>
+&lt;td style="text-align: left">&lt;code>openrun app create --spec image --approve --param image=nginx --param port=80 - nginxapp.localhost:/&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">proxy&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>url&lt;/b>: The url to which requests should be proxied&lt;/li> &lt;/ul>&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">No&lt;/td>
+&lt;td style="text-align: left">No source url required when creating app, use - as url&lt;/td>
+&lt;td style="text-align: left">&lt;code>openrun app create --spec proxy --approve -param url=https://openrun.dev - proxyapp.localhost:/&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">python-wsgi&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>APP_MODULE&lt;/b>: The module:app for the WSGI app. Defaults to app:app, meaning app in app.py&lt;/li> &lt;/ul>&lt;/td>
+&lt;td style="text-align: left">Depends on app&lt;/td>
+&lt;td style="text-align: left">Runs Web Server Gateway Interface (WSGI) apps using gunicorn&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">python-asgi&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>APP_MODULE&lt;/b>: The module:app for the ASGI app. Defaults to app:app, meaning app in app.py&lt;/li> &lt;/ul>&lt;/td>
+&lt;td style="text-align: left">Depends on app&lt;/td>
+&lt;td style="text-align: left">Runs Asynchronous Server Gateway Interface (ASGI) apps using uvicorn&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">python-flask&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>port&lt;/b> : The port number within container. If EXPOSE directive is present, that is used. Defaults to 5000&lt;/li>&lt;/ul>&lt;/td>
+&lt;td style="text-align: left">Depends on app&lt;/td>
+&lt;td style="text-align: left">Runs app using flask dev server&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">python-streamlit&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>app_file&lt;/b> : The file name of the streamlit app to run. Default streamlit_app.py&lt;/li>&lt;/ul>&lt;/td>
+&lt;td style="text-align: left">Yes&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">&lt;code>openrun app create --spec python-streamlit --branch master --approve github.com/streamlit/streamlit-example /streamlit_app&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">python-streamlit-poetry&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>app_file&lt;/b> : The file name of the streamlit app to run. Default streamlit_app.py&lt;/li>&lt;/ul>&lt;/td>
+&lt;td style="text-align: left">Yes&lt;/td>
+&lt;td style="text-align: left">Installs packages using poetry&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">python-fasthtml&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>APP_MODULE&lt;/b>: The module:app for the ASGI app. Defaults to app:app, meaning app in app.py&lt;/li> &lt;/ul>&lt;/td>
+&lt;td style="text-align: left">Depends on app&lt;/td>
+&lt;td style="text-align: left">Runs app using uvicorn&lt;/td>
+&lt;td style="text-align: left">&lt;code>openrun app create --approve --spec python-fasthtml --param APP_MODULE=basic_ws:app https://github.com/AnswerDotAI/fasthtml/examples fasthtmlapp.localhost:/&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">python-gradio&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>app_file&lt;/b> : The file name of the gradio app to run. Default run.py&lt;/li>&lt;/ul>&lt;/td>
+&lt;td style="text-align: left">Yes&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
+&lt;td style="text-align: left">&lt;code>openrun app create --spec python-gradio --approve github.com/gradio-app/gradio/demo/blocks_flag /gradio_app&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">go&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>port&lt;/b> : The port number within container&lt;/li>&lt;/ul>&lt;/td>
+&lt;td style="text-align: left">&lt;ul>&lt;li>&lt;b>MAIN_PACKAGE&lt;/b> : The go module to build, default &amp;ldquo;.&amp;rdquo;. Pass as a &lt;code>--carg&lt;/code> instead of &lt;code>--param&lt;/code>.&lt;/li>&lt;li>&lt;b>APP_ARGS&lt;/b> : Args to pass to the app&lt;/li>&lt;/ul>&lt;/td>
+&lt;td style="text-align: left">Depends on app&lt;/td>
+&lt;td style="text-align: left">CGO is disabled; go.mod has to be present; app should bind to 0.0.0.0&lt;/td>
+&lt;td style="text-align: left">&lt;code>openrun app create --approve --spec go --param port=8080 --param APP_ARGS=&amp;quot;-addr 0.0.0.0:8080&amp;quot; --branch master github.com/golang/example/helloserver /goapp&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Proxy Plugin</title><link>https://openrun.dev/docs/plugins/proxy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/plugins/proxy/</guid><description>
 &lt;p>The &lt;code>proxy.in&lt;/code> plugin provides the &lt;code>config&lt;/code> API to allow proxying of API calls.&lt;/p>
 &lt;h2>Introduction&lt;span class="hx:absolute hx:-mt-20" id="introduction">&lt;/span>
 &lt;a href="#introduction" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun can proxy API calls to external endpoints or to backend APIs implemented in a container. The &lt;code>config&lt;/code> API is used to configure at the route level what configuration is used for the proxy.&lt;/p>
@@ -4847,7 +5284,7 @@ title="Copy code"
 &lt;li>The auth provider name has to be prefixed with &lt;code>rbac:&lt;/code> for the RBAC rules to apply for app &lt;code>access&lt;/code> permission.&lt;/li>
 &lt;li>Updates using the CLI client are done as the &lt;code>admin&lt;/code> system user. There are no RBAC restrictions on the &lt;code>admin&lt;/code>.&lt;/li>
 &lt;li>For apps with no authentication (using &lt;code>none&lt;/code> auth), the user id to use in RBAC is &lt;code>anonymous&lt;/code>, without the auth type prefix.&lt;/li>
-&lt;/ul></description></item><item><title>Templates</title><link>https://openrun.dev/docs/develop/templates/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/develop/templates/</guid><description>
+&lt;/ul></description></item><item><title>Templates</title><link>https://openrun.dev/docs/app/templates/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/app/templates/</guid><description>
 &lt;p>OpenRun uses &lt;a href="https://pkg.go.dev/html/template@go1.21.2"target="_blank" rel="noopener">Go HTML templates&lt;/a> for returning data to the client. See &lt;a href="https://pkg.go.dev/text/template@go1.21.2"target="_blank" rel="noopener">template&lt;/a> for an overview of the template syntax. &lt;a href="https://gohugo.io/templates/introduction/"target="_blank" rel="noopener">Hugo docs&lt;/a> are a good source for an overview of using go templates.&lt;/p>
 &lt;p>The &lt;a href="http://masterminds.github.io/sprig/"target="_blank" rel="noopener">Sprig template library functions&lt;/a> are included automatically. Two functions from Sprig which are excluded for security considerations are &lt;code>env&lt;/code> and &lt;code>expandenv&lt;/code>.&lt;/p>
 &lt;p>Two extra functions &lt;code>static&lt;/code> and &lt;code>fileNonEmpty&lt;/code> are added for handling static file paths.&lt;/p>
@@ -5175,7 +5612,7 @@ title="Copy code"
 &lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
 &lt;/button>
 &lt;/div>
-&lt;/div></description></item><item><title>Styling</title><link>https://openrun.dev/docs/develop/styling/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/develop/styling/</guid><description>
+&lt;/div></description></item><item><title>Styling</title><link>https://openrun.dev/docs/app/styling/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/app/styling/</guid><description>
 &lt;p>OpenRun supports working with Classless CSS libraries and also with TailwindCSS and DaisyUI. To use this, add the directive&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl"> &lt;span class="n">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">style&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;daisyui&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
@@ -5309,7 +5746,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;p>Change to the preferred &lt;a href="https://daisyui.com/docs/themes/"target="_blank" rel="noopener">theme&lt;/a>. DaisyUI is a good option to use to get great default styling for components, with the full flexibility of Tailwind. To use DaisyUI, use the npm version of Tailwind or use this &lt;a href="https://github.com/dobicinaitis/tailwind-cli-extra"target="_blank" rel="noopener">custom version&lt;/a> of the standalone CLI with DaisyUI included. OpenRun takes care of creating the config files. Using the CDN version of DaisyUI or Tailwind is not recommended since that will cause the style files to be large.&lt;/p>
-&lt;p>If using &lt;a href="https://openrun.dev/docs/actions/">Actions&lt;/a>, DaisyUI styles are automatically included. The themes can be customized using the &lt;code>light&lt;/code> and &lt;code>dark&lt;/code> property.&lt;/p></description></item><item><title>JavaScript</title><link>https://openrun.dev/docs/develop/javascript/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/develop/javascript/</guid><description>
+&lt;p>If using &lt;a href="https://openrun.dev/docs/actions/">Actions&lt;/a>, DaisyUI styles are automatically included. The themes can be customized using the &lt;code>light&lt;/code> and &lt;code>dark&lt;/code> property.&lt;/p></description></item><item><title>JavaScript</title><link>https://openrun.dev/docs/app/javascript/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/app/javascript/</guid><description>
 &lt;p>OpenRun supports importing JavaScript libraries as &lt;a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules"target="_blank" rel="noopener">JavaScript Modules&lt;/a> . To use this feature, add&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl"> &lt;span class="n">libraries&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">library&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;d3&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;7.8.5&amp;#34;&lt;/span>&lt;span class="p">)]&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
