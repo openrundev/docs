@@ -6,7 +6,7 @@ summary: "Overview of containerized app config and state management"
 
 The default configuration for the OpenRun server is defined in [openrun.default.toml](https://github.com/openrundev/openrun/blob/main/internal/system/openrun.default.toml). The container related config settings are
 
-```toml
+```toml {filename="openrun.toml"}
 [app_config]
 
 # Health check Config
@@ -21,8 +21,17 @@ container.idle_bytes_high_watermark = 1500 # bytes high watermark for idle shutd
                                            # (1500 bytes sent and recv over 180 seconds)
 
 # Status check Config
-container.status_check_interval_secs = 5
-container.status_health_attempts = 3
+container.status_check_interval_secs = 20
+container.status_health_attempts = 10
+
+# Show logs for container startup failures in prod mode (dev is always true)
+container.log_lines_to_show = 1000
+container.show_logs_for_failure = true
+
+# Kubernetes related settings
+kubernetes.default_volume_size = "10Gi"
+kubernetes.strict_version_check = true
+kubernetes.scaling_threshold_cpu = 80
 ```
 
 A health check is done on the container after container is started. If the health check fails 30 times, the container is assumed to be down.
@@ -43,7 +52,7 @@ openrun app update conf --promote container.idle_shutdown_secs=600 /myapp
 
 changes the idle timeout for the `/myapp` app to 600 secs. Without the `--promote` option, the change will be staged and can be verified on the staging app. App metadata level setting take precedence over the defaults in the `openrun.toml`. Using `all` as the app name will apply the change for all current apps (but not for any new apps created later).
 
-## Docker/Podman
+## Configuring the Container manager
 
 The default for the container command to use is
 
@@ -52,6 +61,6 @@ The default for the container command to use is
 container_command = "auto"
 ```
 
-`auto` means that OpenRun will look for `podman` in the path. If found, it will use that. Else it will use `docker` as the container manager command. If the value for `container_command` is set to any other value, that will be used as the command to use.
+`auto` means that OpenRun will look for `podman` executable in the path. If found, it will use that. Else it will use `docker` as the container manager command. If the value for `container_command` is set to any other value (except `kubernetes`), that will be used as the command to use. Orbstack implements the Docker CLI interface, so Orbstack also works fine with OpenRun.
 
-Orbstack implements the Docker CLI interface, so Orbstack also works fine with OpenRun.
+Setting `container_command = "kubernetes"` enables Kubernetes mode. In Kubernetes mode, the Kubernetes APIs are used to manage the container lifecycle. No CLI commands are used in Kubernetes mode.

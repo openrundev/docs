@@ -129,9 +129,9 @@ For TABLE report, the fields from the first row are used as columns. Extra field
 
 ## Custom Templates
 
-If the `report` type is set to any value other than `ace.AUTO/TEXT/JSON/TABLE`, that is treated as a custom template to use. The template should be defined in a `*.go.html` file. Either the file name can be used or a template/block name can be used. See [template]({{< ref "docs/develop/templates/#template-file-location" >}}) for details.
+If the `report` type is set to any value other than `ace.AUTO/TEXT/JSON/TABLE`, that is treated as a custom template to use. The template should be defined in a `*.go.html` file. Either the file name can be used or a template/block name can be used. See [template]({{< ref "docs/app/templates/#template-file-location" >}}) for details.
 
-For styling, OpenRun uses DaisyUI by default, so default styles are reset. The custom template can use inline styles or it can use TailwindCSS/DaisyUI. For DaisyUI, the app has to be run in dev mode first for the style.css to be generated. See [styling]({{< ref "docs/develop/styling/#tailwindcss" >}}) for details.
+For styling, OpenRun uses DaisyUI by default, so default styles are reset. The custom template can use inline styles or it can use TailwindCSS/DaisyUI. For DaisyUI, the app has to be run in dev mode first for the style.css to be generated. See [styling]({{< ref "docs/app/styling/#tailwindcss" >}}) for details.
 
 See dictionary [code](https://github.com/openrundev/apps/tree/main/misc/dictionary):[demo](https://utils.demo.clace.io/dict) for an actions example app which shows different type of reports.
 

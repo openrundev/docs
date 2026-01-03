@@ -198,9 +198,3 @@ See [secrets]({{< ref "/docs/configuration/secrets/#plugin-access-to-secrets" >}
 There is a disk_usage example [here](https://github.com/openrundev/openrun/tree/main/examples) and many in the [apps repo](https://github.com/openrundev/apps). The disk_usage example shows a basic hypermedia flow. The cowbull game has multiple [pages](https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/misc/cowbull/app.star#L107), each page with some dynamic behavior. For styling, it uses the [DaisyUI](https://daisyui.com/) component library with Tailwind CSS. These two examples work fine with Javascript disabled in the browser, falling back to basic HTML without any HTMX extensions.
 
 The memory_usage example uses the [d3](https://d3js.org/) library to show a interactive display of the memory usage for processes on the machine. The plot library is [automatically imported](https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/system/memory_usage/app.star#L103) as a ECMAScript module and the custom [javascript code](https://github.com/openrundev/apps/blob/main/system/memory_usage/static/js/app.js) works with a [JSON api](https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/system/memory_usage/app.star#L98) on the backend. The default in OpenRun is hypermedia exchange, JSON can be used for data API's.
-
-{{< cards >}}
-{{< card link="styling" title="Styling" subtitle="Styling configuration for apps, using CSS and Tailwind" icon="sparkles" >}}
-{{< card link="javascript" title="Javascript" subtitle="Importing JavaScript libraries and ESModules" icon="variable" >}}
-{{< card link="templates" title="Templates" subtitle="HTML template handling details" icon="template" >}}
-{{< /cards >}}

@@ -8,14 +8,6 @@ OpenRun is an Apache-2.0 licensed project building a web app development and dep
 
 ## Installation
 
-### Certs and Default password
-
-OpenRun manages TLS cert using LetsEncrypt for prod environments. For dev environment, it is recommended to install [mkcert](https://github.com/FiloSottile/mkcert). OpenRun will automatically create local certs using mkcert if it is present. Install mkcert and run `mkcert -install` before starting OpenRun server. Installing OpenRun using brew will automatically install mkcert.
-
-For container based apps, Docker or Podman or Orbstack should be installed and running on the machine. OpenRun automatically detects the container manager to use.
-
-OpenRun uses an `admin` user account as the default authentication for accessing apps. A random password is generated for this account during initial OpenRun server installation. Note down this password for accessing apps.
-
 ### Install OpenRun On OSX/Linux
 
 To install on OSX/Linux, run
@@ -233,7 +225,7 @@ If not using git, a workflow would be:
 - The staging app is available at `https://localhost:25223/myapp_cl_stage` for verification.
 - To promote the code to prod, run `openrun app promote /myapp`. The staged code is promoted to prod, live at `https://localhost:25223/myapp`.
 
-Having a staging environment helps catch issues related to account setup (which endpoint is pointed to etc) and other config issues before the changes are live on prod. OpenRun implements versioning for prod apps, even when source is not from git.
+Having a staging environment helps catch code and config issues before the changes are live on prod. OpenRun implements versioning for prod apps, even when source is not from git.
 
 ## Lifecycle With Git
 
@@ -282,6 +274,6 @@ In the above listing, the staging app is on version 4, prod app on version 3. Th
 
 ## Developing Apps
 
-OpenRun app backend can be written in any language, running in a container. Some apps can be written in [Starlark](https://github.com/google/starlark-go) and [Go HTML templates](https://pkg.go.dev/text/template), in which case no containers are required.
+OpenRun app backend can be written in any language, running in a container. Action and Hypermedia based apps can be written in [Starlark](https://github.com/google/starlark-go) and [Go HTML templates](https://pkg.go.dev/text/template), in which case no containers are required.
 
-See [dev overview]({{< ref "app/overview/" >}}) for a quick start overview on developing OpenRun applications.
+See [develop]({{< ref "develop/" >}}) for a quick start overview on developing OpenRun applications.

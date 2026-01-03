@@ -4,47 +4,9 @@ weight: 100
 summary: "Overview of OpenRun containerized apps"
 ---
 
-OpenRun builds the image and manages the container lifecycle for containerized apps. OpenRun fetches the source code, creates the image, starts the container, does health checks on the container and stops the container when idle. Appspecs allow existing source code to be used with OpenRun with no code changes required.
+OpenRun builds the image and manages the container lifecycle for containerized apps. OpenRun fetches the source code, creates the image, starts the container, proxies the API calls, does health checks on the container and stops the container when idle. Appspecs allow existing source code to be used with OpenRun with no code changes required. OpenRun supports both `Dockerfile` and `Containerfile` as the file name for the container specification file.
 
-## App Specs
-
-OpenRun app specs are defined at https://github.com/openrundev/appspecs. Most specs use containers, the `proxy` spec is an exception.
-
-The `image` spec specifies the image to use. for example
-
-```shell
-openrun app create --spec image --approve --param image=nginx \
-  --param port=80 - nginxapp.localhost:/
-```
-
-downloads the nginx image, starts it and proxies any request to `https://nginxapp.localhost:25223` to the nginx container's port 80. The container is started on the first API call, and it is stopped automatically when there are no API calls for 180 seconds.
-
-For all other specs, the `Containerfile` is defined in the spec. For example, for the `python-streamlit` spec, the Containerfile is [here](https://github.com/openrundev/appspecs/blob/main/python-streamlit/Containerfile). Running
-
-```shell
-openrun app create --spec python-streamlit --branch master \
-  --approve github.com/streamlit/streamlit-example /streamlit_app
-```
-
-will create an app at `https://localhost:25223/streamlit_app`. On the first API call to the app, the image is built from the defined spec and the container is started. The `python-gradio` spec does the same for gradio apps.
-
-## App Specs Listing
-
-The specs defined currently are:
-
-| Spec Name               | Required Params                                                                                                            | Optional Params                                                                                                                                                         | Supports Path Routing | Notes                                                                 | Example                                                                                                                                                         |
-| :---------------------- | :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------- | :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| container               |                                                                                                                            | <ul><li><b>port</b> : The port number within container, optional if EXPOSE directive is present</li></ul>                                                               | Depends on app        | Requires app code to have a Containerfile/Dockerfile                  |
-| image                   | <ul><li><b>image</b>: The image to use for the container</li> <li><b>port</b> : The port number within container</li></ul> |                                                                                                                                                                         | Depends on app        | No source url required when creating app, use - as url                | `openrun app create --spec image --approve --param image=nginx --param port=80 - nginxapp.localhost:/`                                                          |
-| proxy                   | <ul><li><b>url</b>: The url to which requests should be proxied</li> </ul>                                                 |                                                                                                                                                                         | No                    | No source url required when creating app, use - as url                | `openrun app create --spec proxy --approve -param url=https://openrun.dev - proxyapp.localhost:/`                                                               |
-| python-wsgi             |                                                                                                                            | <ul><li><b>APP_MODULE</b>: The module:app for the WSGI app. Defaults to app:app, meaning app in app.py</li> </ul>                                                       | Depends on app        | Runs Web Server Gateway Interface (WSGI) apps using gunicorn          |
-| python-asgi             |                                                                                                                            | <ul><li><b>APP_MODULE</b>: The module:app for the ASGI app. Defaults to app:app, meaning app in app.py</li> </ul>                                                       | Depends on app        | Runs Asynchronous Server Gateway Interface (ASGI) apps using uvicorn  |
-| python-flask            |                                                                                                                            | <ul><li><b>port</b> : The port number within container. If EXPOSE directive is present, that is used. Defaults to 5000</li></ul>                                        | Depends on app        | Runs app using flask dev server                                       |
-| python-streamlit        |                                                                                                                            | <ul><li><b>app_file</b> : The file name of the streamlit app to run. Default streamlit_app.py</li></ul>                                                                 | Yes                   |                                                                       | `openrun app create --spec python-streamlit --branch master --approve github.com/streamlit/streamlit-example /streamlit_app`                                    |
-| python-streamlit-poetry |                                                                                                                            | <ul><li><b>app_file</b> : The file name of the streamlit app to run. Default streamlit_app.py</li></ul>                                                                 | Yes                   | Installs packages using poetry                                        |
-| python-fasthtml         |                                                                                                                            | <ul><li><b>APP_MODULE</b>: The module:app for the ASGI app. Defaults to app:app, meaning app in app.py</li> </ul>                                                       | Depends on app        | Runs app using uvicorn                                                | `openrun app create --approve --spec python-fasthtml --param APP_MODULE=basic_ws:app  https://github.com/AnswerDotAI/fasthtml/examples fasthtmlapp.localhost:/` |
-| python-gradio           |                                                                                                                            | <ul><li><b>app_file</b> : The file name of the gradio app to run. Default run.py</li></ul>                                                                              | Yes                   |                                                                       | `openrun app create --spec python-gradio --approve github.com/gradio-app/gradio/demo/blocks_flag /gradio_app`                                                   |
-| go                      | <ul><li><b>port</b> : The port number within container</li></ul>                                                           | <ul><li><b>MAIN_PACKAGE</b> : The go module to build, default ".". Pass as a `--carg` instead of `--param`.</li><li><b>APP_ARGS</b> : Args to pass to the app</li></ul> | Depends on app        | CGO is disabled; go.mod has to be present; app should bind to 0.0.0.0 | `openrun app create --approve --spec go --param port=8080 --param APP_ARGS="-addr 0.0.0.0:8080" --branch master github.com/golang/example/helloserver /goapp`   |
+For single node installations, OpenRun works with a local container manager (Docker/Podman/Orbstack etc). For multi-node installation on Kubernetes, OpenRun uses Kubernetes deployments to run each app.
 
 ## App Environment Params
 
@@ -110,16 +72,16 @@ To set CPU and memory limits and other options for the container, pass `--copt o
 ```sh
 openrun app create --approve --spec python-fasthtml \
   --param APP_MODULE=basic_ws:app \
-  --copt cpu-shares=1000 \
+  --copt cpu=2 \
   https://github.com/AnswerDotAI/fasthtml/examples fasthtmlapp.localhost:/
 ```
 
-sets the CPU shares for the container to 1000.
+sets the CPU request for the container to 2.
 
 To update container options, run
 
 ```sh
-openrun app update copt cpu-shares=500 fasthtmlapp.localhost:/
+openrun app update copt cpu=3 fasthtmlapp.localhost:/
 ```
 
 Like all metadata updates, option updates are staged. Pass `--promote` to promote immediately or run `app promote` to promote from stage to prod.

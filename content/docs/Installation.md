@@ -85,6 +85,14 @@ git clone -b main https://github.com/openrundev/openrun && cd openrun
 go build -o $OPENRUN_HOME/bin/openrun ./cmd/openrun/
 ```
 
+## Certs and Default password
+
+OpenRun manages TLS cert using LetsEncrypt for prod environments. For dev environment, it is recommended to install [mkcert](https://github.com/FiloSottile/mkcert). OpenRun will automatically create local certs using mkcert if it is present. Install mkcert and run `mkcert -install` before starting OpenRun server. Installing OpenRun using brew will automatically install mkcert.
+
+For container based apps, Docker or Podman or Orbstack should be installed and running on the machine. OpenRun automatically detects the container manager to use.
+
+OpenRun uses an `admin` user account as the default authentication for accessing apps. A random password is generated for this account during initial OpenRun server installation. Note down this password for accessing apps if using `system` auth.
+
 ## Initial Configuration
 
 To use the openrun service, you need an initial config file with the service password and a work directory. Create the openrun.toml file, and create a randomly generate password for the **admin** user account
