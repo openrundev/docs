@@ -283,8 +283,8 @@ title="Copy code"
 &lt;/div>
 &lt;p>in which case OpenRun just makes sure that the new version started successfully,&lt;/p></description></item><item><title>Container Builds</title><link>https://openrun.dev/docs/container/build/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/build/</guid><description>
 &lt;p>OpenRun checks out the source code and builds the app container images. On single node install, builds are done locally and images are maintained on the machine. For Kubernetes installation, builds are done on the Kubernetes cluster using Kaniko, a shared registry is required. For both single-node and Kubernetes installations, delegated builds are supported where the container build is delegated to a dedicated build machine running OpenRun in a builder mode.&lt;/p>
-&lt;h2>Config&lt;span class="hx:absolute hx:-mt-20" id="config">&lt;/span>
-&lt;a href="#config" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The configuration for the container builder is&lt;/p>
+&lt;h2>Builder and Registry Config&lt;span class="hx:absolute hx:-mt-20" id="builder-and-registry-config">&lt;/span>
+&lt;a href="#builder-and-registry-config" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The configuration for the container builder is&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">builder&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">mode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;auto&amp;#34;&lt;/span> &lt;span class="c"># &amp;#34;auto&amp;#34; or &amp;#34;kaniko&amp;#34; or &amp;#34;command&amp;#34; or &amp;#34;delegate:&amp;lt;url&amp;gt;&amp;#34;&lt;/span>
@@ -299,7 +299,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;p>By default, &lt;code>auto&lt;/code> mode is used, which implies local build for single node and kaniko build for Kubernetes.&lt;/p>
-&lt;p>The registry config is empty by default. The possible settings are&lt;/p>
+&lt;p>A shared container registry is required for Kubernetes install and delegated builds. The registry config is empty by default. The possible settings are&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">registry&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">url&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;myregistry.example.com:5000&amp;#34;&lt;/span> &lt;span class="c"># registry location, without the protocol prefix&lt;/span>
@@ -314,6 +314,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
+&lt;p>Other options supported for the registry are &lt;code>username&lt;/code>, &lt;code>password&lt;/code>, &lt;code>password_file&lt;/code>, &lt;code>type&lt;/code> which can be &lt;code>ecr&lt;/code> or empty, &lt;code>ca_file&lt;/code>, &lt;code>client_cert_file&lt;/code>, &lt;code>client_key_file&lt;/code> and &lt;code>aws_region&lt;/code>.&lt;/p>
 &lt;h2>Single-Node Installations&lt;span class="hx:absolute hx:-mt-20" id="single-node-installations">&lt;/span>
 &lt;a href="#single-node-installations" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>For single node installation, OpenRun checks if the required container image is available locally. If not, the source code is checked out and the container manager command CLI is used to build the image.&lt;/p>
 &lt;h2>Kubernetes Installation&lt;span class="hx:absolute hx:-mt-20" id="kubernetes-installation">&lt;/span>
