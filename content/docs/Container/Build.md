@@ -6,7 +6,7 @@ summary: "Container builds on single node install and on Kubernetes"
 
 OpenRun checks out the source code and builds the app container images. On single node install, builds are done locally and images are maintained on the machine. For Kubernetes installation, builds are done on the Kubernetes cluster using Kaniko, a shared registry is required. For both single-node and Kubernetes installations, delegated builds are supported where the container build is delegated to a dedicated build machine running OpenRun in a builder mode.
 
-## Config
+## Builder and Registry Config
 
 The configuration for the container builder is
 
@@ -18,7 +18,7 @@ kaniko_image = "ghcr.io/kaniko-build/dist/chainguard-dev-kaniko/executor:v1.25.3
 
 By default, `auto` mode is used, which implies local build for single node and kaniko build for Kubernetes.
 
-The registry config is empty by default. The possible settings are
+A shared container registry is required for Kubernetes install and delegated builds. The registry config is empty by default. The possible settings are
 
 ```toml {filename="openrun.toml"}
 [registry]
@@ -26,6 +26,8 @@ url = "myregistry.example.com:5000" # registry location, without the protocol pr
 project = ""                        # project within the registry
 insecure = false                    # use true if using http:// instead of https://
 ```
+
+Other options supported for the registry are `username`, `password`, `password_file`, `type` which can be `ecr` or empty, `ca_file`, `client_cert_file`, `client_key_file` and `aws_region`.
 
 ## Single-Node Installations
 
