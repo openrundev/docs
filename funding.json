@@ -5,7 +5,7 @@
         "type": "individual",
         "role": "maintainer",
         "name": "Ajay Kidave",
-        "email": "ajayvk@clace.io",
+        "email": "ajayvk@openrun.dev",
         "phone": "",
         "description": "I am working on making it easier for developers and teams to build and deploy their applications securely. I am working on OpenRun which allows declarative GitOps deployment to a single machine or onto Kubernetes.",
         "webpageUrl": {
