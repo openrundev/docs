@@ -67,5 +67,6 @@ You can keep in touch by these means:
 - Subscribe to the blog [RSS feed](https://openrun.dev/blog/index.xml)
 - Follow ClaceIO on [LinkedIn](https://www.linkedin.com/company/ClaceIO)
 - Connect on [Discord](https://discord.gg/t2P8pJFsd7)
+- Schedule a [Meeting](https://calendar.app.google/wacEeZ9agtHHZTkMA)
 
 Use [discussions](https://github.com/openrundev/openrun/discussions) feature in Github or raise [issues](https://github.com/openrundev/openrun/issues) to provide feedback.
