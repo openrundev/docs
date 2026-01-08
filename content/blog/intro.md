@@ -62,10 +62,9 @@ Open https://localhost:25223 to see app listing. See [installation]({{< ref "ins
 You can keep in touch by these means:
 
 - Star the repo at [github.com/openrundev/openrun](https://github.com/openrundev/openrun)
-- Sign up for [Email updates](https://openrun.dev/#:~:text=Sign%20up%20for%20email%20updates)
-- Follow on [Twitter](https://twitter.com/akopenrun)
+- Follow on [Twitter](https://twitter.com/ajay_kidave)
 - Subscribe to the blog [RSS feed](https://openrun.dev/blog/index.xml)
-- Follow ClaceIO on [LinkedIn](https://www.linkedin.com/company/ClaceIO)
+- Follow OpenRun on [LinkedIn](https://www.linkedin.com/company/openrundev)
 - Connect on [Discord](https://discord.gg/t2P8pJFsd7)
 - Schedule a [Meeting](https://calendar.app.google/wacEeZ9agtHHZTkMA)
 
