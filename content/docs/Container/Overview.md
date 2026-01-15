@@ -1,5 +1,5 @@
 ---
-title: "Container Overview"
+title: "Overview"
 weight: 100
 summary: "Overview of OpenRun containerized apps"
 ---
@@ -7,6 +7,15 @@ summary: "Overview of OpenRun containerized apps"
 OpenRun builds the image and manages the container lifecycle for containerized apps. OpenRun fetches the source code, creates the image, starts the container, proxies the API calls, does health checks on the container and stops the container when idle. Appspecs allow existing source code to be used with OpenRun with no code changes required. OpenRun supports both `Dockerfile` and `Containerfile` as the file name for the container specification file.
 
 For single node installations, OpenRun works with a local container manager (Docker/Podman/Orbstack etc). For multi-node installation on Kubernetes, OpenRun uses Kubernetes deployments to run each app.
+
+<picture  class="responsive-picture" style="display: block; margin-left: auto; margin-right: auto;">
+  <img alt="OpenRun Components" src="/d2/container_overview.svg">
+</picture>
+
+Containers are initialized lazily, when the app API is accessed. The request flow is:
+<picture  class="responsive-picture" style="display: block; margin-left: auto; margin-right: auto;">
+<img alt="OpenRun Request Flow" src="/d2/container_sequence.svg">
+</picture>
 
 ## App Environment Params
 
