@@ -17,3 +17,9 @@ h2, h3, h4, h5, h6 {
     --primary-hue: 120deg;
     --primary-saturation: 90%;
 }
+
+/* assets/css/custom.css */
+.medium-zoom-overlay,
+.medium-zoom-image--opened {
+  z-index: 9999;
+}
