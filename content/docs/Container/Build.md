@@ -68,6 +68,10 @@ mode = "delegate:http://mybuilder.example.com:25222"
 
 Config like registry settings, git credentials etc are not required in the builder machine. Those are passed from the main install to the builder. The main OpenRun install and the builder nodes do not have to point to the same metadata database. The metadata on the builder machines is not used, so it can default to the local SQLite based metadata, even if multiple builder nodes are used.
 
+<picture  class="responsive-picture" style="display: block; margin-left: auto; margin-right: auto;">
+  <img alt="Delegated Build" src="/d2/delegated_build.svg">
+</picture>
+
 {{<callout type="warning" >}}
 The builder machine should not be exposed over the public internet. It should be accessible from the actual OpenRun node/cluster only. Multiple builder nodes can also be provisioned. In that case, a load-balancer would have to be setup and the delegate url should use the load-balancer url.
 {{</callout>}}
