@@ -3170,7 +3170,10 @@ title="Copy code"
 &lt;li>Optionally, a container registry is installed. An external registry can be used instead.&lt;/li>
 &lt;/ul>
 &lt;p>SQLite based metadata is not supported when using Kubernetes. The Postgres metadata needs to be managed properly, with backups and scheduled upgrades. An externally managed Postgres installation is recommended for production Kubernetes OpenRun installations.&lt;/p>
-&lt;p>A container registry is required for Kubernetes based OpenRun install. The registry can be installed through the Helm chart or an external registry can be used.&lt;/p>
+&lt;p>A container registry is required for Kubernetes based OpenRun install. The registry can be installed through the Helm chart or an external registry can be used. An installation with external Postgres and Registry is shown below.&lt;/p>
+&lt;picture class="responsive-picture" style="display: block; margin-left: auto; margin-right: auto;">
+&lt;img alt="Kubernetes Deployment" src="https://openrun.dev/d2/k8s.svg">
+&lt;/picture>
 &lt;h2>Configuration&lt;span class="hx:absolute hx:-mt-20" id="configuration">&lt;/span>
 &lt;a href="#configuration" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">system&lt;/span>&lt;span class="p">]&lt;/span>
@@ -4758,7 +4761,7 @@ title="Copy code"
 &lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200">
 &lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
-&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">The builder machine should not be exposed over the public internet. It should be accessible from the actual OpenRun node/cluster only. Multiple builder nodes can also be provisioned. In that case, a load-balancer would have to be setup and the delegate url should use the load-balancer url.&lt;/div>
+&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">The builder machine should not be exposed over the public internet. It should be accessible from the main OpenRun node/cluster only. Multiple builder nodes can also be provisioned. In that case, a load-balancer would have to be setup and the delegate url should use the load-balancer url.&lt;/div>
 &lt;/div>
 &lt;/div></description></item><item><title>Container Plugin</title><link>https://openrun.dev/docs/plugins/container/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/plugins/container/</guid><description>
 &lt;p>The &lt;code>container.in&lt;/code> plugin provides the &lt;code>config&lt;/code> API to allow configuring the container backend.&lt;/p>
