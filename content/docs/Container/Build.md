@@ -73,5 +73,5 @@ Config like registry settings, git credentials etc are not required in the build
 </picture>
 
 {{<callout type="warning" >}}
-The builder machine should not be exposed over the public internet. It should be accessible from the actual OpenRun node/cluster only. Multiple builder nodes can also be provisioned. In that case, a load-balancer would have to be setup and the delegate url should use the load-balancer url.
+The builder machine should not be exposed over the public internet. It should be accessible from the main OpenRun node/cluster only. Multiple builder nodes can also be provisioned. In that case, a load-balancer would have to be setup and the delegate url should use the load-balancer url.
 {{</callout>}}

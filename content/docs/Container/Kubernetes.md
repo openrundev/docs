@@ -14,7 +14,11 @@ OpenRun can be installed on a Kubernetes cluster using the Helm chart. Running t
 
 SQLite based metadata is not supported when using Kubernetes. The Postgres metadata needs to be managed properly, with backups and scheduled upgrades. An externally managed Postgres installation is recommended for production Kubernetes OpenRun installations.
 
-A container registry is required for Kubernetes based OpenRun install. The registry can be installed through the Helm chart or an external registry can be used.
+A container registry is required for Kubernetes based OpenRun install. The registry can be installed through the Helm chart or an external registry can be used. An installation with external Postgres and Registry is shown below.
+
+<picture  class="responsive-picture" style="display: block; margin-left: auto; margin-right: auto;">
+  <img alt="Kubernetes Deployment" src="/d2/k8s.svg">
+</picture>
 
 ## Configuration
 
