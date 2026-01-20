@@ -250,7 +250,27 @@ title="Copy code"
 &lt;p>&lt;code>auto&lt;/code> means that OpenRun will look for &lt;code>podman&lt;/code> executable in the path. If found, it will use that. Else it will use &lt;code>docker&lt;/code> as the container manager command. If the value for &lt;code>container_command&lt;/code> is set to any other value (except &lt;code>kubernetes&lt;/code>), that will be used as the command to use. Orbstack implements the Docker CLI interface, so Orbstack also works fine with OpenRun.&lt;/p>
 &lt;p>Setting &lt;code>container_command = &amp;quot;kubernetes&amp;quot;&lt;/code> enables Kubernetes mode. In Kubernetes mode, the Kubernetes APIs are used to manage the container lifecycle. No CLI commands are used in Kubernetes mode.&lt;/p></description></item><item><title>Kubernetes Deployment</title><link>https://openrun.dev/docs/container/kubernetes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/kubernetes/</guid><description>
 &lt;h2>Installation&lt;span class="hx:absolute hx:-mt-20" id="installation">&lt;/span>
-&lt;a href="#installation" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun can be installed on a Kubernetes cluster using the Helm chart. Running the Helm chart creates:&lt;/p>
+&lt;a href="#installation" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun can be installed on a Kubernetes cluster using the Helm chart.&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">helm repo add openrun https://openrundev.github.io/openrun-helm-charts/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Install a registry for use with OpenRun (for testing)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">helm install openrun1 openrun/openrun &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --namespace openrun --create-namespace --set registry.enabled&lt;span class="o">=&lt;/span>&lt;span class="nb">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Install with a external registry (recommended)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">helm install openrun1 openrun/openrun &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --namespace openrun --create-namespace --set config.registry.url&lt;span class="o">=&lt;/span>&amp;lt;registry_url&amp;gt;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>Running the Helm chart creates:&lt;/p>
 &lt;ul>
 &lt;li>An service which run the OpenRun API server&lt;/li>
 &lt;li>Optionally, a Postgres database for metadata. An external Postgres database can be used instead.&lt;/li>
