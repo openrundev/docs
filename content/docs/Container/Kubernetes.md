@@ -6,7 +6,21 @@ summary: "Overview of OpenRun deployment on Kubernetes"
 
 ## Installation
 
-OpenRun can be installed on a Kubernetes cluster using the Helm chart. Running the Helm chart creates:
+OpenRun can be installed on a Kubernetes cluster using the Helm chart.
+
+```sh
+helm repo add openrun https://openrundev.github.io/openrun-helm-charts/
+
+# Install a registry for use with OpenRun (for testing)
+helm install openrun1 openrun/openrun \
+  --namespace openrun --create-namespace --set registry.enabled=true
+
+# Install with a external registry (recommended)
+helm install openrun1 openrun/openrun \
+  --namespace openrun --create-namespace --set config.registry.url=<registry_url>
+```
+
+Running the Helm chart creates:
 
 - An service which run the OpenRun API server
 - Optionally, a Postgres database for metadata. An external Postgres database can be used instead.
