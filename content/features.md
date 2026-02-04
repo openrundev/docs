@@ -37,3 +37,9 @@ layout: hextra-home
 <!-- prettier-ignore --> {{< hextra/feature-card title="Security Sandbox" link="/docs/applications/appsecurity/#security-model" subtitle="Apps built in Starlark based micro-framework use sandboxing for security"  icon="shield-check" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
 {{< /hextra/feature-grid >}}
+
+<iframe
+  id="pdfFrame"
+  src="/pdf.html?file=%2Fopenrun_intro.pdf"
+  style="width:100%; height:80vh; border:0;"
+></iframe>

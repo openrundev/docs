@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <link rel="stylesheet" href="./pdfjs/web/pdf_viewer.css" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      #bar {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 48px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        padding: 0 10px;
+        background: rgba(0, 0, 0, 0.65);
+        color: #eee;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        z-index: 5;
+      }
+      #bar button,
+      #bar input {
+        height: 30px;
+        border-radius: 8px;
+        border: 1px solid #333;
+        background: #222;
+        color: #eee;
+        padding: 0 10px;
+      }
+      #bar input {
+        width: 70px;
+      }
+      #spacer {
+        flex: 1;
+      }
+      #info {
+        opacity: 0.85;
+        font-size: 13px;
+      }
+
+      /* MUST be absolutely positioned for PDF.js viewer components */
+      #viewerContainer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 48px;
+        overflow: auto; /* allow pan when zoomed */
+        background: #111;
+      }
+
+      /* helps center the single page */
+      .pdfViewer .page {
+        margin: 16px auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="bar">
+      <button id="prev">◀</button>
+      <button id="next">▶</button>
+
+      <span>Page</span>
+      <input id="page" type="number" min="1" value="1" />
+      <span id="count">/ ?</span>
+
+      <div id="spacer"></div>
+      <span id="info"></span>
+    </div>
+
+    <div id="viewerContainer">
+      <div id="viewer" class="pdfViewer"></div>
+    </div>
+
+    <script type="module">
+      const base = new URL(".", import.meta.url);
+
+      const pdfjsLib = await import(new URL("./pdfjs/build/pdf.mjs", base));
+      const viewerMod = await import(
+        new URL("./pdfjs/web/pdf_viewer.mjs", base)
+      );
+      const { EventBus, PDFLinkService, PDFSinglePageViewer } = viewerMod;
+
+      pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+        "./pdfjs/build/pdf.worker.mjs",
+        base
+      ).toString();
+
+      const params = new URLSearchParams(location.search);
+      const fileParam = params.get("file") || "openrun_intro.pdf";
+      const fileUrl = new URL(fileParam, base).toString();
+
+      const container = document.getElementById("viewerContainer");
+      const eventBus = new EventBus();
+      const linkService = new PDFLinkService({ eventBus });
+
+      const pdfViewer = new PDFSinglePageViewer({
+        container,
+        eventBus,
+        linkService,
+        textLayerMode: 2, // enables selectable text layer (if PDF has text)
+      });
+
+      linkService.setViewer(pdfViewer);
+
+      // Fit page nicely on first init
+      eventBus.on("pagesinit", () => {
+        pdfViewer.currentScaleValue = "page-fit";
+        updateUi();
+      });
+
+      const pdfDoc = await pdfjsLib.getDocument(fileUrl).promise;
+      pdfViewer.setDocument(pdfDoc);
+      linkService.setDocument(pdfDoc);
+
+      const prevBtn = document.getElementById("prev");
+      const nextBtn = document.getElementById("next");
+      const pageInput = document.getElementById("page");
+      const countEl = document.getElementById("count");
+      const infoEl = document.getElementById("info");
+
+      countEl.textContent = `/ ${pdfDoc.numPages}`;
+      infoEl.textContent = fileParam;
+
+      function clamp(n) {
+        return Math.max(1, Math.min(pdfDoc.numPages, n));
+      }
+
+      function updateUi() {
+        const n = pdfViewer.currentPageNumber || 1;
+        pageInput.value = String(n);
+        prevBtn.disabled = n <= 1;
+        nextBtn.disabled = n >= pdfDoc.numPages;
+      }
+
+      function gotoPage(n) {
+        pdfViewer.currentPageNumber = clamp(n);
+        updateUi();
+      }
+
+      prevBtn.onclick = () => gotoPage((pdfViewer.currentPageNumber || 1) - 1);
+      nextBtn.onclick = () => gotoPage((pdfViewer.currentPageNumber || 1) + 1);
+
+      pageInput.addEventListener("change", () => {
+        gotoPage(parseInt(pageInput.value || "1", 10));
+      });
+
+      // Keyboard nav inside iframe
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+          e.preventDefault();
+          nextBtn.click();
+        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault();
+          prevBtn.click();
+        }
+      });
+
+      // Optional: let parent control navigation
+      window.addEventListener("message", (e) => {
+        if (!e.data || !e.data.type) return;
+        if (e.data.type === "pdf-next") nextBtn.click();
+        if (e.data.type === "pdf-prev") prevBtn.click();
+        if (e.data.type === "pdf-goto" && Number.isInteger(e.data.page))
+          gotoPage(e.data.page);
+      });
+    </script>
+  </body>
+</html>
