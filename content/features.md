@@ -5,7 +5,7 @@ layout: hextra-home
 ---
 
 <iframe
-  src="/intro_slides.html"
+  src="/intro.html"
   style="width:100%; height:80vh; border:0;"
 ></iframe>
 
