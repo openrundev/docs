@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-    <link rel="stylesheet" href="./pdfjs/web/pdf_viewer.css" />
+    <link rel="stylesheet" href="/pdfjs/web/pdf_viewer.css" />
     <style>
       html,
       body {
@@ -86,14 +86,14 @@
     <script type="module">
       const base = new URL(".", import.meta.url);
 
-      const pdfjsLib = await import(new URL("./pdfjs/build/pdf.mjs", base));
+      const pdfjsLib = await import(new URL("/pdfjs/build/pdf.mjs", base));
       const viewerMod = await import(
-        new URL("./pdfjs/web/pdf_viewer.mjs", base)
+        new URL("/pdfjs/web/pdf_viewer.mjs", base)
       );
       const { EventBus, PDFLinkService, PDFSinglePageViewer } = viewerMod;
 
       pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-        "./pdfjs/build/pdf.worker.mjs",
+        "/pdfjs/build/pdf.worker.mjs",
         base
       ).toString();
 
