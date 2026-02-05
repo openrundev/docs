@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Deployment"
+title: "Kubernetes"
 weight: 300
 summary: "Overview of OpenRun deployment on Kubernetes"
 ---
@@ -31,8 +31,62 @@ SQLite based metadata is not supported when using Kubernetes. The Postgres metad
 A container registry is required for Kubernetes based OpenRun install. The registry can be installed through the Helm chart or an external registry can be used. An installation with external Postgres and Registry is shown below.
 
 <picture  class="responsive-picture" style="display: block; margin-left: auto; margin-right: auto;">
-  <img alt="Kubernetes Deployment" src="/d2/k8s.svg">
+<img alt="Kubernetes Deployment" src="/d2/k8s.svg">
 </picture>
+
+## Registry Config
+
+OpenRun on Kubernetes requires a registry to which Kaniko built images can be pushed and from which pods can pull. Image pull by default requires a HTTPS protected registry, self-signed certificates are not valid. Creating a signed certificate is not trivial on dev installations. The workaround for dev installs is to enable HTTP endpoints for pod creation. Details depend on the Kubernetes installation being used. For K3S, install the `registry:2` images as a service. If registry is started at `registry.svc.cluster.local:5000`, edit `/etc/rancher/k3s/registries.yaml` to add:
+
+```{filename="/etc/rancher/k3s/registries.yaml"}
+mirrors:
+  "registry.svc.cluster.local:5000":
+    endpoint:
+      - "http://registry.svc.cluster.local:5000"
+```
+
+The registry IP might have to added to `/etc/hosts` depending on how it is accessed.
+
+If using OrbStack, run the `registry:2` service and run `orb config docker` and add
+
+```
+{
+  "insecure-registries": ["registry.orb.local:5000"]
+}
+```
+
+Restart Kubernetes using `orb restart k8s`.
+
+To install Openrun, run
+
+```
+helm --kube-context orbstack upgrade --install openrun openrun/openrun --namespace openrun --create-namespace --wait --timeout 3m --set config.registry.url=registry.orb.local:5000
+```
+
+The Helm chart sets `insecure = true` by default. Change that to `insecure = false` if using a HTTPS registry.
+
+## Install using Terraform
+
+To install a production ready OpenRun installation on AWS, with EKS cluster, ECR registry and RDS Postgres for metadata, do the following:
+
+- Checkout the terraform config `git clone git@github.com:openrundev/openrun.git`
+- Switch to the config directory `cd openrun/deploy/terraform`
+- Create a copy of sample config `cp tfvars.sample terraform.tfvars`
+- Update `terraform.tfvars`, set the values as appropriate.
+- Ensure that AWS cli is installed and credentials are configured. Also, ensure that helm cli is installed and OpenRun updated `helm repo add openrun https://openrundev.github.io/openrun-helm-charts/; helm repo update`
+- Terraform state is by default saved on local disk. If required, update to use S3
+- Run `terraform init`. Add `-backend-config` if using remote state.
+- Run `terraform plan --var-file terraform.tfvars`, verify the plan.
+- Run `terraform apply --var-file terraform.tfvars`, or apply the plan created earlier.
+
+Save the password for the admin user using `terraform output openrun_admin_password`. Add the DNS entries as output under `openrun_dns_records`. The `root_a` and `wildcard_a` DNS entries enable installing apps at the domain level. Wait for the DNS entries to propagate before attempting to access the url (to allow TLS cert creation to work).
+
+After install is done, SSH to the OpenRun instance and run the `sync schedule` to setup the sync. All subsequent operations are done by checking in config updates to the app config in Git.
+
+To destroy the resource created,
+
+- Ensure that kubectl config is set, like `aws eks update-kubeconfig --region us-west-2 --name openrun-eks --profile openrun`. Update the region, the name format is `<prefix>-eks`, default `openrun-eks`.
+- Run `terraform destroy --var-file terraform.tfvars`. Run it a second time in case there is a timeout. All resource should be deleted.
 
 ## Configuration
 
@@ -42,6 +96,8 @@ container_command = "kubernetes"
 ```
 
 is the main config which enables Kubernetes mode. By default. Kaniko based builds are used. Delegated builds can be configured instead, see [delegated builds]({{< ref "/docs/container/build/#delegated-build-mode" >}}). See [registry]({{< ref "/docs/container/build/#config" >}}) for registry config.
+
+OpenRun service and Kaniko jobs run in the main namespace (default `openrun`). Applications are started in the `<main_ns>-apps` namespace (default `openrun-apps`), which is automatically created by the Helm chart. To clear all apps (including any volume data), run `kubectl delete namespace openrun-apps; kubectl create namespace openrun-apps`.
 
 ## Architecture
 
