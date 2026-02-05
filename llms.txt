@@ -1,6 +1,6 @@
-# OpenRun - App Deployment Simplified
+# OpenRun - Internal Tools Deployment Platform
 
-> Open source alternative to Google Cloud Run and AWS App Runner.
+> Internal tools deployment made easy. Deploy web apps declaratively, on a single-node or on Kubernetes.
 
 
 ## Blog
@@ -66,5 +66,5 @@
 - [Features](https://openrun.dev/features/): OpenRun Features
 
 ---
-Generated on 2026-02-04 18:15:54 UTC
+Generated on 2026-02-05 20:38:09 UTC
 Site: https://openrun.dev/
