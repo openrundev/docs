@@ -13,11 +13,11 @@ cascade:
 
 <div class="hx:mb-6">
 {{< hextra/hero-subtitle >}}
-  Internal tools deployments made easy.&nbsp;<br class="hx:sm:block hx:hidden"/>Deploy web apps declaratively, on a single-node or on Kubernetes.
+  Internal tools deployment made easy.&nbsp;<br class="hx:sm:block hx:hidden"/>Deploy web apps declaratively, on a single-node or on Kubernetes.
 {{< /hextra/hero-subtitle >}}
 </div>
 
-<div class="hx:mb-4">
+<div class="hx:mb-4 hx:flex hx:flex-wrap hx:gap-2">
 {{< hextra/hero-button style="border-radius: 8px;" text="Get Started" link="docs/quickstart" >}}
 {{< hextra/hero-button style="border-radius: 8px; padding: 12px 40px;" text="Demo" link="https://apps.demo.clace.io" >}}
 </div>

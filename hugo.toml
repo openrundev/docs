@@ -28,7 +28,7 @@ noClasses = false
 # Default Page Parameters
 [params]
 title = "OpenRun - Internal Tools Deployment Platform"
-description = "Internal tools deployments made easy. Deploy web apps declaratively, on a single-node or on Kubernetes."
+description = "Internal tools deployment made easy. Deploy web apps declaratively, on a single-node or on Kubernetes."
 
 [params.navbar]
 displayTitle = false
@@ -52,7 +52,7 @@ displayToggle = true
 
 [params.banner]
 key = "announcement-kubernetes"
-message = "📌 OpenRun now runs natively on Kubernetes also. [Learn more](https://openrun.dev/docs/container/kubernetes/)."
+message = "📌 OpenRun now enables easy app deployments to Kubernetes. [Learn more](https://openrun.dev/docs/container/kubernetes/)."
 
 # Docs Navigation
 
