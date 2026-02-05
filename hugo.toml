@@ -1,6 +1,6 @@
 baseURL = "https://openrun.dev/"
 languageCode = "en-us"
-title = "OpenRun - App Deployment Simplified"
+title = "OpenRun - Internal Tools Deployment Platform"
 canonifyURLs = false
 relativeURLs = false
 pluralizeListTitles = false
@@ -27,8 +27,8 @@ noClasses = false
 
 # Default Page Parameters
 [params]
-title = "OpenRun - App Deployment Simplified"
-description = "Open source alternative to Google Cloud Run and AWS App Runner."
+title = "OpenRun - Internal Tools Deployment Platform"
+description = "Internal tools deployments made easy. Deploy web apps declaratively, on a single-node or on Kubernetes."
 
 [params.navbar]
 displayTitle = false
@@ -51,8 +51,8 @@ default = "system"
 displayToggle = true
 
 [params.banner]
-key = "announcement-usecase"
-message = "📌 Explore end-to-end configuration examples in the [use-cases](https://openrun.dev/docs/use-cases/) section."
+key = "announcement-kubernetes"
+message = "📌 OpenRun now runs natively on Kubernetes also. [Learn more](https://openrun.dev/docs/container/kubernetes/)."
 
 # Docs Navigation
 
