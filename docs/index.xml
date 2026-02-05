@@ -3161,7 +3161,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>The app cannot be run until either the code change is reverted or the admin approves the new call to rm.&lt;/p></description></item><item><title>Kubernetes Deployment</title><link>https://openrun.dev/docs/container/kubernetes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/kubernetes/</guid><description>
+&lt;p>The app cannot be run until either the code change is reverted or the admin approves the new call to rm.&lt;/p></description></item><item><title>Kubernetes</title><link>https://openrun.dev/docs/container/kubernetes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/kubernetes/</guid><description>
 &lt;h2>Installation&lt;span class="hx:absolute hx:-mt-20" id="installation">&lt;/span>
 &lt;a href="#installation" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun can be installed on a Kubernetes cluster using the Helm chart.&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
@@ -3194,6 +3194,71 @@ title="Copy code"
 &lt;picture class="responsive-picture" style="display: block; margin-left: auto; margin-right: auto;">
 &lt;img alt="Kubernetes Deployment" src="https://openrun.dev/d2/k8s.svg">
 &lt;/picture>
+&lt;h2>Registry Config&lt;span class="hx:absolute hx:-mt-20" id="registry-config">&lt;/span>
+&lt;a href="#registry-config" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun on Kubernetes requires a registry to which Kaniko built images can be pushed and from which pods can pull. Image pull by default requires a HTTPS protected registry, self-signed certificates are not valid. Creating a signed certificate is not trivial on dev installations. The workaround for dev installs is to enable HTTP endpoints for pod creation. Details depend on the Kubernetes installation being used. For K3S, install the &lt;code>registry:2&lt;/code> images as a service. If registry is started at &lt;code>registry.svc.cluster.local:5000&lt;/code>, edit &lt;code>/etc/rancher/k3s/registries.yaml&lt;/code> to add:&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div class="hextra-code-filename not-prose" dir="auto">/etc/rancher/k3s/registries.yaml&lt;/div>&lt;div>&lt;pre>&lt;code>mirrors:
+&amp;#34;registry.svc.cluster.local:5000&amp;#34;:
+endpoint:
+- &amp;#34;http://registry.svc.cluster.local:5000&amp;#34;&lt;/code>&lt;/pre>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>The registry IP might have to added to &lt;code>/etc/hosts&lt;/code> depending on how it is accessed.&lt;/p>
+&lt;p>If using OrbStack, run the &lt;code>registry:2&lt;/code> service and run &lt;code>orb config docker&lt;/code> and add&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;pre>&lt;code>{
+&amp;#34;insecure-registries&amp;#34;: [&amp;#34;registry.orb.local:5000&amp;#34;]
+}&lt;/code>&lt;/pre>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>Restart Kubernetes using &lt;code>orb restart k8s&lt;/code>.&lt;/p>
+&lt;p>To install Openrun, run&lt;/p>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+&lt;div>&lt;pre>&lt;code>helm --kube-context orbstack upgrade --install openrun openrun/openrun --namespace openrun --create-namespace --wait --timeout 3m --set config.registry.url=registry.orb.local:5000&lt;/code>&lt;/pre>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+>
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4">&lt;/div>
+&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;p>The Helm chart sets &lt;code>insecure = true&lt;/code> by default. Change that to &lt;code>insecure = false&lt;/code> if using a HTTPS registry.&lt;/p>
+&lt;h2>Install using Terraform&lt;span class="hx:absolute hx:-mt-20" id="install-using-terraform">&lt;/span>
+&lt;a href="#install-using-terraform" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To install a production ready OpenRun installation on AWS, with EKS cluster, ECR registry and RDS Postgres for metadata, do the following:&lt;/p>
+&lt;ul>
+&lt;li>Checkout the terraform config &lt;code>git clone git@github.com:openrundev/openrun.git&lt;/code>&lt;/li>
+&lt;li>Switch to the config directory &lt;code>cd openrun/deploy/terraform&lt;/code>&lt;/li>
+&lt;li>Create a copy of sample config &lt;code>cp tfvars.sample terraform.tfvars&lt;/code>&lt;/li>
+&lt;li>Update &lt;code>terraform.tfvars&lt;/code>, set the values as appropriate.&lt;/li>
+&lt;li>Ensure that AWS cli is installed and credentials are configured. Also, ensure that helm cli is installed and OpenRun updated &lt;code>helm repo add openrun https://openrundev.github.io/openrun-helm-charts/; helm repo update&lt;/code>&lt;/li>
+&lt;li>Terraform state is by default saved on local disk. If required, update to use S3&lt;/li>
+&lt;li>Run &lt;code>terraform init&lt;/code>. Add &lt;code>-backend-config&lt;/code> if using remote state.&lt;/li>
+&lt;li>Run &lt;code>terraform plan --var-file terraform.tfvars&lt;/code>, verify the plan.&lt;/li>
+&lt;li>Run &lt;code>terraform apply --var-file terraform.tfvars&lt;/code>, or apply the plan created earlier.&lt;/li>
+&lt;/ul>
+&lt;p>Save the password for the admin user using &lt;code>terraform output openrun_admin_password&lt;/code>. Add the DNS entries as output under &lt;code>openrun_dns_records&lt;/code>. The &lt;code>root_a&lt;/code> and &lt;code>wildcard_a&lt;/code> DNS entries enable installing apps at the domain level. Wait for the DNS entries to propagate before attempting to access the url (to allow TLS cert creation to work).&lt;/p>
+&lt;p>After install is done, SSH to the OpenRun instance and run the &lt;code>sync schedule&lt;/code> to setup the sync. All subsequent operations are done by checking in config updates to the app config in Git.&lt;/p>
+&lt;p>To destroy the resource created,&lt;/p>
+&lt;ul>
+&lt;li>Ensure that kubectl config is set, like &lt;code>aws eks update-kubeconfig --region us-west-2 --name openrun-eks --profile openrun&lt;/code>. Update the region, the name format is &lt;code>&amp;lt;prefix&amp;gt;-eks&lt;/code>, default &lt;code>openrun-eks&lt;/code>.&lt;/li>
+&lt;li>Run &lt;code>terraform destroy --var-file terraform.tfvars&lt;/code>. Run it a second time in case there is a timeout. All resource should be deleted.&lt;/li>
+&lt;/ul>
 &lt;h2>Configuration&lt;span class="hx:absolute hx:-mt-20" id="configuration">&lt;/span>
 &lt;a href="#configuration" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">system&lt;/span>&lt;span class="p">]&lt;/span>
@@ -3208,6 +3273,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;p>is the main config which enables Kubernetes mode. By default. Kaniko based builds are used. Delegated builds can be configured instead, see &lt;a href="https://openrun.dev/docs/container/build/#delegated-build-mode">delegated builds&lt;/a>. See &lt;a href="https://openrun.dev/docs/container/build/#config">registry&lt;/a> for registry config.&lt;/p>
+&lt;p>OpenRun service and Kaniko jobs run in the main namespace (default &lt;code>openrun&lt;/code>). Applications are started in the &lt;code>&amp;lt;main_ns&amp;gt;-apps&lt;/code> namespace (default &lt;code>openrun-apps&lt;/code>), which is automatically created by the Helm chart. To clear all apps (including any volume data), run &lt;code>kubectl delete namespace openrun-apps; kubectl create namespace openrun-apps&lt;/code>.&lt;/p>
 &lt;h2>Architecture&lt;span class="hx:absolute hx:-mt-20" id="architecture">&lt;/span>
 &lt;a href="#architecture" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun is installed as a Kubernetes Deployment, with a Service for routing API calls. For each containerized app installed on OpenRun, a Deployment is created with a Service of type ClusterIP. API calls to the OpenRun API Server are routed to the app specific Service using its cluster IP.&lt;/p>
 &lt;p>All Kubernetes resources are created lazily, on the first API call to the app. If app is running version 1, and a code/config change is done which updates it to version 2, the deployment update will happen on the next API call to the app. The API call is blocked, the container image is rebuild if required and the deployment is updated using Server Side Apply API calls.&lt;/p>

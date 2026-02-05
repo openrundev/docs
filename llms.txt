@@ -40,7 +40,7 @@
 ### Containerized Apps
 - [Overview](https://openrun.dev/docs/container/overview/): Overview of OpenRun containerized apps
 - [Container Config](https://openrun.dev/docs/container/config/): Overview of containerized app config and state management
-- [Kubernetes Deployment](https://openrun.dev/docs/container/kubernetes/): Overview of OpenRun deployment on Kubernetes
+- [Kubernetes](https://openrun.dev/docs/container/kubernetes/): Overview of OpenRun deployment on Kubernetes
 - [Container Builds](https://openrun.dev/docs/container/build/): Container builds on single node install and on Kubernetes
 - [App Specs](https://openrun.dev/docs/container/appspecs/): App specifications which predefine container and routing config for common frameworks
 
@@ -66,5 +66,5 @@
 - [Features](https://openrun.dev/features/): OpenRun Features
 
 ---
-Generated on 2026-02-05 20:38:09 UTC
+Generated on 2026-02-05 23:06:15 UTC
 Site: https://openrun.dev/
