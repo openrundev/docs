@@ -8,11 +8,11 @@ summary: "Deploying apps for personal use and for sharing with family and friend
 
 This use-case documents the scenario where you want to:
 
-- Setup an instance on the public internet to host web apps for use by yourself and for family and friends
+- Set up an instance on the public internet to host web apps for use by yourself and for family and friends
 - Use an OAuth provider like Google for login
-- Setup an automated GitOps workflow for app updates and new app creation
+- Set up an automated GitOps workflow for app updates and new app creation
 
-For this use case, we will use a Google Oauth account for authentication and a GitHub account for source control.
+For this use case, we will use a Google OAuth account for authentication and a GitHub account for source control.
 
 ## Initial Setup
 
@@ -20,12 +20,12 @@ To get OpenRun running, the initial setup involves:
 
 - Create a Linux machine, publicly accessible on port 443.
 - Create a DNS entry pointing to the machine's IP address, for example an `A` record for `apps.example.com`. A wildcard DNS entry `*.apps.example.com` will make it easier to install apps at the domain level.
-- Create a Google OAuth by visiting [Google Console](https://console.cloud.google.com/auth/clients). The callback url would be `https://apps.example.com/_openrun/auth/google/callback`. Note down the client id and secret.
-- Create a GitHub Personal Access Token in [GitHub settings](https://github.com/settings/personal-access-tokens). Set the scope to the repositories you want to use for your apps. Note down the token.
+- Create a Google OAuth by visiting [Google Console](https://console.cloud.google.com/auth/clients). The callback URL would be `https://apps.example.com/_openrun/auth/google/callback`. Note the client ID and secret.
+- Create a GitHub Personal Access Token in [GitHub settings](https://github.com/settings/personal-access-tokens). Set the scope to the repositories you want to use for your apps. Note the token.
 
 ## Installation
 
-Assuming a systemd based Linux system, to install OpenRun and start the service, run
+Assuming a systemd-based Linux system, to install OpenRun and start the service, run
 
 ```sh
 curl -sSL https://raw.githubusercontent.com/openrundev/openrun/refs/heads/main/deploy/setup_systemd.sh | sudo sh
@@ -42,7 +42,7 @@ Change to the `openrun` account by running `sudo su -l openrun`. Edit the openru
 ```toml {filename="/var/lib/openrun/openrun.toml"}
 [security]
 admin_password_bcrypt = "$2a$10$L5dzoAEZFKmpdXbbbFddkurIP639w2.fl49737kmxxxxxxxx" # CHANGEME Retain orig value
-callback_url = "https://apps.example.com" # CHANGEME: OAuth/OIDC/SAML callback url prefix
+callback_url = "https://apps.example.com" # CHANGEME: OAuth/OIDC/SAML callback URL prefix
 app_default_auth_type = "rbac:google" # Default auth for all apps, with rbac
 default_git_auth = "githubpat" # Account used for all github access
 
@@ -68,11 +68,11 @@ key = "37019xxxxx-u8e2lltb1tmxxxxxx.apps.googleusercontent.com" # CHANGEME
 secret = "GOCSPX-ybUAedirQiexxxxxxxxxx" # CHANGEME
 ```
 
-This sets the default ports to 80 and 443, sets the apps to use google for auth and sets the github PAT. Automatic TLS cert creation is also enabled. As the regular user (since `openrun` user might not have sudo access), run `sudo systemctl restart openrun` to pick up the config update. The `admin_password_bcrypt` is not used in this scenario, it can kept at its original value or changed.
+This sets the default ports to 80 and 443, sets the apps to use Google for auth and sets the GitHub PAT. Automatic TLS cert creation is also enabled. As the regular user (since `openrun` user might not have sudo access), run `sudo systemctl restart openrun` to pick up the config update. The `admin_password_bcrypt` is not used in this scenario, it can be kept at its original value or changed.
 
 ## RBAC Config
 
-At this point, all apps are authenticated by the google oauth account, but anyone with a Google account can access the apps. To restrict which user has access to what apps, [RBAC]({{< ref "docs/configuration/rbac/" >}}) can be used. RBAC uses the [dynamic config]({{< ref "docs/configuration/overview/#dynamic-config" >}}), which does not require restarting the OpenRun server. We will setup a RBAC schema where:
+At this point, all apps are authenticated by the Google OAuth account, but anyone with a Google account can access the apps. To restrict which user has access to what apps, [RBAC]({{< ref "docs/configuration/rbac/" >}}) can be used. RBAC uses the [dynamic config]({{< ref "docs/configuration/overview/#dynamic-config" >}}), which does not require restarting the OpenRun server. We will set up a RBAC schema where:
 
 - Apps under /family will be shared with family members
 - Apps under /shared will be shared with family members and friends
@@ -156,6 +156,6 @@ If this file is checked into the main branch in the `myuser/myrepo` repo, then r
 openrun sync schedule --minutes 1 --approve --promote github.com/myuser/myrepo/apps.star
 ```
 
-will setup a [sync]({{< ref "docs/applications/overview/#automated-sync" >}}) which checks every minute for new updates to the file. If an app is created with `auth="google"`, instead of the default `auth="rbac:google"`, then anyone can access the app after Google login. If `auth="none"` is used, then no auth is required to access the app.
+will set up a [sync]({{< ref "docs/applications/overview/#automated-sync" >}}) which checks every minute for new updates to the file. If an app is created with `auth="google"`, instead of the default `auth="rbac:google"`, then anyone can access the app after Google login. If `auth="none"` is used, then no auth is required to access the app.
 
 Any new apps declared will be automatically created. Any code changes in the repos referenced or config changes in the apps will also automatically be applied on the existing apps. No further manual updates are required on the machine. All updates can be done by just checking in changes into the declarative config - **Full GitOps CI/CD, in one command.**

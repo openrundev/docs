@@ -63,27 +63,27 @@ The group name referenced in a grant can be a group which is seen at runtime in 
 
 To get the group info dynamically as part of the user login (instead of statically defining in the config file), the requirements are:
 
-- OpenID Connect based auth or SAML is used
-- For OpenId, the appropriate scope is requested, like `groups`
+- OpenID Connect-based auth or SAML is used
+- For OpenID, the appropriate scope is requested, like `groups`
 - The Identity Provider is configured to return the groups info in the user profile, with the `groups` key. For example, see [Okta forum](https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1) about configuring Okta with OIDC.
 - The group name as returned in the user profile is used in the grant
 
 ## Regex User Name
 
-In the `groups.<group_name>` property and in `grant.users`, the user name can be specified as a regex. If the value starts with `regex:` prefix, the subsequent value is considered as a regex. For example, `regex:google:^.*@example.com$` matches any user id with google provider.
+In the `groups.<group_name>` property and in `grant.users`, the username can be specified as a regex. If the value starts with `regex:` prefix, the subsequent value is considered as a regex. For example, `regex:google:^.*@example.com$` matches any user ID with google provider.
 
 ## Custom Permissions
 
-Permissions like `access`, `list`, `update` etc are OpenRun defined permissions. They control what actions can be performed by the user in OpenRun. In addition to these, custom permissions are supported. Custom permissions are defined in the config with the `custom:` prefix. These permissions are ignored by OpenRun. They are passed to the app. For apps where requests are proxied through OpenRun (like containerized apps), these permissions are available in the HTTP headers
+Permissions like `access`, `list`, `update` etc are OpenRun-defined permissions. They control what actions can be performed by the user in OpenRun. In addition to these, custom permissions are supported. Custom permissions are defined in the config with the `custom:` prefix. These permissions are ignored by OpenRun. They are passed to the app. For apps where requests are proxied through OpenRun (like containerized apps), these permissions are available in the HTTP headers
 
-- `X-Openrun-User`: This is the user performing the request. The user id is prefixed with the provider name (like `google:test@example.com`). The user name is `anonymous` for anonymous requests and `admin` for admin requests.
-- `X-Openrun-Perms`: The list of custom permissions available to this user on this app. The list is comma separated, without the `custom:` prefix, like `appread,appdelete`.
+- `X-Openrun-User`: This is the user performing the request. The user ID is prefixed with the provider name (like `google:test@example.com`). The username is `anonymous` for anonymous requests and `admin` for admin requests.
+- `X-Openrun-Perms`: The list of custom permissions available to this user on this app. The list is comma-separated, without the `custom:` prefix, like `appread,appdelete`.
 - `X-Openrun-Rbac-Enabled`: Whether RBAC is enabled for the app, `true` or `false`
 
-For [Action apps]({{< ref "Actions" >}}), custom perms can be used to limit which user can perform what operations. In the action definition, adding `permit=['appread']` means that the Action will be available only to user who have any one of the custom permissions specified in the list. The default action should be available to everyone, other actions can be controlled using custom permissions. If no permits are set or if RBAC is not enabled for the app, then all actions are available to authenticated users.
+For [Action apps]({{< ref "Actions" >}}), custom perms can be used to limit which user can perform what operations. In the action definition, adding `permit=['appread']` means that the action will be available only to users who have any one of the custom permissions specified in the list. The default action should be available to everyone, other actions can be controlled using custom permissions. If no permits are set or if RBAC is not enabled for the app, then all actions are available to authenticated users.
 
 ## Notes
 
 - The auth provider name has to be prefixed with `rbac:` for the RBAC rules to apply for app `access` permission.
 - Updates using the CLI client are done as the `admin` system user. There are no RBAC restrictions on the `admin`.
-- For apps with no authentication (using `none` auth), the user id to use in RBAC is `anonymous`, without the auth type prefix.
+- For apps with no authentication (using `none` auth), the user ID to use in RBAC is `anonymous`, without the auth type prefix.

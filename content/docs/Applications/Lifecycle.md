@@ -6,10 +6,10 @@ summary: "Lifecycle for OpenRun applications, pushing changes live safely"
 
 ## Application Types
 
-A OpenRun application can be one of four types:
+An OpenRun application can be one of four types:
 
-- **Development Apps** : Used for developing apps, supports live reload from code change on disk.
-- **Production Apps** : For production use. Can be created from git hosted source or from sources on local disk.
+- **Development Apps** : Used for developing apps, supports live reload from code changes on disk.
+- **Production Apps** : For production use. Can be created from Git-hosted source or from sources on local disk.
 - **Staging Apps** : For reviewing code and config changes before they are pushed to prod. Every prod app has one staging app.
 - **Preview Apps** : For creating a review environment for code changes, useful as part of code review.
 
@@ -23,17 +23,17 @@ openrun app create --dev --approve /home/user/mycode /myapp
 
 ## Production Apps
 
-Without the `--dev` options, apps are created as production apps by default. Production apps can be created from source on GitHub or from local disk. In either case, the source code for the app is uploaded to the OpenRun metadata database. For example:
+Without the `--dev` option, apps are created as production apps by default. Production apps can be created from source on GitHub or from local disk. In either case, the source code for the app is uploaded to the OpenRun metadata database. For example:
 
 ```sh
 openrun app create --approve /home/user/mycode example.com:/
 ```
 
-creates an production app. After app creation, the original source location is not read, until a `app reload` operation is done to update the sources. The source folder `/home/user/mycode` can be deleted if reload is not required, since the sources are present in the OpenRun metadata database. Every production app automatically has one staging app associated with it.
+creates a production app. After app creation, the original source location is not read, until a `app reload` operation is done to update the sources. The source folder `/home/user/mycode` can be deleted if reload is not required, since the sources are present in the OpenRun metadata database. Every production app automatically has one staging app associated with it.
 
 ## Staging Apps
 
-Staging apps are created for each production app. The purpose of staging app is to be able to verify config and code changes before they are made live in the prod app. For example, after the previous `app create` command, a call to `app list` with the `--internal` option will show two apps:
+Staging apps are created for each production app. The purpose of the staging app is to be able to verify config and code changes before they are made live in the prod app. For example, after the previous `app create` command, a call to `app list` with the `--internal` option will show two apps:
 
 ```sh
 openrun app list --internal
@@ -45,7 +45,7 @@ app_stg_2aMvX3fc9fH18n6i2Jew0tNxnky STG  1                                      
 
 The second app is the staging app for the first. `app list` shows only the main apps by default, the `--internal` option makes it show the linked apps.
 
-The staging app url is available by suffixing `_cl_stage` at the end of the app path. So for an app at `https://example.com/`, the staging url is `https://example.com/cl_stage`. For an app at `https://example.com/utils/app1`, the staging app url is `https://example.com/utils/app1_cl_stage`.
+The staging app URL is available by suffixing `_cl_stage` at the end of the app path. So for an app at `https://example.com/`, the staging URL is `https://example.com/cl_stage`. For an app at `https://example.com/utils/app1`, the staging app URL is `https://example.com/utils/app1_cl_stage`.
 
 ## Promoting Changes
 
@@ -66,7 +66,7 @@ app_prd_2aMvX3fc9fH18n6i2Jew0tNxnky PROD* 1                                     
 app_stg_2aMvX3fc9fH18n6i2Jew0tNxnky STG   2                                                                example.com:/_cl_stage         /home/user/mycode
 ```
 
-At this point, going to the url `example.com:/_cl_stage` will show the updated code while `example.com:/` has not been updated.
+At this point, going to the URL `example.com:/_cl_stage` will show the updated code while `example.com:/` has not been updated.
 
 {{<callout type="info" >}}
 The `*` next to PROD indicates that there are staged changes waiting to be promoted to PROD.
@@ -97,7 +97,7 @@ To do the reload, approval and promotion is one step, do `openrun app reload --a
 
 The rules for fetching source code from local disk and GitHub are:
 
-- If the source url starts with `http://`, `https://` or `github.com`, the source is assumed to be from a github API endpoint. Otherwise the source is assumed to be local disk on the OpenRun server.
+- If the source URL starts with `http://`, `https://` or `github.com`, the source is assumed to be from a GitHub API endpoint. Otherwise the source is assumed to be local disk on the OpenRun server.
 - If OpenRun client and server are on different machines and local disk is being used, the code needs to be copied to the server node first.
 - For GitHub source, the format is https://domain_name/org_name/repo_name/sub/folder, like `github.com/openrundev/openrun/examples/disk_usage`. The sub_folder should contain the `app.star` config file.
 - During `app create` and `app reload`, the commit id takes precedence over the branch name if both are specified.
@@ -117,7 +117,7 @@ Preview apps cannot be changed once they are created. If preview app requires ne
 
 ## Write Mode Access
 
-Staging and Preview apps have read only access by default to plugin APIs. This means that when they make calls to plugin APIs, only APIs defined as READ by the plugin are permitted. The HTTP plugin defines GET/OPTIONS/HEAD requests as READ type, POST/PUT/DELETE are defined as WRITE. For the CLI Exec plugin, the run API is defined as WRITE since the CLI command run might do write operations.
+Staging and Preview apps have read-only access by default to plugin APIs. This means that when they make calls to plugin APIs, only APIs defined as READ by the plugin are permitted. The HTTP plugin defines GET/OPTIONS/HEAD requests as READ type, POST/PUT/DELETE are defined as WRITE. For the CLI Exec plugin, the run API is defined as WRITE since the CLI command run might do write operations.
 
 For cases where the plugin defines an API as Write, the app permission can overwrite the default type and define the operation to be a READ operation. For example, the disk_usage app runs the `du` command, which is a read operation. The [app config defines](https://github.com/openrundev/openrun/blob/49182d4ca1cacbd8e3463a77c2174a6da1fb66c9/examples/disk_usage/app.star#L45) the run plugin call as `type="READ"`, over-riding the default WRITE type defined in the plugin. If no type is specified in the permission, the type defined in the plugin takes effect.
 

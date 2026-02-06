@@ -41,9 +41,9 @@ For Kubernetes installation, a container registry is required. OpenRun checks if
 
 For single-node install, doing the image build can cause heavy load on the system (CPU and disk). This can impact the performance for API calls to other apps. For Kubernetes based install, doing the Kaniko based install can be slow, since the build runs on a fresh machine which does not have any images cached.
 
-For both single-node and Kubernetes installation, delegated builds are supported. One or more machines need to be dedicated for doing the container builds. The main OpenRun installation should used the delegated build option.
+For both single-node and Kubernetes installation, delegated builds are supported. One or more machines need to be dedicated for doing the container builds. The main OpenRun installation should use the delegated build option.
 
-To setup delegated builds, on the builder machine(s) (for example, mybuilder.example.com), enable the builder by installing OpenRun and setting the minimal config to
+To set up delegated builds, on the builder machine(s) (for example, mybuilder.example.com), enable the builder by installing OpenRun and setting the minimal config to
 
 ```toml {filename="openrun.toml"}
 [http]
@@ -57,7 +57,7 @@ container_command = "docker"
 admin_over_tcp = true
 ```
 
-Starting the OpenRun server enables the HTTP port (default 25222) to receive delegated builds requests. The container manager (Docker/Podman) should be running on the builder machine.
+Starting the OpenRun server enables the HTTP port (default 25222) to receive delegated build requests. The container manager (Docker/Podman) should be running on the builder machine.
 
 On the actual OpenRun installation, add in the config:
 
@@ -73,5 +73,5 @@ Config like registry settings, git credentials etc are not required in the build
 </picture>
 
 {{<callout type="warning" >}}
-The builder machine should not be exposed over the public internet. It should be accessible from the main OpenRun node/cluster only. Multiple builder nodes can also be provisioned. In that case, a load-balancer would have to be setup and the delegate url should use the load-balancer url.
+The builder machine should not be exposed over the public internet. It should be accessible from the main OpenRun node/cluster only. Multiple builder nodes can also be provisioned. In that case, a load-balancer would have to be set up and the delegate URL should use the load-balancer URL.
 {{</callout>}}

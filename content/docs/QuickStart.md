@@ -125,11 +125,11 @@ does the following:
 - Copy any missing files from the app specification `python-streamlit` into the repo
 - Load the app source and metadata into the OpenRun server metadata database (SQLite)
 
-When the first API call is done to the app (lazy-loading), the OpenRun server will build the container image from the `Containerfile` defined in the spec, start the container and setup the proxy for the app APIs.
+When the first API call is done to the app (lazy-loading), the OpenRun server will build the container image from the `Containerfile` defined in the spec, start the container and set up the proxy for the app APIs.
 
-Any env params which need to be passed to the app can be configured as [app params]({{< ref "app/overview/#app-parameters" >}}). Params are set, during app creation using `app create --param port=9000` or after creation using `param update port 9000 /myapp`.
+Any env params which need to be passed to the app can be configured as [app params]({{< ref "app/overview/#app-parameters" >}}). Params are set during app creation using `app create --param port=9000` or after creation using `param update port 9000 /myapp`.
 
-If the source repo has a `Containerfile` or `Dockerfile`, the `container` spec is a generic spec which works with any language or framework. If the container file defined a port using `EXPOSE` directive, then port is not required. Otherwise, specify a port, for example
+If the source repo has a `Containerfile` or `Dockerfile`, the `container` spec is a generic spec which works with any language or framework. If the container file defines a port using the `EXPOSE` directive, then port is not required. Otherwise, specify a port, for example
 
 ```
 openrun app create --spec container --approve --param port=8000 \
@@ -140,9 +140,9 @@ See [containerized apps]({{< ref "container/overview/" >}}) for details.
 
 ## Managing Applications
 
-Multiple applications can be installed on a OpenRun server. Each app has a unique path and can be managed separately. The app path is made up of domain_name:url_path. If no domain_name is specified during app creation, the app is created in the default domain. The default domain is looked up when no specific domain match is found. See [app routing]({{< ref "applications/routing/" >}}) for details about routing.
+Multiple applications can be installed on an OpenRun server. Each app has a unique path and can be managed separately. The app path is made up of domain_name:url_path. If no domain_name is specified during app creation, the app is created in the default domain. The default domain is looked up when no specific domain match is found. See [app routing]({{< ref "applications/routing/" >}}) for details about routing.
 
-For local env, url based routing can be used or `*.localhost` domain can be used for domain based paths. For production deployment, if wildcard DNS is setup, domain based routing can be used without new DNS entries being required per app. Apps can be hosted on multiple unrelated domains on one OpenRun server.
+For local env, URL-based routing can be used or `*.localhost` domain can be used for domain-based paths. For production deployment, if wildcard DNS is set up, domain-based routing can be used without new DNS entries being required per app. Apps can be hosted on multiple unrelated domains on one OpenRun server.
 
 ## App Installation
 
@@ -155,7 +155,7 @@ openrun app create --approve github.com/openrundev/apps/system/disk_usage /disk_
 This is installing the `system/disk_usage` app from the main branch of the `openrundev/apps` repo on GitHub. The app is installed for the default domain, to the `/disk_usage` path. Opening [https://127.0.0.1:25223/disk_usage](https://127.0.0.1:25223/disk_usage) will initialize the app and show the app home page.
 
 {{<callout type="warning" >}}
-The `/disk_usage/*` path is now reserved for API's under this app. No new apps can be installed under the `/disk_usage/` path, but `/disk_usage2` is available. Similarly, installing an app under `/` path means no new apps can be installed for the default domain.
+The `/disk_usage/*` path is now reserved for APIs under this app. No new apps can be installed under the `/disk_usage/` path, but `/disk_usage2` is available. Similarly, installing an app under `/` path means no new apps can be installed for the default domain.
 {{</callout>}}
 
 If the app code is available on the OpenRun server node, the `app create` can be done directly with the local disk path:
@@ -178,13 +178,13 @@ In dev mode, source code changes are picked up immediately and the app is live r
 openrun app reload --approve --promote "/disk_usage*"
 ```
 
-For apps created from GitHub source, `app reload` will pick up the [latest changes]({{< ref "applications/lifecycle/#github-reload" >}}) from the branch specified during `app create` (default is `main`). For apps created from local disk sources, the reload loads from the folder originally used during the create. For non-dev apps, the source code is loaded into the SQLite metadata database managed by the OpenRun server.This allow for versioning, even when working with local sources.
+For apps created from GitHub source, `app reload` will pick up the [latest changes]({{< ref "applications/lifecycle/#github-reload" >}}) from the branch specified during `app create` (default is `main`). For apps created from local disk sources, the reload loads from the folder originally used during the create. For non-dev apps, the source code is loaded into the SQLite metadata database managed by the OpenRun server. This allows for versioning, even when working with local sources.
 
 ## App Security
 
 Application config is specified in Starlark code in the `app.star` file. By default, the app does not have any permissions. All external actions an app can perform are done through plugin API calls. Every plugin API call needs to [be approved]({{< ref "applications/appsecurity/#security-model" >}}) before it is allowed. This allows for multiple apps to run on the OpenRun server without interfering with each other.
 
-To approve an app permissions, run
+To approve an app's permissions, run
 
 ```shell
 openrun app approve /disk_usage

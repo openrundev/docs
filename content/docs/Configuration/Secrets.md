@@ -66,7 +66,7 @@ Adding a secret provider with the name `env` or starting with `env_`, like
 [secret.env]
 ```
 
-enables looking up the OpenRun server environment for secrets. This can be accessed like `--param MYPARAM='{{secret_from "env" "MY_SECRET_KEY"}}'`. No properties are required in the env provider config. The value of MY_SECRET_KEY in the OpenRun server env wil be passed as the param.
+enables looking up the OpenRun server environment for secrets. This can be accessed like `--param MYPARAM='{{secret_from "env" "MY_SECRET_KEY"}}'`. No properties are required in the env provider config. The value of MY_SECRET_KEY in the OpenRun server env will be passed as the param.
 
 ### Properties Secrets
 
@@ -83,8 +83,8 @@ file_name = "/etc/props.properties"
 
 Secrets can be accessed using the syntax `{{secret_from "PROVIDER_NAME" "KEY_NAME"}}`. To read from the default provider, use `{{secret "KEY_NAME"}}`. The three contexts in which secrets can be accessed are:
 
-- **App Params** : Param values in `params.star` or in the [app metadata definition]({{< ref "/docs/container/overview/#app-environment-params" >}}) can access the secrets.
-- **Plugin arguments** : Secrets can be passed as string arguments in calls to [plugin functions]({{< ref "plugins" >}}).
+- **App Params**: Param values in `params.star` or in the [app metadata definition]({{< ref "/docs/container/overview/#app-environment-params" >}}) can access the secrets.
+- **Plugin arguments**: Secrets can be passed as string arguments in calls to [plugin functions]({{< ref "plugins" >}}).
 - **Config file**: Secrets are supported in `openrun.toml` config for:
   - For client key and secret in [auth config]({{< ref "/docs/configuration/authentication/#oauth-authentication" >}})
   - For password in [git_auth config]({{< ref "/docs/configuration/security/#private-repository-access" >}})

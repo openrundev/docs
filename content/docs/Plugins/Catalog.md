@@ -34,7 +34,7 @@ The `http.in` plugin supports making HTTP API calls. The APIs available are:
 | **delete**  | Write | HTTP Delete request  |
 |  **patch**  | Write |  HTTP Patch request  |
 
-All the API's support the following parameters:
+All the APIs support the following parameters:
 
 - **url** (string, required) : the url to send the request to
 - **params** (dict, optional) : url params to send
@@ -47,7 +47,7 @@ All the API's support the following parameters:
 - **auth_signature** (string, optional): Signature auth type
 - **error_on_fail** (bool, optional): Whether to fail on non-2xx status code, default true
 
-The response for all API's (`value` within `plugin_response`) contains following properties:
+The response for all APIs (`value` within `plugin_response`) contains the following properties:
 
 - **url** (string): the url the response is for
 - **status_code** (int): the HTTP status code

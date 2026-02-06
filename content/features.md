@@ -21,13 +21,13 @@ layout: hextra-home
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Auto-Pause Idle apps" link="/docs/container/config/" subtitle="Idle apps are paused, scale down to zero."  icon="pause" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
-<!-- prettier-ignore --> {{< hextra/feature-card title="Autogen Actions" link="/docs/actions/" subtitle="Auto generated UI for backend actions, no UI to develop."  icon="binary-off" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
+<!-- prettier-ignore --> {{< hextra/feature-card title="Autogen Actions" link="/docs/actions/" subtitle="Auto-generated UI for backend actions, no UI to develop."  icon="binary-off" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Audit Events" link="/docs/applications/audit/" subtitle="Auto-audit logging for all events, plus custom events."  icon="view-list" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Cross-language AppServer" link="/docs/quickstart/#containerized-applications" subtitle="Application Server which supports all languages."  icon="support" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
-<!-- prettier-ignore --> {{< hextra/feature-card title="Container management" link="/docs/container/overview/" subtitle="Automatically build and and deploy containers, with Docker/Podman or Kubernetes."  icon="docker" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
+<!-- prettier-ignore --> {{< hextra/feature-card title="Container management" link="/docs/container/overview/" subtitle="Automatically build and deploy containers, with Docker/Podman or Kubernetes."  icon="docker" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Cross-platform support" link="/docs/quickstart/#installation" subtitle="OpenRun runs on Linux, Windows and OSX, works with Docker/Podman or Kubernetes"  icon="globe-alt" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
@@ -35,7 +35,7 @@ layout: hextra-home
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Powerful access controls" link="/docs/configuration/authentication" subtitle="OAuth/OpenID/SAML/Client-cert based auth, with full RBAC support"  icon="globe-alt" icon="shield-check"  style="background:radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
-<!-- prettier-ignore --> {{< hextra/feature-card title="Domain based and path based routing" link="/docs/applications/routing/#request-routing" subtitle="Install apps at a domain, subdomain or at path level"  icon="map" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
+<!-- prettier-ignore --> {{< hextra/feature-card title="Domain-based and path-based routing" link="/docs/applications/routing/#request-routing" subtitle="Install apps at a domain, subdomain or at path level"  icon="map" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 
 <!-- prettier-ignore --> {{< hextra/feature-card title="Zero-config dev env setup" link="/docs/applications/overview/#apply-command" subtitle="Easily setup dev environment with zero config required"  icon="check" style="background: radial-gradient(ellipse at 50% 80%,rgba(102, 89, 186, 0.15),hsla(0,0%,100%,0));" >}}
 

@@ -54,7 +54,7 @@ ret = store.insert(table.bookmark, bookmark)
 
 ## Store APIs
 
-The API's in the `store.in` plugin and their arguments and response are:
+The APIs in the `store.in` plugin and their arguments and response are:
 
 |       API        | Type  |                                                     Args                                                     | Response Value |             Notes              |
 | :--------------: | :---: | :----------------------------------------------------------------------------------------------------------: | :------------: | :----------------------------: |

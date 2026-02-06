@@ -8,7 +8,7 @@ date: 2024-12-24
 
 ## Background
 
-I recently encountered an issue where Server-Sent Events (SSE) stopped working in OpenRun. SSE are used for live reload functionality in OpenRun. The problem turned out to be a recent change in OpenRun which added support for tracking HTTP response status code. This was implemented by implementing a composition over the `http.ResponseWriter` to keep track of the status code. This composition broke the SSE functionality.
+I recently encountered an issue where Server-Sent Events (SSE) stopped working in OpenRun. SSE are used for live reload functionality in OpenRun. The problem turned out to be a recent change in OpenRun which added support for tracking HTTP response status code. This was implemented by composing over the `http.ResponseWriter` to keep track of the status code. This composition broke the SSE functionality.
 
 ## Composition over Inheritance
 
@@ -45,7 +45,7 @@ func (cw *CustomWriter) Flush() {
 }
 ```
 
-Adding a `Flush` function is a fix, but an issue with this is that if the caller had support for non-flushable writers, that behavior is lost. A better fix is to have two implementation, one flushable and another non flushable. The appropriate one should be used based on whether the underlying writer implements flusher. This way, the original behavior is not changed by adding the composition.
+Adding a `Flush` function is a fix, but an issue with this is that if the caller had support for non-flushable writers, that behavior is lost. A better fix is to have two implementations, one flushable and another non-flushable. The appropriate one should be used based on whether the underlying writer implements `http.Flusher`. This way, the original behavior is not changed by adding the composition.
 
 ```go
 type FlushableWriter interface {
@@ -68,7 +68,7 @@ Some HTTP routers like [Chi](https://go-chi.io/#/README) have [middleware](https
 
 ## How to avoid this issue
 
-The Go type system does not have a way to catch such issues are compile time. At runtime, the issue can show up as a performance degradation (if the implicit interface is used as an performance optimization) or as a unexpected behavior (if custom behavior is implemented using the implicit interface).
+The Go type system does not have a way to catch such issues at compile time. At runtime, the issue can show up as a performance degradation (if the implicit interface is used as a performance optimization) or as an unexpected behavior (if custom behavior is implemented using the implicit interface).
 
 It would have helped if the documentation for [http.ResponseWriter](https://pkg.go.dev/net/http#ResponseWriter) had mentioned the `http.Flusher` interface and when it is used. This is feasible when the types are in the same package.
 

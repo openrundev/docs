@@ -48,7 +48,7 @@ If the client cert has been signed with the root CA defined in /data/certs/ca1.c
 
 ## Callback Url
 
-To enable any OAuth/OIDC/SAML provider, the callback url domain has to be specified in the server config. Add
+To enable any OAuth/OIDC/SAML provider, the callback URL domain has to be specified in the server config. Add
 
 ```toml {filename="openrun.toml"}
 [security]
@@ -86,23 +86,23 @@ Here, the auth config entry name is `github_test`. The entry name can be one of 
 
 The server `openrun.toml` can have multiple auth configs defined. One of them can be set to be the default using `app_default_auth_type` config. Apps can be configured to use one of `system` or `none` or a valid auth config name as the `auth`. For example, app 1 can use `system` and app 2 can use `github_test`.
 
-In the OAuth account, for an entry `github_test`, the callback url to use will be `https://example.com:25223/_openrun/auth/github_test/callback`.
+In the OAuth account, for an entry `github_test`, the callback URL to use will be `https://example.com:25223/_openrun/auth/github_test/callback`.
 
-The format for the callback url to use is `<CALLBACK_URL>/_openrun/auth/<PROVIDER_ENTRY_NAME>/callback`. The callback url has to exactly match this format.
+The format for the callback URL to use is `<CALLBACK_URL>/_openrun/auth/<PROVIDER_ENTRY_NAME>/callback`. The callback URL has to exactly match this format.
 
 ## OAuth Config Details
 
-The config details depend on the provider type. The `key` is generally the Client Id and the `secret` is the Client Secret. For some providers, additional config config entries are supported. These are:
+The config details depend on the provider type. The `key` is generally the Client ID and the `secret` is the client secret. For some providers, additional config entries are supported. These are:
 
-- **google**: The google provider supports a `hosted_domain` option. This is the domain name to verify on the user being logged in. For example, this can be set to `openrun.dev`.
-- **okta**: The Okta provider requires the `org_url` config, the tenant url to verify.
+- **google**: The google provider supports a `hosted_domain` option. This is the domain name to verify for the logged-in user. For example, this can be set to `openrun.dev`.
+- **okta**: The Okta provider requires the `org_url` config, the tenant URL to verify.
 - **auth0**: The Auth0 provider requires the `domain` config.
 - **oidc**: OIDC requires the `discovery_url` config property. For example, with Okta, use `https://YOURDOMAIN-admin.okta.com/.well-known/openid-configuration`
 
 For all the providers, an optional `scopes` property is also supported. This is the list of scopes to configure for the OAuth account.
 
 {{<callout type="warning" >}}
-The first time a new provider is added, it is important to manually verify an app, to verify if the required authentication restrictions are in place. For example, with google, any valid google user can login, including gmail.com accounts. The `hosted_domain` config has to be used to restrict this.
+The first time a new provider is added, it is important to manually verify an app, to verify if the required authentication restrictions are in place. For example, with google, any valid google user can log in, including gmail.com accounts. The `hosted_domain` config has to be used to restrict this.
 {{</callout>}}
 
 The OAuth integration internally uses the [goth](https://github.com/markbates/goth) library, see [examples](https://github.com/markbates/goth/blob/master/examples/main.go) for implementation details.

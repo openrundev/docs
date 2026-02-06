@@ -66,7 +66,7 @@ ace.html("/game/{game_id}", full="game.go.html", partial="game_info_tmpl", handl
 )
 ```
 
-there are three API's defined:
+there are three APIs defined:
 
 - GET /game/{game_id} : game_handler is the handler function, full page request returns game.go.html, partial HTMX request returns game_info_tmpl template.
 - POST /game/{game_id}/submit : The handler is a lambda function. The game_info_tmpl template partial is inherited from the page as the response for the POST.
@@ -139,7 +139,7 @@ If proxying is enabled for `/` route, then `/static` file serving is disabled fo
 See [proxy plugin]({{< ref "docs/plugins/proxy" >}}) for details about the proxy config.
 
 {{<callout type="warning" >}}
-**Note:** If the upstream service service uses relative paths, then all requests are automatically proxied. If the service uses absolute paths, then it better that the app is installed at the root path, like `example.com:` instead of `example.com:/test`. If the service uses absolute path including the domain name, then the client will see the absolute path and those requests will not come through the proxy. The HTML body is not rewritten by OpenRun to rewrite path references. The upstream service needs to use relative paths to ensure that all requests come through OpenRun.
+**Note:** If the upstream service uses relative paths, then all requests are automatically proxied. If the service uses absolute paths, then it is better that the app is installed at the root path, like `example.com:` instead of `example.com:/test`. If the service uses absolute paths including the domain name, then the client will see the absolute paths and those requests will not come through the proxy. The HTML body is not rewritten by OpenRun to rewrite path references. The upstream service needs to use relative paths to ensure that all requests come through OpenRun.
 {{</callout>}}
 
 ## Request Flow
@@ -150,11 +150,11 @@ The API flow is
 - Within the app, the API is routed based on the routes defined
 - If there is a handler defined for the matched route, the handler function is called with the request as argument
 - The response template is invoked, with an input map containing a `Data` property as returned by the handler function
-- If the API type is set to json, the handler response is directly returned, with no template being used
-- If [automatic error handling]({{< ref "docs/plugins/overview#automatic-error-handling" >}}) is enabled (`error_handler` is defined), then the error handler function is called if there is a error during the handler invocation. The error handler does the response processing, the templates defined in the route are not used.
+- If the API type is set to JSON, the handler response is directly returned, with no template being used
+- If [automatic error handling]({{< ref "docs/plugins/overview#automatic-error-handling" >}}) is enabled (`error_handler` is defined), then the error handler function is called if there is an error during the handler invocation. The error handler does the response processing, the templates defined in the route are not used.
 
 ## Notes
 
-- For HTMX requests, the `partial` template is used. For regular requests, the page level `full` template is used
-- If there is a function called `handler` defined, that is the default handler function for all API's
+- For HTMX requests, the `partial` template is used. For regular requests, the page-level `full` template is used
+- If there is a function called `handler` defined, that is the default handler function for all APIs
 - For non-HTMX update requests (POST/PUT/DELETE), the [Post-Redirect-Get](https://en.wikipedia.org/wiki/Post/Redirect/Get) pattern is automatically implemented by redirecting to the location pointed to by the `Referer` header.

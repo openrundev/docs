@@ -44,7 +44,7 @@ COMMANDS:
    help, h          Shows a list of commands or help for one command
 ```
 
-The app management subcommands are under the `app` command. The `preview` command manages preview app for an app and `version` command manages versions for an app. The `account` command is for managing accounts for an app.
+The app management subcommands are under the `app` command. The `preview` command manages preview apps for an app and `version` command manages versions for an app. The `account` command is for managing accounts for an app.
 
 ## App Management
 
@@ -54,7 +54,7 @@ All the app management subcommands except `create` take a glob pattern, so multi
 
 The `reload/delete/promote/approve/list/update` commands accept a glob pattern. `example.com:**` will match apps under the example.com domain. `*:**` will match all apps in all domains, `all` is a shortcut for this. When using glob patterns, place the pattern inside double-quotes to avoid issues with shell star expansion. For example, `"example.com:**"`
 
-The default for `app list` command is to list all apps. All other commands require an glob pattern to be specified explicitly.
+The default for `app list` command is to list all apps. All other commands require a glob pattern to be specified explicitly.
 
 When multiple apps are being updated, if any one app fails, the whole operation is rolled back. This allows for atomic updates across multiple applications.
 
@@ -150,7 +150,7 @@ will create the apps if not already present. If present, the app configuration i
 
 ### Apply Command
 
-The `apply` command takes one or two arguments: `<filePath> [<appPathGlob>]`. The first is a file path, which can be a glob pointing to multiple files. The files can be from local disk or from a git url. The second optional argument is an app path glob which specifies which apps to apply from the loaded files. By default, all apps is the file(s) are applied.
+The `apply` command takes one or two arguments: `<filePath> [<appPathGlob>]`. The first is a file path, which can be a glob pointing to multiple files. The files can be from local disk or from a Git URL. The second optional argument is an app path glob which specifies which apps to apply from the loaded files. By default, all apps in the file(s) are applied.
 
 The options the `apply` command takes are:
 
@@ -169,7 +169,7 @@ OPTIONS:
    --help, -h                  show help
 ```
 
-The branch/commit/git-auth arguments are for the apply file itself (if the file path is a git url). For the app source code, the git config has to be specified in the config file.
+The branch/commit/git-auth arguments are for the apply file itself (if the file path is a Git URL). For the app source code, the git config has to be specified in the config file.
 
 By default, changes are applied to the stage app. Add the `--promote` option to promote the changes. Use the `--approve` option to approve any permission changes required by apps.
 
@@ -212,7 +212,7 @@ app("/streamlit", "github.com/streamlit/streamlit-example",
 defines a Streamlit based app. Applying this file will create the app. Config can be updated through the CLI or UI. Subsequent runs of apply will not overwrite the imperative changes. For example, if a new param "p2" is defined using the CLI, that will be retained during subsequent runs. If the value of "p1" is updated in the config file, the next apply run will modify the value.
 
 {{<callout type="warning" >}}
-Apps are identified by their path and source url, so those cannot be changed. Dev mode is set during app creation and cannot be updated. App auth and git_auth are settings which are directly applied without being staged. They can be updated through the CLI but not through the config file. All other properties are metadata changes which are staged. They can be updated through the app config. New app versions are created during apply and versions can be reverted at the app level.
+Apps are identified by their path and source URL, so those cannot be changed. Dev mode is set during app creation and cannot be updated. App auth and git_auth are settings which are directly applied without being staged. They can be updated through the CLI but not through the config file. All other properties are metadata changes which are staged. They can be updated through the app config. New app versions are created during apply and versions can be reverted at the app level.
 {{</callout>}}
 
 ## Automated Sync

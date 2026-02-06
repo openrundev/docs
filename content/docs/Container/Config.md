@@ -34,11 +34,11 @@ kubernetes.strict_version_check = true
 kubernetes.scaling_threshold_cpu = 80
 ```
 
-A health check is done on the container after container is started. If the health check fails 30 times, the container is assumed to be down.
+A health check is done on the container after the container is started. If the health check fails 30 times, the container is assumed to be down.
 
 In the running state, a status check is done on the app every five seconds. If three of those checks fail, then the container is assumed to be down.
 
-If an app does not receive any REST API request for 180 seconds and the total data transfer from/to to the app is below 1500 bytes over 180 seconds, the app is assumed to be idle and the container is stopped. The idle shutdown does not apply for dev apps, only for prod mode apps. For frameworks like Streamlit where Websockets is used for communication between the UI and app, there will not be an REST API calls. The data transfer is used to determine whether the app is idle.
+If an app does not receive any REST API request for 180 seconds and the total data transfer from/to the app is below 1500 bytes over 180 seconds, the app is assumed to be idle and the container is stopped. The idle shutdown does not apply for dev apps, only for prod mode apps. For frameworks like Streamlit where WebSockets is used for communication between the UI and app, there will not be any REST API calls. The data transfer is used to determine whether the app is idle.
 
 ## Changing Config
 
@@ -50,9 +50,9 @@ To apply the config at the app level, the app metadata can be updated. For examp
 openrun app update conf --promote container.idle_shutdown_secs=600 /myapp
 ```
 
-changes the idle timeout for the `/myapp` app to 600 secs. Without the `--promote` option, the change will be staged and can be verified on the staging app. App metadata level setting take precedence over the defaults in the `openrun.toml`. Using `all` as the app name will apply the change for all current apps (but not for any new apps created later).
+changes the idle timeout for the `/myapp` app to 600 seconds. Without the `--promote` option, the change will be staged and can be verified on the staging app. App metadata level settings take precedence over the defaults in the `openrun.toml`. Using `all` as the app name will apply the change for all current apps (but not for any new apps created later).
 
-## Configuring the Container manager
+## Configuring the container manager
 
 The default for the container command to use is
 

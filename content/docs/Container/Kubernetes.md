@@ -36,7 +36,7 @@ A container registry is required for Kubernetes based OpenRun install. The regis
 
 ## Registry Config
 
-OpenRun on Kubernetes requires a registry to which Kaniko built images can be pushed and from which pods can pull. Image pull by default requires a HTTPS protected registry, self-signed certificates are not valid. Creating a signed certificate is not trivial on dev installations. The workaround for dev installs is to enable HTTP endpoints for pod creation. Details depend on the Kubernetes installation being used. For K3S, install the `registry:2` images as a service. If registry is started at `registry.svc.cluster.local:5000`, edit `/etc/rancher/k3s/registries.yaml` to add:
+OpenRun on Kubernetes requires a registry to which Kaniko built images can be pushed and from which pods can pull. Image pulls by default require an HTTPS-protected registry; self-signed certificates are not valid. Creating a signed certificate is not trivial on dev installations. The workaround for dev installs is to enable HTTP endpoints for pod creation. Details depend on the Kubernetes installation being used. For K3S, install the `registry:2` images as a service. If registry is started at `registry.svc.cluster.local:5000`, edit `/etc/rancher/k3s/registries.yaml` to add:
 
 ```{filename="/etc/rancher/k3s/registries.yaml"}
 mirrors:
@@ -57,7 +57,7 @@ If using OrbStack, run the `registry:2` service and run `orb config docker` and 
 
 Restart Kubernetes using `orb restart k8s`.
 
-To install Openrun, run
+To install OpenRun, run
 
 ```
 helm --kube-context orbstack upgrade --install openrun openrun/openrun --namespace openrun --create-namespace --wait --timeout 3m --set config.registry.url=registry.orb.local:5000
@@ -67,13 +67,13 @@ The Helm chart sets `insecure = true` by default. Change that to `insecure = fal
 
 ## Install using Terraform
 
-To install a production ready OpenRun installation on AWS, with EKS cluster, ECR registry and RDS Postgres for metadata, do the following:
+To install a production-ready OpenRun installation on AWS, with EKS cluster, ECR registry and RDS Postgres for metadata, do the following:
 
-- Checkout the terraform config `git clone git@github.com:openrundev/openrun.git`
+- Check out the terraform config `git clone git@github.com:openrundev/openrun.git`
 - Switch to the config directory `cd openrun/deploy/terraform`
 - Create a copy of sample config `cp tfvars.sample terraform.tfvars`
 - Update `terraform.tfvars`, set the values as appropriate.
-- Ensure that AWS cli is installed and credentials are configured. Also, ensure that helm cli is installed and OpenRun updated `helm repo add openrun https://openrundev.github.io/openrun-helm-charts/; helm repo update`
+- Ensure that AWS CLI is installed and credentials are configured. Also, ensure that Helm CLI is installed and the OpenRun repo is updated: `helm repo add openrun https://openrundev.github.io/openrun-helm-charts/; helm repo update`
 - Terraform state is by default saved on local disk. If required, update to use S3
 - Run `terraform init`. Add `-backend-config` if using remote state.
 - Run `terraform plan --var-file terraform.tfvars`, verify the plan.
@@ -81,7 +81,7 @@ To install a production ready OpenRun installation on AWS, with EKS cluster, ECR
 
 Save the password for the admin user using `terraform output openrun_admin_password`. Add the DNS entries as output under `openrun_dns_records`. The `root_a` and `wildcard_a` DNS entries enable installing apps at the domain level. Wait for the DNS entries to propagate before attempting to access the url (to allow TLS cert creation to work).
 
-After install is done, SSH to the OpenRun instance and run the `sync schedule` to setup the sync. All subsequent operations are done by checking in config updates to the app config in Git.
+After install is done, SSH to the OpenRun instance and run the `sync schedule` to set up the sync. All subsequent operations are done by checking in config updates to the app config in Git.
 
 To destroy the resource created,
 

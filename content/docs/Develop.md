@@ -6,9 +6,9 @@ summary: "Overview of developing OpenRun Apps"
 
 ## Structure
 
-The structure of a OpenRun application is:
+The structure of an OpenRun application is:
 
-- One OpenRun application per folder, `static` sub-folder contain static assets
+- One OpenRun application per folder, `static` sub-folder contains static assets
 - An `app.star` Starlark file, defining the application configuration
 - Predefined builtins, accessed through the `ace` namespace
 - A global called `app`, created using `app = ace.app()` call
@@ -19,14 +19,14 @@ The structure of a OpenRun application is:
 
 ## Sharing Files Across Apps
 
-The app config property `star_base` can be use to set the base directory for Starlark files. This is useful when multiple apps need to share common files, like templates, static files, container spec etc. For example, if dir /mydir/ is the base directory with /mydir/app1 and /mydir/app2 as subdirectories containing two apps, creating apps using
+The app config property `star_base` can be used to set the base directory for Starlark files. This is useful when multiple apps need to share common files, like templates, static files, container spec etc. For example, if dir /mydir/ is the base directory with /mydir/app1 and /mydir/app2 as subdirectories containing two apps, creating apps using
 
 ```
 openrun app create --approve --conf-str star_base=/app1 /mydir /test1
 openrun app create --approve --conf-str star_base=/app2 /mydir /test2
 ```
 
-will create two apps. `/mydir/app1/app.star` will be used as the app definition for test1 app, static and static_root and template files will be read from /mydir and
+will create two apps. `/mydir/app1/app.star` will be used as the app definition for test1 app, and static, static_root and template files will be read from /mydir.
 
 ## App Lifecycle
 
@@ -51,7 +51,7 @@ app = ace.app("hello",
 )
 ```
 
-Run `openrun app create --auth=none ~/myapp /hello`. After that, the app is available at `/hello`
+Run `openrun app create --auth=none ~/myapp /hello`. After that, the app is available at `/hello`.
 
 ```sh
 $ curl localhost:25222/hello
@@ -76,7 +76,7 @@ def hello_world():
 
 Creating an app like `openrun app create --approve --spec python-flask ./flaskapp /myapp ` will do everything required to fully define the OpenRun app. If the app has additional python dependencies, add a `requirements.txt` file in the app source code. By [default](https://github.com/openrundev/appspecs/blob/main/python-flask/requirements.txt), only the flask package is installed. The file in the app source takes precedence.
 
-See https://github.com/openrundev/appspecs for the list of specs. The OpenRun server build includes these spec by default. Additional specs can de defined by creating a folder `$OPENRUN_HOME/config/appspecs`. Any directory within that is treated as a spec. If the name matches with the predefined ones the spec in the config folder takes precedence. No server restart is required after spec changes. Setting up the server by doing
+See https://github.com/openrundev/appspecs for the list of specs. The OpenRun server build includes these specs by default. Additional specs can be defined by creating a folder `$OPENRUN_HOME/config/appspecs`. Any directory within that is treated as a spec. If the name matches with the predefined ones the spec in the config folder takes precedence. No server restart is required after spec changes. Setting up the server by doing
 
 ```bash
 cd $OPENRUN_HOME/config
@@ -102,16 +102,16 @@ This is defining three parameters. The type can be one of `STRING`(default), `IN
 
 |   Property   | Optional |                    Type                    |         Default         |                                                       Notes                                                        |
 | :----------: | :------: | :----------------------------------------: | :---------------------: | :----------------------------------------------------------------------------------------------------------------: |
-|     name     |  False   |                   string                   |                         |                                       Has to be be a valid starlark keyword                                        |
+|     name     |  False   |                   string                   |                         |                                       Has to be a valid starlark keyword                                           |
 |     type     |   True   | `STRING`, `INT`, `BOOLEAN`, `LIST`or`DICT` |        `STRING`         |                                                   The data type                                                    |
 |   default    |   True   |           Type as set for `type`           | Zero value for the type |                                                                                                                    |
 | description  |   True   |                   string                   |                         |                                           The description for the param                                            |
 |   required   |   True   |                    bool                    |          True           |                   If required is True and default value is not specified, then validation fails                    |
-| display_type |   True   |                   string                   |                         | How ths param should be displayed in the UI. Options are `FILE`, `PASSWORD` and `TEXTAREA`, default is text input. |
+| display_type |   True   |                   string                   |                         | How this param should be displayed in the UI. Options are `FILE`, `PASSWORD` and `TEXTAREA`, default is text input. |
 
 The parameters are available in the app Starlark code, through the `param` namespace. For example, `param.port`, `param.app_name` etc. See https://github.com/openrundev/appspecs/blob/main/python-flask/app.star for an example of how this can be used.
 
-Params are set, during app creation using `app create --param port=9000` or using `param update port 9000 /myapp`. Set value to `-` to delete the param. Use `param list /myapp` to list the params.
+Params are set during app creation using `app create --param port=9000` or using `param update port 9000 /myapp`. Set value to `-` to delete the param. Use `param list /myapp` to list the params.
 
 For containerized apps, all params specified for the app (including ones not specified in `params.star` spec) are passed to the container at runtime as environment parameters. `CL_APP_PATH` is a special param passed to the container with the app installation path (without the domain name). `PORT` is also set with the value of the port number the app is expected to bind to within the container.
 
@@ -140,7 +140,7 @@ app = ace.app("List Files",
 )
 ```
 
-The app, when accessed will look as shown below, with the `ls` command output displayed:
+The app, when accessed, will look as shown below, with the `ls` command output displayed:
 
 <picture  class="responsive-picture" style="display: block; margin-left: auto; margin-right: auto;">
   <source media="(prefers-color-scheme: dark)" srcset="/images/list_files_dark.png">
@@ -152,7 +152,7 @@ See list files [code](https://github.com/openrundev/apps/tree/main/system/list_f
 
 ## Containerized App
 
-A containerized apps needs to have a `Containerfile` (or `Dockerfile`) to define how the image is built. The app definition can have
+A containerized app needs to have a `Containerfile` (or `Dockerfile`) to define how the image is built. The app definition can have
 
 <!-- prettier-ignore -->
 ```python {filename="app.star"}
@@ -173,7 +173,7 @@ app = ace.app("My App",
 
 <!-- prettier-ignore-end -->
 
-which completely specifies the app. This is saying that the app is using the container plugin to configure the container and the proxy plugin to proxy all API calls (`/` route) to the container url. On the first API call to the app, OpenRun will build the image, start the container and proxy the API traffic to the appropriate port. No other configuration is required in Starlark. If the container spec does not define the port being exposed, then the container config needs to specify the port number to use. The port number can be parameterized.
+which completely specifies the app. This is saying that the app is using the container plugin to configure the container and the proxy plugin to proxy all API calls (`/` route) to the container URL. On the first API call to the app, OpenRun will build the image, start the container and proxy the API traffic to the appropriate port. No other configuration is required in Starlark. If the container spec does not define the port being exposed, then the container config needs to specify the port number to use. The port number can be parameterized.
 
 [Containerized Apps]({{< ref "/docs/container" >}}) has more details on building containerized apps.
 
@@ -195,6 +195,6 @@ See [secrets]({{< ref "/docs/configuration/secrets/#plugin-access-to-secrets" >}
 
 ## More examples
 
-There is a disk_usage example [here](https://github.com/openrundev/openrun/tree/main/examples) and many in the [apps repo](https://github.com/openrundev/apps). The disk_usage example shows a basic hypermedia flow. The cowbull game has multiple [pages](https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/misc/cowbull/app.star#L107), each page with some dynamic behavior. For styling, it uses the [DaisyUI](https://daisyui.com/) component library with Tailwind CSS. These two examples work fine with Javascript disabled in the browser, falling back to basic HTML without any HTMX extensions.
+There is a disk_usage example [here](https://github.com/openrundev/openrun/tree/main/examples) and many in the [apps repo](https://github.com/openrundev/apps). The disk_usage example shows a basic hypermedia flow. The cowbull game has multiple [pages](https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/misc/cowbull/app.star#L107), each page with some dynamic behavior. For styling, it uses the [DaisyUI](https://daisyui.com/) component library with Tailwind CSS. These two examples work fine with JavaScript disabled in the browser, falling back to basic HTML without any HTMX extensions.
 
-The memory_usage example uses the [d3](https://d3js.org/) library to show a interactive display of the memory usage for processes on the machine. The plot library is [automatically imported](https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/system/memory_usage/app.star#L103) as a ECMAScript module and the custom [javascript code](https://github.com/openrundev/apps/blob/main/system/memory_usage/static/js/app.js) works with a [JSON api](https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/system/memory_usage/app.star#L98) on the backend. The default in OpenRun is hypermedia exchange, JSON can be used for data API's.
+The memory_usage example uses the [d3](https://d3js.org/) library to show an interactive display of the memory usage for processes on the machine. The plot library is [automatically imported](https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/system/memory_usage/app.star#L103) as an ECMAScript module and the custom [JavaScript code](https://github.com/openrundev/apps/blob/main/system/memory_usage/static/js/app.js) works with a [JSON API](https://github.com/openrundev/apps/blob/f5566cea6061ec85ea59495efc7b8700f06a4e70/system/memory_usage/app.star#L98) on the backend. The default in OpenRun is hypermedia exchange, JSON can be used for data APIs.
