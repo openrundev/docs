@@ -322,7 +322,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>there are three API&amp;rsquo;s defined:&lt;/p>
+&lt;p>there are three APIs defined:&lt;/p>
 &lt;ul>
 &lt;li>GET /game/{game_id} : game_handler is the handler function, full page request returns game.go.html, partial HTMX request returns game_info_tmpl template.&lt;/li>
 &lt;li>POST /game/{game_id}/submit : The handler is a lambda function. The game_info_tmpl template partial is inherited from the page as the response for the POST.&lt;/li>
@@ -483,7 +483,7 @@ title="Copy code"
 &lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200">
 &lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
-&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">&lt;strong>Note:&lt;/strong> If the upstream service service uses relative paths, then all requests are automatically proxied. If the service uses absolute paths, then it better that the app is installed at the root path, like &lt;code>example.com:&lt;/code> instead of &lt;code>example.com:/test&lt;/code>. If the service uses absolute path including the domain name, then the client will see the absolute path and those requests will not come through the proxy. The HTML body is not rewritten by OpenRun to rewrite path references. The upstream service needs to use relative paths to ensure that all requests come through OpenRun.&lt;/div>
+&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">&lt;strong>Note:&lt;/strong> If the upstream service uses relative paths, then all requests are automatically proxied. If the service uses absolute paths, then it is better that the app is installed at the root path, like &lt;code>example.com:&lt;/code> instead of &lt;code>example.com:/test&lt;/code>. If the service uses absolute paths including the domain name, then the client will see the absolute paths and those requests will not come through the proxy. The HTML body is not rewritten by OpenRun to rewrite path references. The upstream service needs to use relative paths to ensure that all requests come through OpenRun.&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;h2>Request Flow&lt;span class="hx:absolute hx:-mt-20" id="request-flow">&lt;/span>
@@ -493,13 +493,13 @@ title="Copy code"
 &lt;li>Within the app, the API is routed based on the routes defined&lt;/li>
 &lt;li>If there is a handler defined for the matched route, the handler function is called with the request as argument&lt;/li>
 &lt;li>The response template is invoked, with an input map containing a &lt;code>Data&lt;/code> property as returned by the handler function&lt;/li>
-&lt;li>If the API type is set to json, the handler response is directly returned, with no template being used&lt;/li>
-&lt;li>If &lt;a href="https://openrun.dev/docs/plugins/overview/#automatic-error-handling">automatic error handling&lt;/a> is enabled (&lt;code>error_handler&lt;/code> is defined), then the error handler function is called if there is a error during the handler invocation. The error handler does the response processing, the templates defined in the route are not used.&lt;/li>
+&lt;li>If the API type is set to JSON, the handler response is directly returned, with no template being used&lt;/li>
+&lt;li>If &lt;a href="https://openrun.dev/docs/plugins/overview/#automatic-error-handling">automatic error handling&lt;/a> is enabled (&lt;code>error_handler&lt;/code> is defined), then the error handler function is called if there is an error during the handler invocation. The error handler does the response processing, the templates defined in the route are not used.&lt;/li>
 &lt;/ul>
 &lt;h2>Notes&lt;span class="hx:absolute hx:-mt-20" id="notes">&lt;/span>
 &lt;a href="#notes" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;ul>
-&lt;li>For HTMX requests, the &lt;code>partial&lt;/code> template is used. For regular requests, the page level &lt;code>full&lt;/code> template is used&lt;/li>
-&lt;li>If there is a function called &lt;code>handler&lt;/code> defined, that is the default handler function for all API&amp;rsquo;s&lt;/li>
+&lt;li>For HTMX requests, the &lt;code>partial&lt;/code> template is used. For regular requests, the page-level &lt;code>full&lt;/code> template is used&lt;/li>
+&lt;li>If there is a function called &lt;code>handler&lt;/code> defined, that is the default handler function for all APIs&lt;/li>
 &lt;li>For non-HTMX update requests (POST/PUT/DELETE), the &lt;a href="https://en.wikipedia.org/wiki/Post/Redirect/Get"target="_blank" rel="noopener">Post-Redirect-Get&lt;/a> pattern is automatically implemented by redirecting to the location pointed to by the &lt;code>Referer&lt;/code> header.&lt;/li>
 &lt;/ul></description></item><item><title>Request</title><link>https://openrun.dev/docs/app/request/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/app/request/</guid><description>
 &lt;h2>Request Structure&lt;span class="hx:absolute hx:-mt-20" id="request-structure">&lt;/span>
@@ -1132,7 +1132,7 @@ title="Copy code"
 &lt;/div>
 &lt;p>Change to the preferred &lt;a href="https://daisyui.com/docs/themes/"target="_blank" rel="noopener">theme&lt;/a>. DaisyUI is a good option to use to get great default styling for components, with the full flexibility of Tailwind. To use DaisyUI, use the npm version of Tailwind or use this &lt;a href="https://github.com/dobicinaitis/tailwind-cli-extra"target="_blank" rel="noopener">custom version&lt;/a> of the standalone CLI with DaisyUI included. OpenRun takes care of creating the config files. Using the CDN version of DaisyUI or Tailwind is not recommended since that will cause the style files to be large.&lt;/p>
 &lt;p>If using &lt;a href="https://openrun.dev/docs/actions/">Actions&lt;/a>, DaisyUI styles are automatically included. The themes can be customized using the &lt;code>light&lt;/code> and &lt;code>dark&lt;/code> property.&lt;/p></description></item><item><title>JavaScript</title><link>https://openrun.dev/docs/app/javascript/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/app/javascript/</guid><description>
-&lt;p>OpenRun supports importing JavaScript libraries as &lt;a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules"target="_blank" rel="noopener">JavaScript Modules&lt;/a> . To use this feature, add&lt;/p>
+&lt;p>OpenRun supports importing JavaScript libraries as &lt;a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules"target="_blank" rel="noopener">JavaScript Modules&lt;/a>. To use this feature, add&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl"> &lt;span class="n">libraries&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ace&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">library&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;d3&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;7.8.5&amp;#34;&lt;/span>&lt;span class="p">)]&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
 &lt;button
@@ -1180,7 +1180,7 @@ title="Copy code"
 &lt;/tbody>
 &lt;/table>
 &lt;p>The args array uses the &lt;a href="https://pkg.go.dev/github.com/evanw/esbuild/pkg/cli"target="_blank" rel="noopener">esbuild cli syntax&lt;/a>. For example, passing args as &lt;code>[&amp;quot;--minify&amp;quot;]&lt;/code> will enable minification for the imported module.&lt;/p>
-&lt;p>To directly download a library from a CDN to the static folder, add the url directly. For example,&lt;/p>
+&lt;p>To directly download a library from a CDN to the static folder, add the URL directly. For example,&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">app.star&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl"> &lt;span class="n">libraries&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;https://unpkg.com/jquery@3.3.1/dist/jquery.min.js&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
 &lt;button
@@ -1194,12 +1194,12 @@ title="Copy code"
 &lt;/div>
 &lt;p>The HTMX library and its SSE extension are automatically downloaded.&lt;/p>
 &lt;h2>JavaScript Modules&lt;span class="hx:absolute hx:-mt-20" id="javascript-modules">&lt;/span>
-&lt;a href="#javascript-modules" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>JavaScript modules (also called ESM or ECMAScript Modules) are a way to import Javascript libraries dynamically, providing a unique namespace for all functions. Modules, once imported, can be used in the client code without requiring any build steps. See &lt;a href="https://jvns.ca/blog/2023/02/16/writing-javascript-without-a-build-system/"target="_blank" rel="noopener">jvns.ca&lt;/a> and &lt;a href="https://simonwillison.net/2023/May/2/download-esm/"target="_blank" rel="noopener">simonwillison.net&lt;/a> for notes about this approach. OpenRun tries to provide an easy interface to modules, converting npm packages to module format so that subsequent code changes do not require any build steps.&lt;/p>
+&lt;a href="#javascript-modules" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>JavaScript modules (also called ESM or ECMAScript Modules) are a way to import JavaScript libraries dynamically, providing a unique namespace for all functions. Modules, once imported, can be used in the client code without requiring any build steps. See &lt;a href="https://jvns.ca/blog/2023/02/16/writing-javascript-without-a-build-system/"target="_blank" rel="noopener">jvns.ca&lt;/a> and &lt;a href="https://simonwillison.net/2023/May/2/download-esm/"target="_blank" rel="noopener">simonwillison.net&lt;/a> for notes about this approach. OpenRun tries to provide an easy interface to modules, converting npm packages to module format so that subsequent code changes do not require any build steps.&lt;/p>
 &lt;h2>Workflow&lt;span class="hx:absolute hx:-mt-20" id="workflow">&lt;/span>
 &lt;a href="#workflow" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The workflow when using modules in OpenRun for an app in dev mode is:&lt;/p>
 &lt;ul>
-&lt;li>Ensure &lt;a href="https://nodejs.org/en/download"target="_blank" rel="noopener">nodejs&lt;/a> is installed&lt;/li>
-&lt;li>Using npm, install package you want to use a modules. for example &lt;code>npm install d3&lt;/code>&lt;/li>
+&lt;li>Ensure &lt;a href="https://nodejs.org/en/download"target="_blank" rel="noopener">Node.js&lt;/a> is installed&lt;/li>
+&lt;li>Using npm, install the package you want to use as a module. For example, &lt;code>npm install d3&lt;/code>&lt;/li>
 &lt;li>Add the ace.library entry in the app config. OpenRun will automatically run esbuild and import the package as a module into &lt;code>static/gen/esm&lt;/code>&lt;/li>
 &lt;li>Add an importmap in the head section of the html. Like &lt;a href="https://github.com/openrundev/openrun/blob/8b7f0d7d0c692e0ca3c6a74e97d1913031b954a1/examples/memory_usage/index.go.html#L10"target="_blank" rel="noopener">here&lt;/a>.
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
@@ -1233,8 +1233,8 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>Creating the module is a one time step. The generated module can be checked into source code. On a new machine, to make code changes to the app, you do not need nodejs or npm to be installed.&lt;/p>
-&lt;p>For production deployment, no changes are required. Checkout the git repo containing the source code and create a OpenRun app. OpenRun will serve the static assets over HTTP/2 with content hash based caching. The assets are compressed for serving, there is no need usually for mimifying the modules.&lt;/p>
+&lt;p>Creating the module is a one-time step. The generated module can be checked into source code. On a new machine, to make code changes to the app, you do not need Node.js or npm to be installed.&lt;/p>
+&lt;p>For production deployment, no changes are required. Check out the git repo containing the source code and create an OpenRun app. OpenRun will serve the static assets over HTTP/2 with content-hash-based caching. The assets are compressed for serving, there is usually no need for minifying the modules.&lt;/p>
 &lt;h2>Esbuild Config&lt;span class="hx:absolute hx:-mt-20" id="esbuild-config">&lt;/span>
 &lt;a href="#esbuild-config" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun includes esbuild, there is no need to install esbuild manually. The OpenRun server config has the entry&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
@@ -1254,8 +1254,8 @@ title="Copy code"
 &lt;p>If you do not want esbuild to create modules, set the node_path property in the server config to &lt;code>disable&lt;/code>. You will have to manually download the module file into the static folder.&lt;/p>
 &lt;h2>Notes&lt;span class="hx:absolute hx:-mt-20" id="notes">&lt;/span>
 &lt;a href="#notes" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;ul>
-&lt;li>The version number specified in the &lt;code>ace.library&lt;/code> is used to create the file name under &lt;code>static/gen/esm&lt;/code>. The actual package version depends on what was install using npm. Ensure that the same version is installed by npm as specified in the library config.&lt;/li>
+&lt;li>The version number specified in the &lt;code>ace.library&lt;/code> is used to create the file name under &lt;code>static/gen/esm&lt;/code>. The actual package version depends on what was installed using npm. Ensure that the same version is installed by npm as specified in the library config.&lt;/li>
 &lt;li>Only the &lt;code>minify&lt;/code> option for esbuild has been tested with OpenRun. Other options like chunking the files might not work currently.&lt;/li>
-&lt;li>The JavaScript support is for running JS on the browser. There is no support for running JavaScript on the OpenRun server, the server runs only Go code and starlark applications.&lt;/li>
-&lt;li>If an library url is specified, that is downloaded directly. There is no need for npm package in that case.&lt;/li>
+&lt;li>The JavaScript support is for running JS in the browser. There is no support for running JavaScript on the OpenRun server, the server runs only Go code and Starlark applications.&lt;/li>
+&lt;li>If a library URL is specified, that is downloaded directly. There is no need for an npm package in that case.&lt;/li>
 &lt;/ul></description></item></channel></rss>

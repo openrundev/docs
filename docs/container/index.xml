@@ -215,9 +215,9 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>A health check is done on the container after container is started. If the health check fails 30 times, the container is assumed to be down.&lt;/p>
+&lt;p>A health check is done on the container after the container is started. If the health check fails 30 times, the container is assumed to be down.&lt;/p>
 &lt;p>In the running state, a status check is done on the app every five seconds. If three of those checks fail, then the container is assumed to be down.&lt;/p>
-&lt;p>If an app does not receive any REST API request for 180 seconds and the total data transfer from/to to the app is below 1500 bytes over 180 seconds, the app is assumed to be idle and the container is stopped. The idle shutdown does not apply for dev apps, only for prod mode apps. For frameworks like Streamlit where Websockets is used for communication between the UI and app, there will not be an REST API calls. The data transfer is used to determine whether the app is idle.&lt;/p>
+&lt;p>If an app does not receive any REST API request for 180 seconds and the total data transfer from/to the app is below 1500 bytes over 180 seconds, the app is assumed to be idle and the container is stopped. The idle shutdown does not apply for dev apps, only for prod mode apps. For frameworks like Streamlit where WebSockets is used for communication between the UI and app, there will not be any REST API calls. The data transfer is used to determine whether the app is idle.&lt;/p>
 &lt;h2>Changing Config&lt;span class="hx:absolute hx:-mt-20" id="changing-config">&lt;/span>
 &lt;a href="#changing-config" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The &lt;code>openrun.toml&lt;/code> can be updated to have a different value for any of the properties. After the server restart, the config change will apply for all apps.&lt;/p>
 &lt;p>To apply the config at the app level, the app metadata can be updated. For example the command&lt;/p>
@@ -232,8 +232,8 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>changes the idle timeout for the &lt;code>/myapp&lt;/code> app to 600 secs. Without the &lt;code>--promote&lt;/code> option, the change will be staged and can be verified on the staging app. App metadata level setting take precedence over the defaults in the &lt;code>openrun.toml&lt;/code>. Using &lt;code>all&lt;/code> as the app name will apply the change for all current apps (but not for any new apps created later).&lt;/p>
-&lt;h2>Configuring the Container manager&lt;span class="hx:absolute hx:-mt-20" id="configuring-the-container-manager">&lt;/span>
+&lt;p>changes the idle timeout for the &lt;code>/myapp&lt;/code> app to 600 seconds. Without the &lt;code>--promote&lt;/code> option, the change will be staged and can be verified on the staging app. App metadata level settings take precedence over the defaults in the &lt;code>openrun.toml&lt;/code>. Using &lt;code>all&lt;/code> as the app name will apply the change for all current apps (but not for any new apps created later).&lt;/p>
+&lt;h2>Configuring the container manager&lt;span class="hx:absolute hx:-mt-20" id="configuring-the-container-manager">&lt;/span>
 &lt;a href="#configuring-the-container-manager" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The default for the container command to use is&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">system&lt;/span>&lt;span class="p">]&lt;/span>
@@ -282,7 +282,7 @@ title="Copy code"
 &lt;img alt="Kubernetes Deployment" src="https://openrun.dev/d2/k8s.svg">
 &lt;/picture>
 &lt;h2>Registry Config&lt;span class="hx:absolute hx:-mt-20" id="registry-config">&lt;/span>
-&lt;a href="#registry-config" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun on Kubernetes requires a registry to which Kaniko built images can be pushed and from which pods can pull. Image pull by default requires a HTTPS protected registry, self-signed certificates are not valid. Creating a signed certificate is not trivial on dev installations. The workaround for dev installs is to enable HTTP endpoints for pod creation. Details depend on the Kubernetes installation being used. For K3S, install the &lt;code>registry:2&lt;/code> images as a service. If registry is started at &lt;code>registry.svc.cluster.local:5000&lt;/code>, edit &lt;code>/etc/rancher/k3s/registries.yaml&lt;/code> to add:&lt;/p>
+&lt;a href="#registry-config" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>OpenRun on Kubernetes requires a registry to which Kaniko built images can be pushed and from which pods can pull. Image pulls by default require an HTTPS-protected registry; self-signed certificates are not valid. Creating a signed certificate is not trivial on dev installations. The workaround for dev installs is to enable HTTP endpoints for pod creation. Details depend on the Kubernetes installation being used. For K3S, install the &lt;code>registry:2&lt;/code> images as a service. If registry is started at &lt;code>registry.svc.cluster.local:5000&lt;/code>, edit &lt;code>/etc/rancher/k3s/registries.yaml&lt;/code> to add:&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">/etc/rancher/k3s/registries.yaml&lt;/div>&lt;div>&lt;pre>&lt;code>mirrors:
 &amp;#34;registry.svc.cluster.local:5000&amp;#34;:
@@ -313,7 +313,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;p>Restart Kubernetes using &lt;code>orb restart k8s&lt;/code>.&lt;/p>
-&lt;p>To install Openrun, run&lt;/p>
+&lt;p>To install OpenRun, run&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;pre>&lt;code>helm --kube-context orbstack upgrade --install openrun openrun/openrun --namespace openrun --create-namespace --wait --timeout 3m --set config.registry.url=registry.orb.local:5000&lt;/code>&lt;/pre>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
 &lt;button
@@ -327,20 +327,20 @@ title="Copy code"
 &lt;/div>
 &lt;p>The Helm chart sets &lt;code>insecure = true&lt;/code> by default. Change that to &lt;code>insecure = false&lt;/code> if using a HTTPS registry.&lt;/p>
 &lt;h2>Install using Terraform&lt;span class="hx:absolute hx:-mt-20" id="install-using-terraform">&lt;/span>
-&lt;a href="#install-using-terraform" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To install a production ready OpenRun installation on AWS, with EKS cluster, ECR registry and RDS Postgres for metadata, do the following:&lt;/p>
+&lt;a href="#install-using-terraform" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To install a production-ready OpenRun installation on AWS, with EKS cluster, ECR registry and RDS Postgres for metadata, do the following:&lt;/p>
 &lt;ul>
-&lt;li>Checkout the terraform config &lt;code>git clone git@github.com:openrundev/openrun.git&lt;/code>&lt;/li>
+&lt;li>Check out the terraform config &lt;code>git clone git@github.com:openrundev/openrun.git&lt;/code>&lt;/li>
 &lt;li>Switch to the config directory &lt;code>cd openrun/deploy/terraform&lt;/code>&lt;/li>
 &lt;li>Create a copy of sample config &lt;code>cp tfvars.sample terraform.tfvars&lt;/code>&lt;/li>
 &lt;li>Update &lt;code>terraform.tfvars&lt;/code>, set the values as appropriate.&lt;/li>
-&lt;li>Ensure that AWS cli is installed and credentials are configured. Also, ensure that helm cli is installed and OpenRun updated &lt;code>helm repo add openrun https://openrundev.github.io/openrun-helm-charts/; helm repo update&lt;/code>&lt;/li>
+&lt;li>Ensure that AWS CLI is installed and credentials are configured. Also, ensure that Helm CLI is installed and the OpenRun repo is updated: &lt;code>helm repo add openrun https://openrundev.github.io/openrun-helm-charts/; helm repo update&lt;/code>&lt;/li>
 &lt;li>Terraform state is by default saved on local disk. If required, update to use S3&lt;/li>
 &lt;li>Run &lt;code>terraform init&lt;/code>. Add &lt;code>-backend-config&lt;/code> if using remote state.&lt;/li>
 &lt;li>Run &lt;code>terraform plan --var-file terraform.tfvars&lt;/code>, verify the plan.&lt;/li>
 &lt;li>Run &lt;code>terraform apply --var-file terraform.tfvars&lt;/code>, or apply the plan created earlier.&lt;/li>
 &lt;/ul>
 &lt;p>Save the password for the admin user using &lt;code>terraform output openrun_admin_password&lt;/code>. Add the DNS entries as output under &lt;code>openrun_dns_records&lt;/code>. The &lt;code>root_a&lt;/code> and &lt;code>wildcard_a&lt;/code> DNS entries enable installing apps at the domain level. Wait for the DNS entries to propagate before attempting to access the url (to allow TLS cert creation to work).&lt;/p>
-&lt;p>After install is done, SSH to the OpenRun instance and run the &lt;code>sync schedule&lt;/code> to setup the sync. All subsequent operations are done by checking in config updates to the app config in Git.&lt;/p>
+&lt;p>After install is done, SSH to the OpenRun instance and run the &lt;code>sync schedule&lt;/code> to set up the sync. All subsequent operations are done by checking in config updates to the app config in Git.&lt;/p>
 &lt;p>To destroy the resource created,&lt;/p>
 &lt;ul>
 &lt;li>Ensure that kubectl config is set, like &lt;code>aws eks update-kubeconfig --region us-west-2 --name openrun-eks --profile openrun&lt;/code>. Update the region, the name format is &lt;code>&amp;lt;prefix&amp;gt;-eks&lt;/code>, default &lt;code>openrun-eks&lt;/code>.&lt;/li>
@@ -417,8 +417,8 @@ title="Copy code"
 &lt;a href="#kubernetes-installation" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>For Kubernetes installation, a container registry is required. OpenRun checks if the required container image is available in the registry. If not, the source code is checked out and shipped to a Kaniko based container which does the image build and pushes the image to the registry.&lt;/p>
 &lt;h2>Delegated Build Mode&lt;span class="hx:absolute hx:-mt-20" id="delegated-build-mode">&lt;/span>
 &lt;a href="#delegated-build-mode" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>For single-node install, doing the image build can cause heavy load on the system (CPU and disk). This can impact the performance for API calls to other apps. For Kubernetes based install, doing the Kaniko based install can be slow, since the build runs on a fresh machine which does not have any images cached.&lt;/p>
-&lt;p>For both single-node and Kubernetes installation, delegated builds are supported. One or more machines need to be dedicated for doing the container builds. The main OpenRun installation should used the delegated build option.&lt;/p>
-&lt;p>To setup delegated builds, on the builder machine(s) (for example, mybuilder.example.com), enable the builder by installing OpenRun and setting the minimal config to&lt;/p>
+&lt;p>For both single-node and Kubernetes installation, delegated builds are supported. One or more machines need to be dedicated for doing the container builds. The main OpenRun installation should use the delegated build option.&lt;/p>
+&lt;p>To set up delegated builds, on the builder machine(s) (for example, mybuilder.example.com), enable the builder by installing OpenRun and setting the minimal config to&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">http&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">host&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;0.0.0.0&amp;#34;&lt;/span> &lt;span class="c"># bind to all interfaces&lt;/span>
@@ -438,7 +438,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>Starting the OpenRun server enables the HTTP port (default 25222) to receive delegated builds requests. The container manager (Docker/Podman) should be running on the builder machine.&lt;/p>
+&lt;p>Starting the OpenRun server enables the HTTP port (default 25222) to receive delegated build requests. The container manager (Docker/Podman) should be running on the builder machine.&lt;/p>
 &lt;p>On the actual OpenRun installation, add in the config:&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">builder&lt;/span>&lt;span class="p">]&lt;/span>
@@ -459,7 +459,7 @@ title="Copy code"
 &lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200">
 &lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
-&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">The builder machine should not be exposed over the public internet. It should be accessible from the main OpenRun node/cluster only. Multiple builder nodes can also be provisioned. In that case, a load-balancer would have to be setup and the delegate url should use the load-balancer url.&lt;/div>
+&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">The builder machine should not be exposed over the public internet. It should be accessible from the main OpenRun node/cluster only. Multiple builder nodes can also be provisioned. In that case, a load-balancer would have to be set up and the delegate URL should use the load-balancer URL.&lt;/div>
 &lt;/div>
 &lt;/div></description></item><item><title>App Specs</title><link>https://openrun.dev/docs/container/appspecs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/container/appspecs/</guid><description>
 &lt;h2>App Specs&lt;span class="hx:absolute hx:-mt-20" id="app-specs">&lt;/span>

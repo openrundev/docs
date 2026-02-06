@@ -45,12 +45,12 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>The app management subcommands are under the &lt;code>app&lt;/code> command. The &lt;code>preview&lt;/code> command manages preview app for an app and &lt;code>version&lt;/code> command manages versions for an app. The &lt;code>account&lt;/code> command is for managing accounts for an app.&lt;/p>
+&lt;p>The app management subcommands are under the &lt;code>app&lt;/code> command. The &lt;code>preview&lt;/code> command manages preview apps for an app and &lt;code>version&lt;/code> command manages versions for an app. The &lt;code>account&lt;/code> command is for managing accounts for an app.&lt;/p>
 &lt;h2>App Management&lt;span class="hx:absolute hx:-mt-20" id="app-management">&lt;/span>
 &lt;a href="#app-management" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>All the app management subcommands except &lt;code>create&lt;/code> take a glob pattern, so multiple apps can be updated using one command. Use the &lt;code>--dry-run&lt;/code> option with any update CLI call to verify if the options specified are correct before the actual run. No database changes are committed during dry-run and no changes are done in memory.&lt;/p>
 &lt;h2>Glob Pattern&lt;span class="hx:absolute hx:-mt-20" id="glob-pattern">&lt;/span>
 &lt;a href="#glob-pattern" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The &lt;code>reload/delete/promote/approve/list/update&lt;/code> commands accept a glob pattern. &lt;code>example.com:**&lt;/code> will match apps under the example.com domain. &lt;code>*:**&lt;/code> will match all apps in all domains, &lt;code>all&lt;/code> is a shortcut for this. When using glob patterns, place the pattern inside double-quotes to avoid issues with shell star expansion. For example, &lt;code>&amp;quot;example.com:**&amp;quot;&lt;/code>&lt;/p>
-&lt;p>The default for &lt;code>app list&lt;/code> command is to list all apps. All other commands require an glob pattern to be specified explicitly.&lt;/p>
+&lt;p>The default for &lt;code>app list&lt;/code> command is to list all apps. All other commands require a glob pattern to be specified explicitly.&lt;/p>
 &lt;p>When multiple apps are being updated, if any one app fails, the whole operation is rolled back. This allows for atomic updates across multiple applications.&lt;/p>
 &lt;h2>App Listing&lt;span class="hx:absolute hx:-mt-20" id="app-listing">&lt;/span>
 &lt;a href="#app-listing" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Use the &lt;code>app list&lt;/code> command to list apps. If the &lt;code>--internal&lt;/code> option is used, then the internal staging and preview apps for each matched prod app are also listed.&lt;/p>
@@ -159,7 +159,7 @@ title="Copy code"
 &lt;/div>
 &lt;p>will create the apps if not already present. If present, the app configuration is updated to match the new configuration.&lt;/p>
 &lt;h3>Apply Command&lt;span class="hx:absolute hx:-mt-20" id="apply-command">&lt;/span>
-&lt;a href="#apply-command" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h3>&lt;p>The &lt;code>apply&lt;/code> command takes one or two arguments: &lt;code>&amp;lt;filePath&amp;gt; [&amp;lt;appPathGlob&amp;gt;]&lt;/code>. The first is a file path, which can be a glob pointing to multiple files. The files can be from local disk or from a git url. The second optional argument is an app path glob which specifies which apps to apply from the loaded files. By default, all apps is the file(s) are applied.&lt;/p>
+&lt;a href="#apply-command" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h3>&lt;p>The &lt;code>apply&lt;/code> command takes one or two arguments: &lt;code>&amp;lt;filePath&amp;gt; [&amp;lt;appPathGlob&amp;gt;]&lt;/code>. The first is a file path, which can be a glob pointing to multiple files. The files can be from local disk or from a Git URL. The second optional argument is an app path glob which specifies which apps to apply from the loaded files. By default, all apps in the file(s) are applied.&lt;/p>
 &lt;p>The options the &lt;code>apply&lt;/code> command takes are:&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;pre>&lt;code>OPTIONS:
@@ -183,7 +183,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>The branch/commit/git-auth arguments are for the apply file itself (if the file path is a git url). For the app source code, the git config has to be specified in the config file.&lt;/p>
+&lt;p>The branch/commit/git-auth arguments are for the apply file itself (if the file path is a Git URL). For the app source code, the git config has to be specified in the config file.&lt;/p>
 &lt;p>By default, changes are applied to the stage app. Add the &lt;code>--promote&lt;/code> option to promote the changes. Use the &lt;code>--approve&lt;/code> option to approve any permission changes required by apps.&lt;/p>
 &lt;p>The &lt;code>--reload&lt;/code> option controls whether new source code is loaded for apps during the apply operation. Setting it to &lt;code>none&lt;/code> means no apps are reloaded, &lt;code>updated&lt;/code> means apps which have a config update are reloaded. &lt;code>matched&lt;/code> (the default) means all apps matched by the app glob are reloaded, even if there is no config update.&lt;/p>
 &lt;p>By default, changes are applied as a three way merge. The old config and new config are compared against the live config. If there are changes between old and new declarative config, those changes are applied. Changes done imperatively are not overwritten. Using the &lt;code>--force&lt;/code> option will overwrite any changes applied imperatively through the CLI or UI. The new declarative config overwrites any existing state when &lt;code>--force&lt;/code> is used.&lt;/p>
@@ -314,7 +314,7 @@ title="Copy code"
 &lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200">
 &lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
-&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">Apps are identified by their path and source url, so those cannot be changed. Dev mode is set during app creation and cannot be updated. App auth and git_auth are settings which are directly applied without being staged. They can be updated through the CLI but not through the config file. All other properties are metadata changes which are staged. They can be updated through the app config. New app versions are created during apply and versions can be reverted at the app level.&lt;/div>
+&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">Apps are identified by their path and source URL, so those cannot be changed. Dev mode is set during app creation and cannot be updated. App auth and git_auth are settings which are directly applied without being staged. They can be updated through the CLI but not through the config file. All other properties are metadata changes which are staged. They can be updated through the app config. New app versions are created during apply and versions can be reverted at the app level.&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;h2>Automated Sync&lt;span class="hx:absolute hx:-mt-20" id="automated-sync">&lt;/span>
@@ -419,10 +419,10 @@ title="Copy code"
 &lt;li>&lt;code>/_openrun/&lt;/code> API path at the root level and &lt;code>/_openrun_app/&lt;/code> within an app path are reserved paths, they are used by the OpenRun internal APIs, requests will not reach the app. This applies for all domains. &lt;code>_cl_&lt;/code> is reserved for use for internal apps, so app path last component cannot have &lt;code>_cl_&lt;/code>.&lt;/li>
 &lt;/ul></description></item><item><title>Application Lifecycle</title><link>https://openrun.dev/docs/applications/lifecycle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/applications/lifecycle/</guid><description>
 &lt;h2>Application Types&lt;span class="hx:absolute hx:-mt-20" id="application-types">&lt;/span>
-&lt;a href="#application-types" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>A OpenRun application can be one of four types:&lt;/p>
+&lt;a href="#application-types" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>An OpenRun application can be one of four types:&lt;/p>
 &lt;ul>
-&lt;li>&lt;strong>Development Apps&lt;/strong> : Used for developing apps, supports live reload from code change on disk.&lt;/li>
-&lt;li>&lt;strong>Production Apps&lt;/strong> : For production use. Can be created from git hosted source or from sources on local disk.&lt;/li>
+&lt;li>&lt;strong>Development Apps&lt;/strong> : Used for developing apps, supports live reload from code changes on disk.&lt;/li>
+&lt;li>&lt;strong>Production Apps&lt;/strong> : For production use. Can be created from Git-hosted source or from sources on local disk.&lt;/li>
 &lt;li>&lt;strong>Staging Apps&lt;/strong> : For reviewing code and config changes before they are pushed to prod. Every prod app has one staging app.&lt;/li>
 &lt;li>&lt;strong>Preview Apps&lt;/strong> : For creating a review environment for code changes, useful as part of code review.&lt;/li>
 &lt;/ul>
@@ -440,7 +440,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;h2>Production Apps&lt;span class="hx:absolute hx:-mt-20" id="production-apps">&lt;/span>
-&lt;a href="#production-apps" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Without the &lt;code>--dev&lt;/code> options, apps are created as production apps by default. Production apps can be created from source on GitHub or from local disk. In either case, the source code for the app is uploaded to the OpenRun metadata database. For example:&lt;/p>
+&lt;a href="#production-apps" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Without the &lt;code>--dev&lt;/code> option, apps are created as production apps by default. Production apps can be created from source on GitHub or from local disk. In either case, the source code for the app is uploaded to the OpenRun metadata database. For example:&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">openrun app create --approve /home/user/mycode example.com:/&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
 &lt;button
@@ -452,9 +452,9 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>creates an production app. After app creation, the original source location is not read, until a &lt;code>app reload&lt;/code> operation is done to update the sources. The source folder &lt;code>/home/user/mycode&lt;/code> can be deleted if reload is not required, since the sources are present in the OpenRun metadata database. Every production app automatically has one staging app associated with it.&lt;/p>
+&lt;p>creates a production app. After app creation, the original source location is not read, until a &lt;code>app reload&lt;/code> operation is done to update the sources. The source folder &lt;code>/home/user/mycode&lt;/code> can be deleted if reload is not required, since the sources are present in the OpenRun metadata database. Every production app automatically has one staging app associated with it.&lt;/p>
 &lt;h2>Staging Apps&lt;span class="hx:absolute hx:-mt-20" id="staging-apps">&lt;/span>
-&lt;a href="#staging-apps" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Staging apps are created for each production app. The purpose of staging app is to be able to verify config and code changes before they are made live in the prod app. For example, after the previous &lt;code>app create&lt;/code> command, a call to &lt;code>app list&lt;/code> with the &lt;code>--internal&lt;/code> option will show two apps:&lt;/p>
+&lt;a href="#staging-apps" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Staging apps are created for each production app. The purpose of the staging app is to be able to verify config and code changes before they are made live in the prod app. For example, after the previous &lt;code>app create&lt;/code> command, a call to &lt;code>app list&lt;/code> with the &lt;code>--internal&lt;/code> option will show two apps:&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">openrun app list --internal
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Id Type Version GitCommit GitBranch Domain:Path SourceUrl
@@ -470,7 +470,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;p>The second app is the staging app for the first. &lt;code>app list&lt;/code> shows only the main apps by default, the &lt;code>--internal&lt;/code> option makes it show the linked apps.&lt;/p>
-&lt;p>The staging app url is available by suffixing &lt;code>_cl_stage&lt;/code> at the end of the app path. So for an app at &lt;code>https://example.com/&lt;/code>, the staging url is &lt;code>https://example.com/cl_stage&lt;/code>. For an app at &lt;code>https://example.com/utils/app1&lt;/code>, the staging app url is &lt;code>https://example.com/utils/app1_cl_stage&lt;/code>.&lt;/p>
+&lt;p>The staging app URL is available by suffixing &lt;code>_cl_stage&lt;/code> at the end of the app path. So for an app at &lt;code>https://example.com/&lt;/code>, the staging URL is &lt;code>https://example.com/cl_stage&lt;/code>. For an app at &lt;code>https://example.com/utils/app1&lt;/code>, the staging app URL is &lt;code>https://example.com/utils/app1_cl_stage&lt;/code>.&lt;/p>
 &lt;h2>Promoting Changes&lt;span class="hx:absolute hx:-mt-20" id="promoting-changes">&lt;/span>
 &lt;a href="#promoting-changes" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>When there are code changes, running &lt;code>app reload&lt;/code> will update the staging environment.&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
@@ -501,7 +501,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>At this point, going to the url &lt;code>example.com:/_cl_stage&lt;/code> will show the updated code while &lt;code>example.com:/&lt;/code> has not been updated.&lt;/p>
+&lt;p>At this point, going to the URL &lt;code>example.com:/_cl_stage&lt;/code> will show the updated code while &lt;code>example.com:/&lt;/code> has not been updated.&lt;/p>
 &lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200">
 &lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
@@ -542,7 +542,7 @@ title="Copy code"
 &lt;h2>GitHub Reload&lt;span class="hx:absolute hx:-mt-20" id="github-reload">&lt;/span>
 &lt;a href="#github-reload" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The rules for fetching source code from local disk and GitHub are:&lt;/p>
 &lt;ul>
-&lt;li>If the source url starts with &lt;code>http://&lt;/code>, &lt;code>https://&lt;/code> or &lt;code>github.com&lt;/code>, the source is assumed to be from a github API endpoint. Otherwise the source is assumed to be local disk on the OpenRun server.&lt;/li>
+&lt;li>If the source URL starts with &lt;code>http://&lt;/code>, &lt;code>https://&lt;/code> or &lt;code>github.com&lt;/code>, the source is assumed to be from a GitHub API endpoint. Otherwise the source is assumed to be local disk on the OpenRun server.&lt;/li>
 &lt;li>If OpenRun client and server are on different machines and local disk is being used, the code needs to be copied to the server node first.&lt;/li>
 &lt;li>For GitHub source, the format is https://domain_name/org_name/repo_name/sub/folder, like &lt;code>github.com/openrundev/openrun/examples/disk_usage&lt;/code>. The sub_folder should contain the &lt;code>app.star&lt;/code> config file.&lt;/li>
 &lt;li>During &lt;code>app create&lt;/code> and &lt;code>app reload&lt;/code>, the commit id takes precedence over the branch name if both are specified.&lt;/li>
@@ -564,7 +564,7 @@ title="Copy code"
 &lt;p>creates an app accessible at &lt;code>/myapp_cl_preview_49182d4ca1cacbd8e3463a77c2174a6da1fb66c9&lt;/code> which runs the app code in the specified commit id.&lt;/p>
 &lt;p>Preview apps cannot be changed once they are created. If preview app requires new permissions, add the &lt;code>--approve&lt;/code> option to the &lt;code>preview create&lt;/code> command.&lt;/p>
 &lt;h2>Write Mode Access&lt;span class="hx:absolute hx:-mt-20" id="write-mode-access">&lt;/span>
-&lt;a href="#write-mode-access" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Staging and Preview apps have read only access by default to plugin APIs. This means that when they make calls to plugin APIs, only APIs defined as READ by the plugin are permitted. The HTTP plugin defines GET/OPTIONS/HEAD requests as READ type, POST/PUT/DELETE are defined as WRITE. For the CLI Exec plugin, the run API is defined as WRITE since the CLI command run might do write operations.&lt;/p>
+&lt;a href="#write-mode-access" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Staging and Preview apps have read-only access by default to plugin APIs. This means that when they make calls to plugin APIs, only APIs defined as READ by the plugin are permitted. The HTTP plugin defines GET/OPTIONS/HEAD requests as READ type, POST/PUT/DELETE are defined as WRITE. For the CLI Exec plugin, the run API is defined as WRITE since the CLI command run might do write operations.&lt;/p>
 &lt;p>For cases where the plugin defines an API as Write, the app permission can overwrite the default type and define the operation to be a READ operation. For example, the disk_usage app runs the &lt;code>du&lt;/code> command, which is a read operation. The &lt;a href="https://github.com/openrundev/openrun/blob/49182d4ca1cacbd8e3463a77c2174a6da1fb66c9/examples/disk_usage/app.star#L45"target="_blank" rel="noopener">app config defines&lt;/a> the run plugin call as &lt;code>type=&amp;quot;READ&amp;quot;&lt;/code>, over-riding the default WRITE type defined in the plugin. If no type is specified in the permission, the type defined in the plugin takes effect.&lt;/p>
 &lt;p>Staging and Preview apps are allowed only READ calls by default, even if the app permissions allow WRITE operations. To allow stage apps access to WRITE operations, run &lt;code>openrun app settings stage-write-access true all&lt;/code>. Change &lt;code>all&lt;/code> to the desired app glob pattern.&lt;/p>
 &lt;p>To allow preview apps access to WRITE operation, run &lt;code>openrun app settings preview-write-access true example.com:/&lt;/code>. This changes the existing preview apps and any new preview apps created for example.com:/ to allow write operations, if the permissions have been approved.&lt;/p></description></item><item><title>Application Security</title><link>https://openrun.dev/docs/applications/appsecurity/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/applications/appsecurity/</guid><description>

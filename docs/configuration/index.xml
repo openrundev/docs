@@ -365,10 +365,10 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>All other server related config entries are ignored by the OpenRun client. Note that to connect to a OpenRun server over HTTP remotely, the server needs to be bound to the all interface(0.0.0.0), see &lt;a href="https://openrun.dev/docs/configuration/networking/">networking&lt;/a>.&lt;/p>
-&lt;p>If server_uri is set to the https endpoint and the OpenRun server is running with a self-signed certificate, set &lt;code>skip_cert_check = true&lt;/code> in config to disable the TLS certificate check.&lt;/p>
+&lt;p>All other server related config entries are ignored by the OpenRun client. Note that to connect to an OpenRun server over HTTP remotely, the server needs to be bound to the all interface (0.0.0.0), see &lt;a href="https://openrun.dev/docs/configuration/networking/">networking&lt;/a>.&lt;/p>
+&lt;p>If server_uri is set to the HTTPS endpoint and the OpenRun server is running with a self-signed certificate, set &lt;code>skip_cert_check = true&lt;/code> in config to disable the TLS certificate check.&lt;/p>
 &lt;h2>Application Security&lt;span class="hx:absolute hx:-mt-20" id="application-security">&lt;/span>
-&lt;a href="#application-security" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>See &lt;a href="https://openrun.dev/docs/applications/appsecurity/">appsecurity&lt;/a> for details about the application level sandboxing and &lt;a href="https://openrun.dev/docs/configuration/authentication/">authentication&lt;/a> for details about adding OAuth/OIDC/SAML/Cert based auth for apps.&lt;/p>
+&lt;a href="#application-security" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>See &lt;a href="https://openrun.dev/docs/applications/appsecurity/">appsecurity&lt;/a> for details about the application level sandboxing and &lt;a href="https://openrun.dev/docs/configuration/authentication/">authentication&lt;/a> for details about adding OAuth/OIDC/SAML/cert-based auth for apps.&lt;/p>
 &lt;h2>CSRF Protection&lt;span class="hx:absolute hx:-mt-20" id="csrf-protection">&lt;/span>
 &lt;a href="#csrf-protection" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>CSRF protection is automatically enabled for OpenRun internal APIs and for API calls to apps. This uses the &lt;a href="https://pkg.go.dev/net/http#CrossOriginProtection"target="_blank" rel="noopener">CrossOriginProtection&lt;/a> middleware. Use &lt;code>app_config.security.disable_csrf_protection = true&lt;/code> in &lt;code>openrun.toml&lt;/code> to disable globally for all apps. CSRF protection can be disabled individually for apps by running &lt;code>openrun app update conf --promote 'security.disable_csrf_protection=true' /myapp&lt;/code>&lt;/p>
 &lt;h2>Private Repository Access&lt;span class="hx:absolute hx:-mt-20" id="private-repository-access">&lt;/span>
@@ -492,7 +492,7 @@ title="Copy code"
 &lt;/div>
 &lt;p>If the client cert has been signed with the root CA defined in /data/certs/ca1.crt, the API call will succeed. Otherwise it fails. HTTP requests are not allowed when client cert authentication is used.&lt;/p>
 &lt;h2>Callback Url&lt;span class="hx:absolute hx:-mt-20" id="callback-url">&lt;/span>
-&lt;a href="#callback-url" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To enable any OAuth/OIDC/SAML provider, the callback url domain has to be specified in the server config. Add&lt;/p>
+&lt;a href="#callback-url" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To enable any OAuth/OIDC/SAML provider, the callback URL domain has to be specified in the server config. Add&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
 &lt;div class="hextra-code-filename not-prose" dir="auto">openrun.toml&lt;/div>&lt;div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="nx">security&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">callback_url&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;https://example.com:25223&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-8">
@@ -538,13 +538,13 @@ title="Copy code"
 &lt;/div>
 &lt;p>Here, the auth config entry name is &lt;code>github_test&lt;/code>. The entry name can be one of the supported providers, or a supported provider name followed by a &lt;code>_&lt;/code> and a qualifier. The provider name is case sensitive. So &lt;code>github&lt;/code>, &lt;code>google&lt;/code>, &lt;code>github_prod&lt;/code>, &lt;code>google_my_org&lt;/code> etc are valid config names. &lt;code>github-test&lt;/code> and &lt;code>my_org_google&lt;/code> are not valid.&lt;/p>
 &lt;p>The server &lt;code>openrun.toml&lt;/code> can have multiple auth configs defined. One of them can be set to be the default using &lt;code>app_default_auth_type&lt;/code> config. Apps can be configured to use one of &lt;code>system&lt;/code> or &lt;code>none&lt;/code> or a valid auth config name as the &lt;code>auth&lt;/code>. For example, app 1 can use &lt;code>system&lt;/code> and app 2 can use &lt;code>github_test&lt;/code>.&lt;/p>
-&lt;p>In the OAuth account, for an entry &lt;code>github_test&lt;/code>, the callback url to use will be &lt;code>https://example.com:25223/_openrun/auth/github_test/callback&lt;/code>.&lt;/p>
-&lt;p>The format for the callback url to use is &lt;code>&amp;lt;CALLBACK_URL&amp;gt;/_openrun/auth/&amp;lt;PROVIDER_ENTRY_NAME&amp;gt;/callback&lt;/code>. The callback url has to exactly match this format.&lt;/p>
+&lt;p>In the OAuth account, for an entry &lt;code>github_test&lt;/code>, the callback URL to use will be &lt;code>https://example.com:25223/_openrun/auth/github_test/callback&lt;/code>.&lt;/p>
+&lt;p>The format for the callback URL to use is &lt;code>&amp;lt;CALLBACK_URL&amp;gt;/_openrun/auth/&amp;lt;PROVIDER_ENTRY_NAME&amp;gt;/callback&lt;/code>. The callback URL has to exactly match this format.&lt;/p>
 &lt;h2>OAuth Config Details&lt;span class="hx:absolute hx:-mt-20" id="oauth-config-details">&lt;/span>
-&lt;a href="#oauth-config-details" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The config details depend on the provider type. The &lt;code>key&lt;/code> is generally the Client Id and the &lt;code>secret&lt;/code> is the Client Secret. For some providers, additional config config entries are supported. These are:&lt;/p>
+&lt;a href="#oauth-config-details" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The config details depend on the provider type. The &lt;code>key&lt;/code> is generally the Client ID and the &lt;code>secret&lt;/code> is the client secret. For some providers, additional config entries are supported. These are:&lt;/p>
 &lt;ul>
-&lt;li>&lt;strong>google&lt;/strong>: The google provider supports a &lt;code>hosted_domain&lt;/code> option. This is the domain name to verify on the user being logged in. For example, this can be set to &lt;code>openrun.dev&lt;/code>.&lt;/li>
-&lt;li>&lt;strong>okta&lt;/strong>: The Okta provider requires the &lt;code>org_url&lt;/code> config, the tenant url to verify.&lt;/li>
+&lt;li>&lt;strong>google&lt;/strong>: The google provider supports a &lt;code>hosted_domain&lt;/code> option. This is the domain name to verify for the logged-in user. For example, this can be set to &lt;code>openrun.dev&lt;/code>.&lt;/li>
+&lt;li>&lt;strong>okta&lt;/strong>: The Okta provider requires the &lt;code>org_url&lt;/code> config, the tenant URL to verify.&lt;/li>
 &lt;li>&lt;strong>auth0&lt;/strong>: The Auth0 provider requires the &lt;code>domain&lt;/code> config.&lt;/li>
 &lt;li>&lt;strong>oidc&lt;/strong>: OIDC requires the &lt;code>discovery_url&lt;/code> config property. For example, with Okta, use &lt;code>https://YOURDOMAIN-admin.okta.com/.well-known/openid-configuration&lt;/code>&lt;/li>
 &lt;/ul>
@@ -552,7 +552,7 @@ title="Copy code"
 &lt;div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:rounded-lg hx:border hx:py-2 hx:ltr:pr-4 hx:rtl:pl-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200">
 &lt;div class="hx:ltr:pl-3 hx:ltr:pr-2 hx:rtl:pr-3 hx:rtl:pl-2">&lt;svg height=1.2em class="hx:inline-block hx:align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>&lt;/svg>&lt;/div>
 &lt;div class="hx:w-full hx:min-w-0 hx:leading-7">
-&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">The first time a new provider is added, it is important to manually verify an app, to verify if the required authentication restrictions are in place. For example, with google, any valid google user can login, including gmail.com accounts. The &lt;code>hosted_domain&lt;/code> config has to be used to restrict this.&lt;/div>
+&lt;div class="hx:mt-6 hx:leading-7 hx:first:mt-0">The first time a new provider is added, it is important to manually verify an app, to verify if the required authentication restrictions are in place. For example, with google, any valid google user can log in, including gmail.com accounts. The &lt;code>hosted_domain&lt;/code> config has to be used to restrict this.&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;p>The OAuth integration internally uses the &lt;a href="https://github.com/markbates/goth"target="_blank" rel="noopener">goth&lt;/a> library, see &lt;a href="https://github.com/markbates/goth/blob/master/examples/main.go"target="_blank" rel="noopener">examples&lt;/a> for implementation details.&lt;/p>
@@ -673,26 +673,26 @@ title="Copy code"
 &lt;h2>Group Info&lt;span class="hx:absolute hx:-mt-20" id="group-info">&lt;/span>
 &lt;a href="#group-info" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>To get the group info dynamically as part of the user login (instead of statically defining in the config file), the requirements are:&lt;/p>
 &lt;ul>
-&lt;li>OpenID Connect based auth or SAML is used&lt;/li>
-&lt;li>For OpenId, the appropriate scope is requested, like &lt;code>groups&lt;/code>&lt;/li>
+&lt;li>OpenID Connect-based auth or SAML is used&lt;/li>
+&lt;li>For OpenID, the appropriate scope is requested, like &lt;code>groups&lt;/code>&lt;/li>
 &lt;li>The Identity Provider is configured to return the groups info in the user profile, with the &lt;code>groups&lt;/code> key. For example, see &lt;a href="https://devforum.okta.com/t/userinfo-not-returning-groups/31907/1"target="_blank" rel="noopener">Okta forum&lt;/a> about configuring Okta with OIDC.&lt;/li>
 &lt;li>The group name as returned in the user profile is used in the grant&lt;/li>
 &lt;/ul>
 &lt;h2>Regex User Name&lt;span class="hx:absolute hx:-mt-20" id="regex-user-name">&lt;/span>
-&lt;a href="#regex-user-name" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>In the &lt;code>groups.&amp;lt;group_name&amp;gt;&lt;/code> property and in &lt;code>grant.users&lt;/code>, the user name can be specified as a regex. If the value starts with &lt;code>regex:&lt;/code> prefix, the subsequent value is considered as a regex. For example, &lt;code>regex:google:^.*@example.com$&lt;/code> matches any user id with google provider.&lt;/p>
+&lt;a href="#regex-user-name" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>In the &lt;code>groups.&amp;lt;group_name&amp;gt;&lt;/code> property and in &lt;code>grant.users&lt;/code>, the username can be specified as a regex. If the value starts with &lt;code>regex:&lt;/code> prefix, the subsequent value is considered as a regex. For example, &lt;code>regex:google:^.*@example.com$&lt;/code> matches any user ID with google provider.&lt;/p>
 &lt;h2>Custom Permissions&lt;span class="hx:absolute hx:-mt-20" id="custom-permissions">&lt;/span>
-&lt;a href="#custom-permissions" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Permissions like &lt;code>access&lt;/code>, &lt;code>list&lt;/code>, &lt;code>update&lt;/code> etc are OpenRun defined permissions. They control what actions can be performed by the user in OpenRun. In addition to these, custom permissions are supported. Custom permissions are defined in the config with the &lt;code>custom:&lt;/code> prefix. These permissions are ignored by OpenRun. They are passed to the app. For apps where requests are proxied through OpenRun (like containerized apps), these permissions are available in the HTTP headers&lt;/p>
+&lt;a href="#custom-permissions" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Permissions like &lt;code>access&lt;/code>, &lt;code>list&lt;/code>, &lt;code>update&lt;/code> etc are OpenRun-defined permissions. They control what actions can be performed by the user in OpenRun. In addition to these, custom permissions are supported. Custom permissions are defined in the config with the &lt;code>custom:&lt;/code> prefix. These permissions are ignored by OpenRun. They are passed to the app. For apps where requests are proxied through OpenRun (like containerized apps), these permissions are available in the HTTP headers&lt;/p>
 &lt;ul>
-&lt;li>&lt;code>X-Openrun-User&lt;/code>: This is the user performing the request. The user id is prefixed with the provider name (like &lt;code>google:test@example.com&lt;/code>). The user name is &lt;code>anonymous&lt;/code> for anonymous requests and &lt;code>admin&lt;/code> for admin requests.&lt;/li>
-&lt;li>&lt;code>X-Openrun-Perms&lt;/code>: The list of custom permissions available to this user on this app. The list is comma separated, without the &lt;code>custom:&lt;/code> prefix, like &lt;code>appread,appdelete&lt;/code>.&lt;/li>
+&lt;li>&lt;code>X-Openrun-User&lt;/code>: This is the user performing the request. The user ID is prefixed with the provider name (like &lt;code>google:test@example.com&lt;/code>). The username is &lt;code>anonymous&lt;/code> for anonymous requests and &lt;code>admin&lt;/code> for admin requests.&lt;/li>
+&lt;li>&lt;code>X-Openrun-Perms&lt;/code>: The list of custom permissions available to this user on this app. The list is comma-separated, without the &lt;code>custom:&lt;/code> prefix, like &lt;code>appread,appdelete&lt;/code>.&lt;/li>
 &lt;li>&lt;code>X-Openrun-Rbac-Enabled&lt;/code>: Whether RBAC is enabled for the app, &lt;code>true&lt;/code> or &lt;code>false&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;p>For &lt;a href="https://openrun.dev/docs/actions/">Action apps&lt;/a>, custom perms can be used to limit which user can perform what operations. In the action definition, adding &lt;code>permit=['appread']&lt;/code> means that the Action will be available only to user who have any one of the custom permissions specified in the list. The default action should be available to everyone, other actions can be controlled using custom permissions. If no permits are set or if RBAC is not enabled for the app, then all actions are available to authenticated users.&lt;/p>
+&lt;p>For &lt;a href="https://openrun.dev/docs/actions/">Action apps&lt;/a>, custom perms can be used to limit which user can perform what operations. In the action definition, adding &lt;code>permit=['appread']&lt;/code> means that the action will be available only to users who have any one of the custom permissions specified in the list. The default action should be available to everyone, other actions can be controlled using custom permissions. If no permits are set or if RBAC is not enabled for the app, then all actions are available to authenticated users.&lt;/p>
 &lt;h2>Notes&lt;span class="hx:absolute hx:-mt-20" id="notes">&lt;/span>
 &lt;a href="#notes" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;ul>
 &lt;li>The auth provider name has to be prefixed with &lt;code>rbac:&lt;/code> for the RBAC rules to apply for app &lt;code>access&lt;/code> permission.&lt;/li>
 &lt;li>Updates using the CLI client are done as the &lt;code>admin&lt;/code> system user. There are no RBAC restrictions on the &lt;code>admin&lt;/code>.&lt;/li>
-&lt;li>For apps with no authentication (using &lt;code>none&lt;/code> auth), the user id to use in RBAC is &lt;code>anonymous&lt;/code>, without the auth type prefix.&lt;/li>
+&lt;li>For apps with no authentication (using &lt;code>none&lt;/code> auth), the user ID to use in RBAC is &lt;code>anonymous&lt;/code>, without the auth type prefix.&lt;/li>
 &lt;/ul></description></item><item><title>Secrets Management</title><link>https://openrun.dev/docs/configuration/secrets/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://openrun.dev/docs/configuration/secrets/</guid><description>
 &lt;p>OpenRun supports secret management when working with apps. Secrets can be passed to containerized apps through the environment params. Secrets can also be passed to any plugin as argument. For OAuth config, the client secrets can be configured as secret in the config file.&lt;/p>
 &lt;h2>Supported Providers&lt;span class="hx:absolute hx:-mt-20" id="supported-providers">&lt;/span>
@@ -766,7 +766,7 @@ title="Copy code"
 &lt;/button>
 &lt;/div>
 &lt;/div>
-&lt;p>enables looking up the OpenRun server environment for secrets. This can be accessed like &lt;code>--param MYPARAM='{{secret_from &amp;quot;env&amp;quot; &amp;quot;MY_SECRET_KEY&amp;quot;}}'&lt;/code>. No properties are required in the env provider config. The value of MY_SECRET_KEY in the OpenRun server env wil be passed as the param.&lt;/p>
+&lt;p>enables looking up the OpenRun server environment for secrets. This can be accessed like &lt;code>--param MYPARAM='{{secret_from &amp;quot;env&amp;quot; &amp;quot;MY_SECRET_KEY&amp;quot;}}'&lt;/code>. No properties are required in the env provider config. The value of MY_SECRET_KEY in the OpenRun server env will be passed as the param.&lt;/p>
 &lt;h3>Properties Secrets&lt;span class="hx:absolute hx:-mt-20" id="properties-secrets">&lt;/span>
 &lt;a href="#properties-secrets" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h3>&lt;p>Secrets can be read from a properties file. The config name should be &lt;code>prop&lt;/code> or should start with &lt;code>prop_&lt;/code>. To use this, add&lt;/p>
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
@@ -785,8 +785,8 @@ title="Copy code"
 &lt;h2>Secrets Usage&lt;span class="hx:absolute hx:-mt-20" id="secrets-usage">&lt;/span>
 &lt;a href="#secrets-usage" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>Secrets can be accessed using the syntax &lt;code>{{secret_from &amp;quot;PROVIDER_NAME&amp;quot; &amp;quot;KEY_NAME&amp;quot;}}&lt;/code>. To read from the default provider, use &lt;code>{{secret &amp;quot;KEY_NAME&amp;quot;}}&lt;/code>. The three contexts in which secrets can be accessed are:&lt;/p>
 &lt;ul>
-&lt;li>&lt;strong>App Params&lt;/strong> : Param values in &lt;code>params.star&lt;/code> or in the &lt;a href="https://openrun.dev/docs/container/overview/#app-environment-params">app metadata definition&lt;/a> can access the secrets.&lt;/li>
-&lt;li>&lt;strong>Plugin arguments&lt;/strong> : Secrets can be passed as string arguments in calls to &lt;a href="https://openrun.dev/docs/plugins/">plugin functions&lt;/a>.&lt;/li>
+&lt;li>&lt;strong>App Params&lt;/strong>: Param values in &lt;code>params.star&lt;/code> or in the &lt;a href="https://openrun.dev/docs/container/overview/#app-environment-params">app metadata definition&lt;/a> can access the secrets.&lt;/li>
+&lt;li>&lt;strong>Plugin arguments&lt;/strong>: Secrets can be passed as string arguments in calls to &lt;a href="https://openrun.dev/docs/plugins/">plugin functions&lt;/a>.&lt;/li>
 &lt;li>&lt;strong>Config file&lt;/strong>: Secrets are supported in &lt;code>openrun.toml&lt;/code> config for:
 &lt;ul>
 &lt;li>For client key and secret in &lt;a href="https://openrun.dev/docs/configuration/authentication/#oauth-authentication">auth config&lt;/a>&lt;/li>

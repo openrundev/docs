@@ -360,7 +360,7 @@ running &lt;code>openrun account link --promote /myapp http.in#google myaccount&
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>All the API&amp;rsquo;s support the following parameters:&lt;/p>
+&lt;p>All the APIs support the following parameters:&lt;/p>
 &lt;ul>
 &lt;li>&lt;strong>url&lt;/strong> (string, required) : the url to send the request to&lt;/li>
 &lt;li>&lt;strong>params&lt;/strong> (dict, optional) : url params to send&lt;/li>
@@ -373,7 +373,7 @@ running &lt;code>openrun account link --promote /myapp http.in#google myaccount&
 &lt;li>&lt;strong>auth_signature&lt;/strong> (string, optional): Signature auth type&lt;/li>
 &lt;li>&lt;strong>error_on_fail&lt;/strong> (bool, optional): Whether to fail on non-2xx status code, default true&lt;/li>
 &lt;/ul>
-&lt;p>The response for all API&amp;rsquo;s (&lt;code>value&lt;/code> within &lt;code>plugin_response&lt;/code>) contains following properties:&lt;/p>
+&lt;p>The response for all APIs (&lt;code>value&lt;/code> within &lt;code>plugin_response&lt;/code>) contains the following properties:&lt;/p>
 &lt;ul>
 &lt;li>&lt;strong>url&lt;/strong> (string): the url the response is for&lt;/li>
 &lt;li>&lt;strong>status_code&lt;/strong> (int): the HTTP status code&lt;/li>
@@ -577,7 +577,7 @@ title="Copy code"
 &lt;/div>
 &lt;/div>
 &lt;h2>Store APIs&lt;span class="hx:absolute hx:-mt-20" id="store-apis">&lt;/span>
-&lt;a href="#store-apis" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The API&amp;rsquo;s in the &lt;code>store.in&lt;/code> plugin and their arguments and response are:&lt;/p>
+&lt;a href="#store-apis" class="subheading-anchor" aria-label="Permalink for this section">&lt;/a>&lt;/h2>&lt;p>The APIs in the &lt;code>store.in&lt;/code> plugin and their arguments and response are:&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
