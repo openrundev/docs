@@ -34,7 +34,7 @@ description = "Internal tools deployment made easy. Deploy web apps declarativel
 displayTitle = false
 
 [params.navbar.logo]
-path = "openrun.png"
+path = "openrun_anim.svg"
 width = 180
 height = 50
 
