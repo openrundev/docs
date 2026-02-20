@@ -110,4 +110,5 @@ The project was started by [Ajay Kidave](https://www.linkedin.com/in/ajayvk/). A
 - Follow on [Twitter](https://twitter.com/ajay_kidave)
 - Subscribe to the blog [RSS feed](https://openrun.dev/blog/index.xml)
 - Connect on [Discord](https://discord.gg/t2P8pJFsd7)
+- #openrun channel in the [CNCF Slack](https://cloud-native.slack.com/)
 - Schedule a [Meeting](https://calendar.app.google/wacEeZ9agtHHZTkMA)

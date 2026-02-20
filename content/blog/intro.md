@@ -66,6 +66,7 @@ You can keep in touch by these means:
 - Subscribe to the blog [RSS feed](https://openrun.dev/blog/index.xml)
 - Follow OpenRun on [LinkedIn](https://www.linkedin.com/company/openrundev)
 - Connect on [Discord](https://discord.gg/t2P8pJFsd7)
+- #openrun channel in the [CNCF Slack](https://cloud-native.slack.com/)
 - Schedule a [Meeting](https://calendar.app.google/wacEeZ9agtHHZTkMA)
 
 Use [discussions](https://github.com/openrundev/openrun/discussions) feature in GitHub or raise [issues](https://github.com/openrundev/openrun/issues) to provide feedback.

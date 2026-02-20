@@ -135,3 +135,8 @@ weight = 4
 name = "Discord"
 url = "https://discord.gg/t2P8pJFsd7"
 weight = 5
+
+[[menu.sidebar]]
+name = "CNCF Slack #openrun"
+url = "https://cloud-native.slack.com/"
+weight = 6
