@@ -132,11 +132,22 @@ function copyCode(codeId, buttonElem) {
 <div style="height: 20px;"></div>
 
 <style>
-  /* Apply width 60% for screens wider than 768px */
   @media screen and (min-width: 768px) {
-    .responsive-picture {
-      width: 60%;
-    }
+    .responsive-picture { width: 60%; }
+  }
+  .mc-signup { max-width: 720px; margin: 0 auto; padding: 20px 28px; border-radius: 12px; background: radial-gradient(ellipse at 50% 80%, rgba(0,194,0,0.12), hsla(0,0%,100%,0)); border: 1px solid rgba(0,194,0,0.2); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .mc-signup-text { flex: 0 1 auto; min-width: 200px; }
+  .mc-signup-form { flex: 1 1 320px; display: flex; align-items: center; gap: 10px; }
+  .mc-signup-form input[type="email"] { flex: 1 1 180px; padding: 10px 14px; border: 1px solid rgba(0,194,0,0.35); border-radius: 8px; font-size: 14px; outline: none; background: transparent; color: inherit; }
+  .mc-signup-form button { padding: 10px 24px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; background: linear-gradient(135deg,#00C200,#2ED82E); color: white; white-space: nowrap; transition: opacity 0.2s; }
+  .mc-signup-form button:hover { opacity: 0.85; }
+  @media screen and (max-width: 600px) {
+    .mc-signup { flex-direction: row; flex-wrap: wrap; justify-content: center; text-align: center; padding: 8px 10px; gap: 4px; width: 100%; max-width: none; align-self: stretch; box-sizing: border-box; }
+    .mc-signup-text { flex: 1 1 100%; min-width: 0; }
+    .mc-signup-text div { line-height: 1.3; }
+    .mc-signup-form { flex: 1 1 100%; gap: 6px; margin-top: 4px; }
+    .mc-signup-form input[type="email"] { flex: 1 1 auto; padding: 6px 10px; font-size: 13px; }
+    .mc-signup-form button { padding: 6px 14px; font-size: 13px; }
   }
 </style>
 
@@ -145,3 +156,5 @@ function copyCode(codeId, buttonElem) {
   <source media="(prefers-color-scheme: light)" src="https://openrun.dev/demo_light.mp4" type="video/mp4">
 </video>
 <br>
+
+<!-- Begin Mailchimp Signup Form --><div id="mc_embed_signup" class="mc-signup"><div class="mc-signup-text"><div style="font-size: 18px; font-weight: 700; margin-bottom: 4px; background: linear-gradient(135deg, #00C200, #2ED82E); color: transparent; background-clip: text; -webkit-background-clip: text;">Stay in the loop</div><div style="font-size: 13px; color: #6b7280;">Get updates on new features and releases.</div></div><form action="https://clace.us21.list-manage.com/subscribe/post?u=3e38430549570438cbc8b7513&amp;id=57d9eeea29&amp;f_id=00afa8e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate mc-signup-form" target="_blank"><input type="email" placeholder="Enter your email" name="EMAIL" id="mce-EMAIL" required><div aria-hidden="true" id="mce-responses" class="clear foot" style="display:none"><div class="response" id="mce-error-response" style="display:none"></div><div class="response" id="mce-success-response" style="display:none"></div></div><input aria-hidden="true" type="hidden" name="b_3e38430549570438cbc8b7513_57d9eeea29" value=""><button type="submit" name="subscribe" id="mc-embedded-subscribe">Subscribe</button></form></div><!--End mc_embed_signup-->
